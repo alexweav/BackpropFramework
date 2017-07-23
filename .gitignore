@@ -33,3 +33,8 @@
 
 # Main
 Main.cpp
+
+# Build and lib dirs
+build
+lib/*
+bin/*
