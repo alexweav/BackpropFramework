@@ -1,0 +1,14 @@
+#ifndef SUBTRACTION_H
+#define SUBTRACTION_H
+
+#include "Operation.h"
+#include "IDifferentiable.h"
+
+class Subtraction: public Operation, public IDifferentiable {
+    public:
+        Subtraction(Node* i1, Node* i2);
+        float Forward(vector<float>* inputs);
+        vector<float>* Backward(float grads, vector<float>* prevInputs);
+};
+
+#endif
