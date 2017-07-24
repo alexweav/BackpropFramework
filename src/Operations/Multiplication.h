@@ -1,12 +1,12 @@
-#ifndef ADDITION_H
-#define ADDITION_H
+#ifndef MULTIPLICATION_H
+#define MULTIPLICATION_H
 
 #include "Operation.h"
 #include "IDifferentiable.h"
 
-class Addition: public Operation, public IDifferentiable {
+class Multiplication: public Operation, public IDifferentiable {
     public:
-        Addition(Node* input1, Node* input2);
+        Multiplication(Node* i1, Node* i2);
         float Forward(vector<float>* inputs);
         vector<float>* Backward(vector<float>* prevInputs);
 };

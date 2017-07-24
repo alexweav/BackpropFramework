@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Addition.h"
 
 using namespace std;
@@ -12,8 +11,9 @@ float Addition::Forward(vector<float>* inputs) {
     return inputs->at(0) + inputs->at(1);
 }
 
-vector<float>* Addition::Backward(float grad, vector<float>* prevInputs) {
+vector<float>* Addition::Backward(vector<float>* prevInputs) {
     vector<float>* grads = new vector<float>(this->_arity);
-    grads->at(0) = 1.0 * grad;
-    grads->at(1) = 1.0 * grad;
+    grads->at(0) = 1.0;
+    grads->at(1) = 1.0;
+    return grads;
 }
