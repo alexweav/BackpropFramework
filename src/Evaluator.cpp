@@ -8,24 +8,24 @@ float Evaluator::ForwardEvaluate(Node* node, Dictionary<Input*, float>* vars) {
     for(pair<Input*, float> element : *vars) {
         evaluated[element.first] = element.second;
     }
-    vector<float>* inputs = EvaluatePredecessors(node, *vars, evaluated);
+    vector<float>* inputs = EvaluatePredecessors(node, evaluated);
     float result = node->Forward(inputs);
     free(inputs);
     return result;
 }
 
-float Evaluator::ForwardEvaluate(Node*& node, Dictionary<Input*, float>& vars, Dictionary<Node*, float>& evaluated) {
-    vector<float>* inputs = EvaluatePredecessors(node, vars, evaluated);   
+float Evaluator::ForwardEvaluate(Node*& node, Dictionary<Node*, float>& evaluated) {
+    vector<float>* inputs = EvaluatePredecessors(node, evaluated);   
     float result = node->Forward(inputs);
     free(inputs);
     return result;
 }
 
-vector<float>* Evaluator::EvaluatePredecessors(Node* node, Dictionary<Input*, float>& vars, Dictionary<Node*, float>& evaluated) {
+vector<float>* Evaluator::EvaluatePredecessors(Node* node, Dictionary<Node*, float>& evaluated) {
     vector<float>* inputs = new vector<float>(node->Arity());
     for (int i = 0; i < node->Arity(); i++) {
         if (evaluated.find(node->Predecessors()->at(i)) == evaluated.end()) {
-            inputs->at(i) = ForwardEvaluate(node->Predecessors()->at(i), vars, evaluated);
+            inputs->at(i) = ForwardEvaluate(node->Predecessors()->at(i), evaluated);
             evaluated[node->Predecessors()->at(i)] = inputs->at(i);
         } else {
             inputs->at(i) = evaluated[node->Predecessors()->at(i)];
@@ -33,3 +33,4 @@ vector<float>* Evaluator::EvaluatePredecessors(Node* node, Dictionary<Input*, fl
     }
     return inputs;
 }
+

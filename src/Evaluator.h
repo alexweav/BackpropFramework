@@ -14,10 +14,14 @@ class Evaluator{
         float ForwardEvaluate(Node*, Dictionary<Input*, float>* vars);
     protected:
         float ForwardEvaluate(Node*&, 
-                              Dictionary<Input*, float>& vars, 
                               Dictionary<Node*, float>& evaluated);
         vector<float>* EvaluatePredecessors(Node*, 
-                                            Dictionary<Input*, float>& vars,
                                             Dictionary<Node*, float>& evaluated);
 };
+
+struct EvaluationVariables {
+    Dictionary<Node*, float> nodeOutputs;
+    vector<Node*>* evaluationOrder;
+};
+
 #endif

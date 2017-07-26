@@ -12,9 +12,11 @@ class Node {
         virtual float Forward(vector<float>*) = 0;
         int Arity();
         vector<Node*>* Predecessors();
+        void RegisterSuccessor(Node* node);
     protected:
         int _arity;
         vector<Node*>* _predecessors;
+        vector<Node*>* _successors;
 };
 
 #endif

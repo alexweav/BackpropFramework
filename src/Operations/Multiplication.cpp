@@ -2,7 +2,9 @@
 
 Multiplication::Multiplication(Node* i1, Node* i2): Operation(2) {
     _predecessors->at(0) = i1;
+    i1->RegisterSuccessor(this);
     _predecessors->at(1) = i2;
+    i2->RegisterSuccessor(this);
 }
 
 float Multiplication::Forward(vector<float>* inputs) {
