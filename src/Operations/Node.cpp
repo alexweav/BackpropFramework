@@ -1,8 +1,13 @@
 #include "Node.h"
 
-Node::Node(int arity): _arity(arity) {
-    this->_predecessors = new vector<Node*>(arity);
+Node::Node(initializer_list<Node*> inputs): _arity(inputs.size()) {
+    this->_predecessors = new vector<Node*>(_arity);
     this->_successors = new vector<Node*>();
+    int i = 0;
+    for (Node* node : inputs) {
+        _predecessors->at(i++) = node;
+        node->RegisterSuccessor(this);
+    }
 }
 
 int Node::Arity() {

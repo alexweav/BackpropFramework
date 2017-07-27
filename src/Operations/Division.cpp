@@ -1,11 +1,6 @@
 #include "Division.h"
 
-Division::Division(Node* i1, Node* i2): Operation(2) {
-    _predecessors->at(0) = i1;
-    i1->RegisterSuccessor(this);
-    _predecessors->at(1) = i2;
-    i2->RegisterSuccessor(this);
-}
+Division::Division(Node* i1, Node* i2): Operation({i1, i2}) { }
 
 float Division::Forward(vector<float>* inputs) {
     return inputs->at(0) / inputs->at(1);

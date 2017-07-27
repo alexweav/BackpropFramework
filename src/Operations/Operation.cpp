@@ -3,5 +3,5 @@
 
 using namespace std;
 
-Operation::Operation(int arity): Node(arity) { }
+Operation::Operation(initializer_list<Node*> inputs): Node(inputs) { }
 

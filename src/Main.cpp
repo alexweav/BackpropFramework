@@ -8,6 +8,20 @@
 
 using namespace std;
 
+void func() {
+    cout << "asdf" << endl;
+}
+
+template<typename... Args>
+void func(int arg, Args... args) {
+    cout << "before" << arg << endl;
+    func(args...);
+    cout << "after" << arg << endl;
+}
+
+
+
+
 int main(int argc, char** argv) {
     Input* var1 = new Input();
     Input* var2 = new Input();
@@ -24,5 +38,13 @@ int main(int argc, char** argv) {
     cout << eval->ForwardEvaluate(sub, vars) << endl;
     (*vars)[var1] = 13.0;
     cout << eval->ForwardEvaluate(sub, vars) << endl;
+    cout << endl << endl << endl;
+    
+
+    func(1, 2, 3, 4);
+    
+
+
     return 0;
 }
+

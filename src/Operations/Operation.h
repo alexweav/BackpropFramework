@@ -8,7 +8,7 @@
 
 class Operation: public Node {
 public:
-    Operation(int arity);
+    Operation(initializer_list<Node*> inputs);
     virtual float Forward(vector<float>* inputs) = 0;
 };
 
