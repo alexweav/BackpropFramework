@@ -39,3 +39,14 @@ vector<float>* Evaluator::EvaluatePredecessors(Node* node, Dictionary<Node*, flo
     return inputs;
 }
 
+Dictionary<Node*, float>* Evaluator::BackwardEvaluate(Node* node, Dictionary<Input*, float>* vars) {
+    Dictionary<Node*, float> forwardOutputs;
+    for(pair<Input*, float> element : *vars) {
+        forwardOutputs[element.first] = element.second;
+    }
+    vector<Node*>* order = new vector<Node*>();
+    float result = ForwardEvaluate(node, forwardOutputs, order);
+    //TODO: complete this    
+    free(order);
+}
+
