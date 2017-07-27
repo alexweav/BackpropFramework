@@ -2,6 +2,7 @@
 #define EVALUATOR_H
 
 #include <vector>
+#include <iostream>
 #include "Operations/Node.h"
 #include "Operations/IDifferentiable.h"
 #include "Operations/Input.h"
@@ -13,15 +14,8 @@ class Evaluator{
     public:
         float ForwardEvaluate(Node*, Dictionary<Input*, float>* vars);
     protected:
-        float ForwardEvaluate(Node*&, 
-                              Dictionary<Node*, float>& evaluated);
-        vector<float>* EvaluatePredecessors(Node*, 
-                                            Dictionary<Node*, float>& evaluated);
-};
-
-struct EvaluationVariables {
-    Dictionary<Node*, float> nodeOutputs;
-    vector<Node*>* evaluationOrder;
+        float ForwardEvaluate(Node*&, Dictionary<Node*, float>& evaluated, vector<Node*>* order);
+        vector<float>* EvaluatePredecessors(Node*, Dictionary<Node*, float>& evaluated, vector<Node*>* order);
 };
 
 #endif

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <initializer_list>
+#include <iostream>
 #include "../Utils/Dictionary.h"
 
 using namespace std;
