@@ -6,7 +6,7 @@ float Input::GetDefaultOutput() {
     return _defaultOutput;
 }
 
-float Input::Forward(vector<float>* inputs) {
+float Input::Forward(const vector<float>& inputs) const {
     return _defaultOutput;
 }
 

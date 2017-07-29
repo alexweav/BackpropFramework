@@ -7,7 +7,7 @@
 class Addition: public Operation, public IDifferentiable {
     public:
         Addition(Node* input1, Node* input2);
-        float Forward(vector<float>* inputs);
+        float Forward(const vector<float>& inputs) const;
         vector<float>* Backward(vector<float>* prevInputs);
 };
 

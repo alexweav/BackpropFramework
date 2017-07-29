@@ -2,9 +2,8 @@
 
 Subtraction::Subtraction(Node* i1, Node* i2): Operation({i1, i2}) { }
 
-float Subtraction::Forward(vector<float>* inputs) {
-    return inputs->at(0) - inputs->at(1);
-    cout << "Evaluated sub" << endl;
+float Subtraction::Forward(const vector<float>& inputs) const {
+    return inputs.at(0) - inputs.at(1);
 }
 
 vector<float>* Subtraction::Backward(vector<float>* prevInputs) {

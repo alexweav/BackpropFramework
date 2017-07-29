@@ -11,7 +11,7 @@ using namespace std;
 class Node {
     public:
         Node(initializer_list<Node*>);
-        virtual float Forward(vector<float>*) = 0;
+        virtual float Forward(const vector<float>&) const = 0;
         int Arity();
         vector<Node*>* Predecessors();
         void RegisterSuccessor(Node* node);

@@ -10,7 +10,7 @@ float Evaluator::ForwardEvaluate(Node* node, Dictionary<Input*, float>* vars) {
     }
     vector<Node*>* order = new vector<Node*>();
     vector<float>* inputs = EvaluatePredecessors(node, evaluated, order);
-    float result = node->Forward(inputs);
+    float result = node->Forward(*inputs);
     evaluated[node] = result;
     order->push_back(node);
     free(inputs);
@@ -20,7 +20,7 @@ float Evaluator::ForwardEvaluate(Node* node, Dictionary<Input*, float>* vars) {
 
 float Evaluator::ForwardEvaluate(Node*& node, Dictionary<Node*, float>& evaluated, vector<Node*>* order) {
     vector<float>* inputs = EvaluatePredecessors(node, evaluated, order);   
-    float result = node->Forward(inputs);
+    float result = node->Forward(*inputs);
     order->push_back(node);
     free(inputs);
     return result;

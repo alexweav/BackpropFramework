@@ -6,7 +6,7 @@
 class Input: public Node {
     public:
         Input();
-        float Forward(vector<float>* inputs);
+        float Forward(const vector<float>& inputs) const;
         void RegisterNewDefaultValue(float);
         float GetDefaultOutput();
     private:

@@ -7,7 +7,7 @@
 class Division: public Operation, public IDifferentiable {
     public:
         Division(Node* i1, Node* i2);
-        float Forward(vector<float>* inputs);
+        float Forward(const vector<float>& inputs) const;
         vector<float>* Backward(vector<float>* prevInputs);
 };
 

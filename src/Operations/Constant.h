@@ -6,7 +6,7 @@
 class Constant: public Node {
     public:
         Constant(float value);
-        float Forward(vector<float>*);
+        float Forward(const vector<float>&) const;
         float getValue();
 
     private:

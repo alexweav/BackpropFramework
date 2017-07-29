@@ -4,7 +4,7 @@ Constant::Constant(float value): Node({}) {
     _value = value;
 }
 
-float Constant::Forward(vector<float>* inputs) {
+float Constant::Forward(const vector<float>& inputs) const {
     return _value;
 }
 

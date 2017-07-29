@@ -2,8 +2,8 @@
 
 Division::Division(Node* i1, Node* i2): Operation({i1, i2}) { }
 
-float Division::Forward(vector<float>* inputs) {
-    return inputs->at(0) / inputs->at(1);
+float Division::Forward(const vector<float>& inputs) const {
+    return inputs.at(0) / inputs.at(1);
 }
 
 vector<float>* Division::Backward(vector<float>* prevInputs) {
