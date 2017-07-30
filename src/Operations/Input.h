@@ -3,7 +3,7 @@
 
 #include "Node.h"
 
-class Input: public Node {
+class Input: public Node, public IDifferentiable {
     public:
         Input();
         float Forward(const vector<float>& inputs) const;
