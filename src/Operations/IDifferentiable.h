@@ -7,7 +7,7 @@ using namespace std;
 
 class IDifferentiable {
     public:
-        virtual vector<float>* Backward(vector<float>* prevInputs) = 0;
+        virtual vector<float> Backward(const vector<float>& prevInputs) const = 0;
 };
 
 #endif

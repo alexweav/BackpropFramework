@@ -6,9 +6,9 @@ float Division::Forward(const vector<float>& inputs) const {
     return inputs.at(0) / inputs.at(1);
 }
 
-vector<float>* Division::Backward(vector<float>* prevInputs) {
-    vector<float>* grads = new vector<float>(this->_arity);
-    grads->at(0) = 1.0 / prevInputs->at(1);
-    grads->at(1) = prevInputs->at(0) * -(1.0 / (prevInputs->at(1) * prevInputs->at(1)));
+vector<float> Division::Backward(const vector<float>& prevInputs) const {
+    vector<float> grads(this->_arity);
+    grads.at(0) = 1.0 / prevInputs.at(1);
+    grads.at(1) = prevInputs.at(0) * -(1.0 / (prevInputs.at(1) * prevInputs.at(1)));
     return grads;
 }
