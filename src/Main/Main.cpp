@@ -3,7 +3,7 @@
 #include "Operations/Subtraction.h"
 #include "Operations/Constant.h"
 #include "Operations/Input.h"
-#include "Evaluator.h"
+#include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
 
 using namespace std;
