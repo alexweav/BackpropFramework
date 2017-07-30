@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
     Subtraction* sub = new Subtraction(add, var2);
 
     Evaluator* eval = new Evaluator();
-    Dictionary<Input*, float>* vars = new Dictionary<Input*, float>();
+    Dictionary<Input*, float> vars;
     eval->ForwardEvaluate(sub, vars);
     
 
