@@ -9,15 +9,17 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-    Input* var1 = new Input();
-    Input* var2 = new Input();
-    Constant* cons = new Constant(5.0);
-    Addition* add = new Addition(var1, cons);
-    Subtraction* sub = new Subtraction(add, var2);
+    auto var1 = new Input();
+    auto var2 = new Input();
+    auto cons = new Constant(5.0);
+    auto add = new Addition(var1, cons);
+    auto sub = new Subtraction(add, var2);
 
-    Evaluator* eval = new Evaluator();
+    auto eval = new Evaluator();
     Dictionary<Input*, float> vars;
-    eval->ForwardEvaluate(sub, vars);
+    vars[var1] = 2.0;
+    vars[var2] = 1.0;
+    cout << eval->ForwardEvaluate(sub, vars) << endl;
     
 
 
