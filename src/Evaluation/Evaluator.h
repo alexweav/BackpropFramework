@@ -16,7 +16,7 @@ class Evaluator{
         Dictionary<Node*, float>* BackwardEvaluate(Node*, Dictionary<Input*, float>* vars);
     protected:
         float ForwardEvaluate(Node*&, Dictionary<Node*, float>& evaluated, vector<Node*>* order);
-        vector<float>* EvaluatePredecessors(Node*, Dictionary<Node*, float>& evaluated, vector<Node*>* order);
+        vector<float> EvaluatePredecessors(Node*, Dictionary<Node*, float>& evaluated, vector<Node*>* order);
 };
 
 #endif
