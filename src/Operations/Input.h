@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include "Node.h"
+#include "IDifferentiable.h"
 
 class Input: public Node, public IDifferentiable {
     public:

@@ -3,7 +3,7 @@
 #include "Operations/Subtraction.h"
 #include "Operations/Constant.h"
 #include "Operations/Input.h"
-#include "Evaluation/Evaluator.h"
+#include "Evaluation/ForwardEvaluator.h"
 #include "Utils/Dictionary.h"
 
 using namespace std;
@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
     auto add = new Addition(var1, cons);
     auto sub = new Subtraction(add, var2);
 
-    auto eval = new Evaluator();
+    auto eval = new ForwardEvaluator();
     Dictionary<Input*, float> vars;
     vars[var1] = 2.0;
     vars[var2] = 1.0;
