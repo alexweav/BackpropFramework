@@ -8,7 +8,7 @@
 
 class Operation: public Node {
 public:
-    Operation(initializer_list<Node*> inputs);
+    Operation(initializer_list<Node*> inputs, bool);
     virtual float Forward(const vector<float>& inputs) const = 0;
 };
 

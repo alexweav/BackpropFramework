@@ -1,6 +1,6 @@
 #include "Input.h"
 
-Input::Input(): Node({}) { }
+Input::Input(): Node({}, true) { }
 
 float Input::GetDefaultOutput() {
     return _defaultOutput;

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Addition::Addition(Node* i1, Node* i2): Operation({i1, i2}) { }
+Addition::Addition(Node* i1, Node* i2): Operation({i1, i2}, true) { }
 
 float Addition::Forward(const vector<float>& inputs) const {
     return inputs.at(0) + inputs.at(1);

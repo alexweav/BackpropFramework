@@ -3,5 +3,5 @@
 
 using namespace std;
 
-Operation::Operation(initializer_list<Node*> inputs): Node(inputs) { }
+Operation::Operation(initializer_list<Node*> inputs, bool isDiff): Node(inputs, isDiff) { }
 

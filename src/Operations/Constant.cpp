@@ -1,6 +1,6 @@
 #include "Constant.h"
 
-Constant::Constant(float value): Node({}) {
+Constant::Constant(float value): Node({}, true) {
     _value = value;
 }
 

@@ -1,6 +1,6 @@
 #include "Subtraction.h"
 
-Subtraction::Subtraction(Node* i1, Node* i2): Operation({i1, i2}) { }
+Subtraction::Subtraction(Node* i1, Node* i2): Operation({i1, i2}, true) { }
 
 float Subtraction::Forward(const vector<float>& inputs) const {
     return inputs.at(0) - inputs.at(1);
