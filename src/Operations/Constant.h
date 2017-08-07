@@ -2,9 +2,9 @@
 #define CONSTANT_H
 
 #include "Node.h"
-#include "IDifferentiable.h"
+#include "Differentiable.h"
 
-class Constant: public IDifferentiable {
+class Constant: public Differentiable {
     public:
         Constant(float value);
         float Forward(const vector<float>&) const;

@@ -2,9 +2,9 @@
 #define DIVISION_H
 
 #include "Operation.h"
-#include "IDifferentiable.h"
+#include "Differentiable.h"
 
-class Division: public Operation, public IDifferentiable {
+class Division: public Operation, public Differentiable {
     public:
         Division(Node* i1, Node* i2);
         float Forward(const vector<float>& inputs) const;

@@ -2,9 +2,9 @@
 #define ADDITION_H
 
 #include "Operation.h"
-#include "IDifferentiable.h"
+#include "Differentiable.h"
 
-class Addition: public Operation, public IDifferentiable {
+class Addition: public Operation, public Differentiable {
     public:
         Addition(Node* input1, Node* input2);
         float Forward(const vector<float>& inputs) const;

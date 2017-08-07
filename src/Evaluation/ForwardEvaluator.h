@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Operations/Node.h"
-#include "Operations/IDifferentiable.h"
+#include "Operations/Differentiable.h"
 #include "Operations/Input.h"
 #include "Utils/Dictionary.h"
 

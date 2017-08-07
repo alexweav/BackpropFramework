@@ -1,14 +1,14 @@
-#ifndef IDIFFERENTIABLE_H
-#define IDIFFERENTIABLE_H
+#ifndef DIFFERENTIABLE_H
+#define DIFFERENTIABLE_H
 
 #include <vector>
 #include "Node.h"
 
 using namespace std;
 
-class IDifferentiable: public virtual Node {
+class Differentiable: public virtual Node {
     public:
-        IDifferentiable(): Node() {}
+        Differentiable(): Node() {}
         virtual vector<float> Backward(const vector<float>& prevInputs) const = 0;
 };
 
