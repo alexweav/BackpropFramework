@@ -16,7 +16,7 @@ float ForwardEvaluator::ForwardEvaluate(Node* node, const Dictionary<Input*, flo
     return result;
 }
 
-float ForwardEvaluator::ForwardEvaluate(Node*& node, Dictionary<Node*, float>& evaluated, vector<Node*>* order) {
+float ForwardEvaluator::ForwardEvaluate(Node* node, Dictionary<Node*, float>& evaluated, vector<Node*>* order) {
     vector<float> inputs = EvaluatePredecessors(node, evaluated, order);   
     float result = node->Forward(inputs);
     order->push_back(node);
