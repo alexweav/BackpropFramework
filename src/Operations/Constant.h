@@ -4,7 +4,7 @@
 #include "Node.h"
 #include "IDifferentiable.h"
 
-class Constant: public Node, public IDifferentiable {
+class Constant: public IDifferentiable {
     public:
         Constant(float value);
         float Forward(const vector<float>&) const;

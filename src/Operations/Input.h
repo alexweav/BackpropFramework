@@ -1,10 +1,9 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "Node.h"
 #include "IDifferentiable.h"
 
-class Input: public Node, public IDifferentiable {
+class Input: public IDifferentiable {
     public:
         Input();
         float Forward(const vector<float>& inputs) const;

@@ -6,9 +6,9 @@
 #include "Node.h"
 #include "../Utils/Dictionary.h"
 
-class Operation: public Node {
+class Operation: public virtual Node {
 public:
-    Operation(initializer_list<Node*> inputs, bool);
+    Operation(): Node() {}
     virtual float Forward(const vector<float>& inputs) const = 0;
 };
 

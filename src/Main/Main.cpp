@@ -4,13 +4,13 @@
 #include "Operations/Constant.h"
 #include "Operations/Input.h"
 #include "Evaluation/ForwardEvaluator.h"
+#include "Evaluation/BackwardEvaluator.h"
 #include "Utils/Dictionary.h"
 
 using namespace std;
 
 int main(int argc, char** argv) {
     auto var1 = new Input();
-    cout << var1->HasDifferentiableTree() << endl;
     auto var2 = new Input();
     auto cons = new Constant(5.0);
     auto add = new Addition(var1, cons);
@@ -22,6 +22,8 @@ int main(int argc, char** argv) {
     vars[var2] = 1.0;
     cout << eval->ForwardEvaluate(sub, vars) << endl;
     cout << sub->HasDifferentiableTree() << endl;
+    auto bval = new BackwardEvaluator();
+    auto res = bval->BackwardEvaluate(sub, vars);
     
 
 
