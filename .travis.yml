@@ -9,4 +9,6 @@ script:
   - cmake --version
   - mkdir build
   - cd build
-  - cmake .. && make
+  - cmake ..
+  - make
+  - make test
