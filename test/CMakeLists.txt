@@ -1,1 +1,2 @@
+add_subdirectory(TestEvaluation)
 add_subdirectory(TestOperations)

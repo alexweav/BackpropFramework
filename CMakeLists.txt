@@ -46,3 +46,4 @@ add_executable (BackpropFrameworkExe ${BackpropFramework_SOURCES})
 add_library(BackpropFramework ${BackpropFramework_SOURCES})
 
 add_test(TestOperations test/TestOperations/TestOperations)
+add_test(TestEvaluation test/TestEvaluation/TestEvaluation)
