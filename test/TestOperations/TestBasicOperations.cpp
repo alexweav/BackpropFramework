@@ -11,7 +11,7 @@ TEST(AdditionTests, ForwardAdds) {
     auto cons2 = new Constant(0);
     auto add = new Addition(cons1, cons2);
     vector<float> inputs({2.0, 3.0});
-    EXPECT_EQ(add->Forward(inputs), 2.0 + 3.0);
+    EXPECT_FLOAT_EQ(add->Forward(inputs), 5.0);
 }
 
 TEST(AdditionTests, BackwardAtPointCorrect) {
@@ -21,8 +21,8 @@ TEST(AdditionTests, BackwardAtPointCorrect) {
     vector<float> inputs({2.0, 3.0});
     vector<float> gradsOut = add->Backward(inputs);
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_EQ(gradsOut.at(0), 1.0);
-    EXPECT_EQ(gradsOut.at(1), 1.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(0), 1.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(1), 1.0);
 }
 
 TEST(SubtractionTests, ForwardSubtracts) {
@@ -30,7 +30,7 @@ TEST(SubtractionTests, ForwardSubtracts) {
     auto cons2 = new Constant(0);
     auto sub = new Subtraction(cons1, cons2);
     vector<float> inputs({5.0, 3.0});
-    EXPECT_EQ(sub->Forward(inputs), 5.0 - 3.0);
+    EXPECT_FLOAT_EQ(sub->Forward(inputs), 2.0);
 }
 
 TEST(SubtractionTests, BackwardAtPointCorrect) {
@@ -40,8 +40,8 @@ TEST(SubtractionTests, BackwardAtPointCorrect) {
     vector<float> inputs({5.0, 3.0});
     vector<float> gradsOut = sub->Backward(inputs);
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_EQ(gradsOut.at(0), 1.0);
-    EXPECT_EQ(gradsOut.at(1), -1.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(0), 1.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(1), -1.0);
 }
 
 TEST(MultiplicationTests, ForwardMultiplies) {
@@ -49,7 +49,7 @@ TEST(MultiplicationTests, ForwardMultiplies) {
     auto cons2 = new Constant(0);
     auto mul = new Multiplication(cons1, cons2);
     vector<float> inputs({3.0, 5.0});
-    EXPECT_EQ(mul->Forward(inputs), 3.0*5.0);
+    EXPECT_FLOAT_EQ(mul->Forward(inputs), 15.0);
 }
 
 TEST(MultiplicationTests, BackwardAtPointCorrect) {
@@ -59,8 +59,8 @@ TEST(MultiplicationTests, BackwardAtPointCorrect) {
     vector<float> inputs({3.0, 5.0});
     vector<float> gradsOut = mul->Backward(inputs);
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_EQ(gradsOut.at(0), 5.0);
-    EXPECT_EQ(gradsOut.at(1), 3.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(0), 5.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(1), 3.0);
 }
 
 TEST(DivisionTests, ForwardDivides) {
@@ -68,7 +68,7 @@ TEST(DivisionTests, ForwardDivides) {
     auto cons2 = new Constant(0);
     auto div = new Division(cons1, cons2);
     vector<float> inputs({7.0, 2.0});
-    EXPECT_EQ(div->Forward(inputs), 7.0 / 2.0);
+    EXPECT_FLOAT_EQ(div->Forward(inputs), 3.5);
 }
 
 TEST(DivisionTests, BackwardAtPointCorrect) {
@@ -78,6 +78,6 @@ TEST(DivisionTests, BackwardAtPointCorrect) {
     vector<float> inputs({7.0, 2.0});
     vector<float> gradsOut = div->Backward(inputs);
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_EQ(gradsOut.at(0), 1.0 / 2.0);
-    EXPECT_EQ(gradsOut.at(1), -7.0 / (2.0 * 2.0));
+    EXPECT_FLOAT_EQ(gradsOut.at(0), 0.5);
+    EXPECT_FLOAT_EQ(gradsOut.at(1), -1.75);
 }

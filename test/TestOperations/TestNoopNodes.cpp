@@ -5,7 +5,7 @@
 TEST(ConstantTests, ForwardReturnsValue) {
     auto cons = new Constant(2.0);
     vector<float> inputs;
-    EXPECT_EQ(cons->Forward(inputs), 2.0);
+    EXPECT_FLOAT_EQ(cons->Forward(inputs), 2.0);
 }
 
 TEST(ConstantTests, BackwardReturnsEmptyVector) {
@@ -17,7 +17,7 @@ TEST(ConstantTests, BackwardReturnsEmptyVector) {
 TEST(InputTests, ForwardReturnsDefaultValue) {
     auto input = new Input();
     vector<float> inputs;
-    EXPECT_EQ(input->Forward(inputs), 0.0);
+    EXPECT_FLOAT_EQ(input->Forward(inputs), 0.0);
 }
 
 TEST(InputTests, NewDefaultValueAppearsInForward) {
@@ -25,7 +25,7 @@ TEST(InputTests, NewDefaultValueAppearsInForward) {
     vector<float> inputs;
     EXPECT_EQ(input->Forward(inputs), 0.0);
     input->RegisterNewDefaultValue(3.0);
-    EXPECT_EQ(input->Forward(inputs), 3.0);
+    EXPECT_FLOAT_EQ(input->Forward(inputs), 3.0);
 }
 
 TEST(InputTests, BackwardReturnsEmptyVector) {
