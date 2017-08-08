@@ -43,5 +43,6 @@ include_directories("src/"
 
 add_subdirectory(test)
 add_executable (BackpropFrameworkExe ${BackpropFramework_SOURCES})
+add_library(BackpropFramework ${BackpropFramework_SOURCES})
 
 add_test(TestOperations test/TestOperations/TestOperations)
