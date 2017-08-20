@@ -7,6 +7,7 @@
 #include "Operations/Subtraction.h"
 #include "Operations/Multiplication.h"
 #include "Evaluation/ForwardEvaluator.h"
+#include "FakeForwardEvaluationCounter.h"
 
 class ForwardPropagationTest : public ::testing::Test {
     protected:
@@ -30,6 +31,23 @@ class ForwardPropagationTest : public ::testing::Test {
         Multiplication* mul45;
         Addition* add47;
         Subtraction* sub0;
+};
+
+class MultipleEvaluationTest : public ::testing::Test {
+    protected:
+        virtual void SetUp() {
+            eval = new ForwardEvaluator();
+            counterConstant = new FakeForwardEvaluationCounter();
+            zero = new Constant(0.0);
+            addSingle = new Addition(counterConstant, zero);
+            addDual = new Addition(counterConstant, counterConstant);
+        }
+        Dictionary<Input*, float> vars;
+        ForwardEvaluator* eval;
+        FakeForwardEvaluationCounter* counterConstant;
+        Constant* zero;
+        Addition* addSingle;
+        Addition* addDual;
 };
 
 #endif
