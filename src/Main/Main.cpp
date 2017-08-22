@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Eigen/Dense"
 #include "Operations/Addition.h"
 #include "Operations/Subtraction.h"
 #include "Operations/Multiplication.h"
@@ -8,6 +9,7 @@
 #include "Utils/Dictionary.h"
 
 using namespace std;
+using Eigen::MatrixXd;
 
 int main(int argc, char** argv) {
     auto var1 = new Input();
@@ -29,10 +31,10 @@ int main(int argc, char** argv) {
     cout << "cons: " << res[cons] << endl;
     cout << "add:  " << res[add] << endl;
     cout << "mul:  " << res[mul] << endl;
-    
-    
-
-
+    cout << endl;
+    MatrixXd m = MatrixXd::Random(3, 3);
+    m = (m + MatrixXd::Constant(3, 3, 1.2)) * 50;
+    cout << m << endl;
 
     return 0;
 }

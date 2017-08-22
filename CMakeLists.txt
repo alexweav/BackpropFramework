@@ -46,6 +46,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 file(GLOB_RECURSE BackpropFramework_SOURCES "src/*.cpp")
 
 include_directories("src/"
+                    "external/"
                     "${source_dir}/googletest/include"
                     "${source_dir}/googlemock/include")
 
