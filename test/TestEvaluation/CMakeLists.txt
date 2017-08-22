@@ -7,3 +7,4 @@ target_link_libraries(TestEvaluation
 )
 
 install(TARGETS TestEvaluation DESTINATION bin)
+add_test(NAME test_evaluation COMMAND TestEvaluation)

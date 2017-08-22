@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project (BackpropFramework)
+project(BackpropFramework)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 enable_testing()
@@ -11,8 +11,8 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
     include(CodeCoverage)
-    #setup_target_for_coverage(BackpropFramework_COVERAGE TestOperations coverage)
-    #setup_target_for_coverage(BackpropFramework_COVERAGE TestEvaluation coverage)
+    setup_target_for_coverage(TestOperations_coverage TestOperations coverage)
+    setup_target_for_coverage(TestEvaluation_coverage TestEvaluation coverage)
 endif()
 
 ExternalProject_Add(
@@ -53,5 +53,3 @@ add_subdirectory(test)
 add_executable (BackpropFrameworkExe ${BackpropFramework_SOURCES})
 add_library(BackpropFramework ${BackpropFramework_SOURCES})
 
-add_test(TestOperations test/TestOperations/TestOperations)
-add_test(TestEvaluation test/TestEvaluation/TestEvaluation)
