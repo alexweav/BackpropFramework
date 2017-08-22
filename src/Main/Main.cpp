@@ -4,8 +4,7 @@
 #include "Operations/Multiplication.h"
 #include "Operations/Constant.h"
 #include "Operations/Input.h"
-#include "Evaluation/ForwardEvaluator.h"
-#include "Evaluation/BackwardEvaluator.h"
+#include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
 
 using namespace std;
@@ -17,13 +16,12 @@ int main(int argc, char** argv) {
     auto add = new Addition(var1, cons);
     auto mul = new Multiplication(add, var2);
 
-    auto eval = new ForwardEvaluator();
+    auto eval = new Evaluator();
     Dictionary<Input*, float> vars;
     vars[var1] = 2.0;
     vars[var2] = 3.0;
     cout << eval->ForwardEvaluate(mul, vars) << endl;
-    auto bval = new BackwardEvaluator();
-    auto res = bval->BackwardEvaluate(mul, vars);
+    auto res = eval->BackwardEvaluate(mul, vars);
     cout << "(var1 + cons) * var2" << endl;
     cout << "(2 + 5) * 3" << endl;
     cout << "var1: " << res[var1] << endl;

@@ -6,13 +6,13 @@
 #include "Operations/Addition.h"
 #include "Operations/Subtraction.h"
 #include "Operations/Multiplication.h"
-#include "Evaluation/ForwardEvaluator.h"
+#include "Evaluation/Evaluator.h"
 #include "FakeForwardEvaluationCounter.h"
 
 class ForwardPropagationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
-            eval = new ForwardEvaluator();
+            eval = new Evaluator();
             cons2 = new Constant(2.0);
             cons7 = new Constant(7.0);
             add9 = new Addition(cons2, cons7);
@@ -22,7 +22,7 @@ class ForwardPropagationTest : public ::testing::Test {
             sub0 = new Subtraction(add47, add47);
         }
         Dictionary<Input*, float> vars;
-        ForwardEvaluator* eval;
+        Evaluator* eval;
         Constant* cons2;
         Constant* cons3;
         Constant* cons5;
@@ -36,14 +36,14 @@ class ForwardPropagationTest : public ::testing::Test {
 class MultipleEvaluationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
-            eval = new ForwardEvaluator();
+            eval = new Evaluator();
             counterConstant = new FakeForwardEvaluationCounter();
             zero = new Constant(0.0);
             addSingle = new Addition(counterConstant, zero);
             addDual = new Addition(counterConstant, counterConstant);
         }
         Dictionary<Input*, float> vars;
-        ForwardEvaluator* eval;
+        Evaluator* eval;
         FakeForwardEvaluationCounter* counterConstant;
         Constant* zero;
         Addition* addSingle;
