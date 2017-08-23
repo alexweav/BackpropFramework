@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Eigen/Dense"
 #include "Operations/Addition.h"
 #include "Operations/Subtraction.h"
 #include "Operations/Multiplication.h"
@@ -7,9 +6,10 @@
 #include "Operations/Input.h"
 #include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
+#include "Utils/Datatypes.h"
 
 using namespace std;
-using Eigen::MatrixXd;
+using namespace Eigen;
 
 int main(int argc, char** argv) {
     auto var1 = new Input();
@@ -32,9 +32,11 @@ int main(int argc, char** argv) {
     cout << "add:  " << res[add] << endl;
     cout << "mul:  " << res[mul] << endl;
     cout << endl;
-    MatrixXd m = MatrixXd::Random(3, 3);
-    m = (m + MatrixXd::Constant(3, 3, 1.2)) * 50;
+    MatrixXf m(2, 2);
     cout << m << endl;
+    DataObject* data = new DataObject(5.0);
+    cout << "Is Scalar: " << (data->GetKind() == DataKind::SCALAR) << endl;
+    cout << "Value: " << data->GetData<float>() << endl;
 
     return 0;
 }
