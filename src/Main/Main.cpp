@@ -34,12 +34,14 @@ int main(int argc, char** argv) {
     cout << endl;
     MatrixXf m(2, 2);
     cout << m << endl;
-    DataObject* data = new DataObject(5.0);
+    DataObject tensor1({1, 2});
+    cout << +tensor1.Dim() << endl;
+    /*DataObject* data = new DataObject(5.0);
     cout << "Is Scalar: " << (data->GetKind() == DataKind::SCALAR) << endl;
     cout << "Value: " << data->GetData<float>() << endl;
     DataObject* mData = new DataObject(m);
     cout << "Is Matrix: " << (mData->GetKind() == DataKind::MATRIX) << endl;
-    cout << "Value: " << mData->GetData<MatrixXf>() << endl;
+    cout << "Value: " << mData->GetData<MatrixXf>() << endl;*/
 
     return 0;
 }
