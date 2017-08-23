@@ -5,7 +5,7 @@ DataObject::DataObject(float value) {
     this->_scalar = value;
 }
 
-DataObject::DataObject(MatrixXf* matrix) {
+DataObject::DataObject(const MatrixXf& matrix) {
     this->_kind = DataKind::MATRIX;
     this->_matrix = matrix;
 }
@@ -21,11 +21,6 @@ float DataObject::GetData<float>(void) {
 
 template<>
 MatrixXf DataObject::GetData<MatrixXf>(void) {
-    return *(this->_matrix);
+    return this->_matrix;
 }
 
-DataObject::~DataObject() {
-    if (this->_kind == DataKind::MATRIX) {
-        free(this->_matrix);
-    }
-}

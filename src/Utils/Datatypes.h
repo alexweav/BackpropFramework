@@ -14,18 +14,15 @@ typedef enum dataKind {
 class DataObject {
     public:
         DataObject(float);
-        DataObject(MatrixXf*);
-        ~DataObject();
+        DataObject(const MatrixXf&);
         DataKind GetKind(void);
         template<typename T>
         T GetData(void);
         
     private:
         DataKind _kind;
-        union {
-            float _scalar;
-            MatrixXf* _matrix;
-        };
+        float _scalar;
+        MatrixXf _matrix;
 };
 
 #endif
