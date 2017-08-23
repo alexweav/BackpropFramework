@@ -37,6 +37,9 @@ int main(int argc, char** argv) {
     DataObject* data = new DataObject(5.0);
     cout << "Is Scalar: " << (data->GetKind() == DataKind::SCALAR) << endl;
     cout << "Value: " << data->GetData<float>() << endl;
+    DataObject* mData = new DataObject(new MatrixXf(3, 3));
+    cout << "Is Matrix: " << (mData->GetKind() == DataKind::MATRIX) << endl;
+    cout << "Value: " << mData->GetData<MatrixXf>() << endl;
 
     return 0;
 }

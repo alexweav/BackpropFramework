@@ -5,7 +5,7 @@ DataObject::DataObject(float value) {
     this->_scalar = value;
 }
 
-DataObject::DataObject(std::shared_ptr<MatrixXf> matrix) {
+DataObject::DataObject(MatrixXf* matrix) {
     this->_kind = DataKind::MATRIX;
     this->_matrix = matrix;
 }
@@ -20,6 +20,12 @@ float DataObject::GetData<float>(void) {
 }
 
 template<>
-std::shared_ptr<MatrixXf> DataObject::GetData<std::shared_ptr<MatrixXf>>(void) {
-    return this->_matrix;
+MatrixXf DataObject::GetData<MatrixXf>(void) {
+    return *(this->_matrix);
+}
+
+DataObject::~DataObject() {
+    if (this->_kind == DataKind::MATRIX) {
+        free(this->_matrix);
+    }
 }

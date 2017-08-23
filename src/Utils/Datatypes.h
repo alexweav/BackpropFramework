@@ -11,25 +11,20 @@ typedef enum dataKind {
     MATRIX
 } DataKind;
 
-typedef union dataPtr {
-    float scalar;
-    std::shared_ptr<MatrixXf> matrix;
-} DataPtr;
-
 class DataObject {
     public:
         DataObject(float);
-        DataObject(std::shared_ptr<MatrixXf>);
+        DataObject(MatrixXf*);
+        ~DataObject();
         DataKind GetKind(void);
         template<typename T>
         T GetData(void);
-
         
     private:
         DataKind _kind;
         union {
             float _scalar;
-            std::shared_ptr<MatrixXf> _matrix;
+            MatrixXf* _matrix;
         };
 };
 
