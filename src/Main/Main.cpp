@@ -19,7 +19,13 @@ int main(int argc, char** argv) {
     auto mul = new Multiplication(add, var2);
 
     auto eval = new Evaluator();
-    Dictionary<Input*, float> vars;
+    Dictionary<Input*, DataObject> vars_d;
+    DataObject d2(2.0);
+    DataObject d3(3.0);
+    vars_d[var1] = d2;
+    vars_d[var2] = d3;
+    cout << vars_d[var1].GetData<float>() << endl;
+    /*Dictionary<Input*, float> vars;
     vars[var1] = 2.0;
     vars[var2] = 3.0;
     cout << eval->ForwardEvaluate(mul, vars) << endl;
@@ -35,7 +41,8 @@ int main(int argc, char** argv) {
     MatrixXf m(2, 2);
     cout << m << endl;
     DataObject tensor1({1, 2});
-    cout << +tensor1.Dim() << endl;
+    cout << +tensor1.Dim() << endl;*/
+
     /*DataObject* data = new DataObject(5.0);
     cout << "Is Scalar: " << (data->GetKind() == DataKind::SCALAR) << endl;
     cout << "Value: " << data->GetData<float>() << endl;

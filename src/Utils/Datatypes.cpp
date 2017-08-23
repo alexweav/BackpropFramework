@@ -1,5 +1,7 @@
 #include "Datatypes.h"
 
+DataObject::DataObject(void) : DataObject({}) { }
+
 DataObject::DataObject(const std::initializer_list<uint32_t>& shape)
             : _dimension(shape.size()), 
               _shape(shape) { }
@@ -18,17 +20,32 @@ uint8_t DataObject::Dim(void) {
     return this->_dimension;
 }
 
-DataKind DataObject::GetKind(void) {
+std::vector<uint32_t> DataObject::Shape(void) {
+    return this->_shape;
+}
+
+DataKind DataObject::GetKind(void) const {
     return this->_kind;
 }
 
 template<>
-float DataObject::GetData<float>(void) {
+float DataObject::GetData<float>(void) const {
     return this->_scalar;
 }
 
 template<>
-MatrixXf DataObject::GetData<MatrixXf>(void) {
+MatrixXf DataObject::GetData<MatrixXf>(void) const {
     return this->_matrix;
+}
+
+bool DataObject::operator==(const DataObject& other) {
+    if (this->_kind != other.GetKind()) {
+        return false;
+    }
+    if (this->_kind == DataKind::SCALAR) {
+        return this->_scalar == other.GetData<float>();
+    } else {
+        return this->_matrix == other.GetData<MatrixXf>();
+    }
 }
 

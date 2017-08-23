@@ -17,17 +17,20 @@ typedef enum dataKind {
 
 class DataObject {
     public:
+        DataObject(void);
         DataObject(const std::initializer_list<uint32_t>&);
         DataObject(float);
         DataObject(const MatrixXf&);
         uint8_t Dim(void);
-        DataKind GetKind(void);
+        std::vector<uint32_t> Shape(void);
+        DataKind GetKind(void) const;
         template<typename T>
-        T GetData(void);
+        T GetData(void) const;
+        bool operator==(const DataObject&);
         
     private:
         uint8_t _dimension;
-        std::initializer_list<uint32_t> _shape;
+        std::vector<uint32_t> _shape;
         DataKind _kind;
         float _scalar;
         MatrixXf _matrix;
