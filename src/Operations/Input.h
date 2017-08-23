@@ -13,4 +13,7 @@ class Input: public Differentiable {
     private:
         float _defaultOutput = 0;
 };
+
+typedef Dictionary<Input*, DataObject> Variables;
+
 #endif

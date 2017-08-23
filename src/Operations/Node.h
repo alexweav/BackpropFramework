@@ -4,9 +4,11 @@
 #include <vector>
 #include <initializer_list>
 #include <iostream>
-#include "../Utils/Dictionary.h"
+#include "Utils/Dictionary.h"
+#include "Utils/Datatypes.h"
 
 using namespace std;
+using namespace utils;
 
 class Node {
     public:
@@ -24,5 +26,7 @@ class Node {
         vector<Node*>* _predecessors;
         vector<Node*>* _successors;
 };
+
+typedef Dictionary<Node*, DataObject> Overrides;
 
 #endif

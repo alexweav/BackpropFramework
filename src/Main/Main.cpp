@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
     auto mul = new Multiplication(add, var2);
 
     auto eval = new Evaluator();
-    Dictionary<Input*, DataObject> vars_d;
+    Variables vars_d;
     DataObject d2(2.0);
     DataObject d3(3.0);
     vars_d[var1] = d2;
