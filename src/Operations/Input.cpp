@@ -6,12 +6,13 @@ float Input::GetDefaultOutput() {
     return _defaultOutput;
 }
 
-float Input::Forward(const vector<float>& inputs) const {
-    return _defaultOutput;
+DataObject Input::Forward(const vector<DataObject>& inputs) const {
+    DataObject result(_defaultOutput);
+    return result;
 }
 
-vector<float> Input::Backward(const vector<float>& prevInputs) const {
-    vector<float> gradsOut;
+vector<DataObject> Input::Backward(const vector<DataObject>& prevInputs) const {
+    vector<DataObject> gradsOut;
     return gradsOut;
 }
 

@@ -16,8 +16,6 @@ class Evaluator {
     protected:
         DataObject ForwardEvaluate(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
         vector<DataObject> EvaluatePredecessors(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
-    private:
-        vector<float> GetFloatVectorFromDataObjectVector(const vector<DataObject>&);
 };
 
 #endif

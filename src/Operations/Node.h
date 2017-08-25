@@ -14,7 +14,7 @@ class Node {
     public:
         Node() {}
         Node(initializer_list<Node*>, bool isDifferentiable);
-        virtual float Forward(const vector<float>&) const = 0;
+        virtual DataObject Forward(const vector<DataObject>&) const = 0;
         int Arity();
         vector<Node*>* Predecessors();
         void RegisterSuccessor(Node* node);

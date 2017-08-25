@@ -9,7 +9,7 @@
 class Operation: public virtual Node {
 public:
     Operation(): Node() {}
-    virtual float Forward(const vector<float>& inputs) const = 0;
+    virtual DataObject Forward(const vector<DataObject>& inputs) const = 0;
 };
 
 #endif

@@ -10,74 +10,90 @@ TEST(AdditionTests, ForwardAdds) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto add = new Addition(cons1, cons2);
-    vector<float> inputs({2.0, 3.0});
-    EXPECT_FLOAT_EQ(add->Forward(inputs), 5.0);
+    DataObject d2(2.0);
+    DataObject d3(3.0);
+    vector<DataObject> inputs({d2, d3});
+    EXPECT_FLOAT_EQ(add->Forward(inputs).GetData<float>(), 5.0);
 }
 
 TEST(AdditionTests, BackwardAtPointCorrect) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto add = new Addition(cons1, cons2);
-    vector<float> inputs({2.0, 3.0});
-    vector<float> gradsOut = add->Backward(inputs);
+    DataObject d2(2.0);
+    DataObject d3(3.0);
+    vector<DataObject> inputs({d2, d3});
+    vector<DataObject> gradsOut = add->Backward(inputs);
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_FLOAT_EQ(gradsOut.at(0), 1.0);
-    EXPECT_FLOAT_EQ(gradsOut.at(1), 1.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(0).GetData<float>(), 1.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(1).GetData<float>(), 1.0);
 }
 
 TEST(SubtractionTests, ForwardSubtracts) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto sub = new Subtraction(cons1, cons2);
-    vector<float> inputs({5.0, 3.0});
-    EXPECT_FLOAT_EQ(sub->Forward(inputs), 2.0);
+    DataObject d5(5.0);
+    DataObject d3(3.0);
+    vector<DataObject> inputs({d5, d3});
+    EXPECT_FLOAT_EQ(sub->Forward(inputs).GetData<float>(), 2.0);
 }
 
 TEST(SubtractionTests, BackwardAtPointCorrect) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto sub = new Subtraction(cons1, cons2);
-    vector<float> inputs({5.0, 3.0});
-    vector<float> gradsOut = sub->Backward(inputs);
+    DataObject d5(5.0);
+    DataObject d3(3.0);
+    vector<DataObject> inputs({d5, d3});
+    vector<DataObject> gradsOut = sub->Backward(inputs);
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_FLOAT_EQ(gradsOut.at(0), 1.0);
-    EXPECT_FLOAT_EQ(gradsOut.at(1), -1.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(0).GetData<float>(), 1.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(1).GetData<float>(), -1.0);
 }
 
 TEST(MultiplicationTests, ForwardMultiplies) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto mul = new Multiplication(cons1, cons2);
-    vector<float> inputs({3.0, 5.0});
-    EXPECT_FLOAT_EQ(mul->Forward(inputs), 15.0);
+    DataObject d3(3.0);
+    DataObject d5(5.0);
+    vector<DataObject> inputs({d3, d5});
+    EXPECT_FLOAT_EQ(mul->Forward(inputs).GetData<float>(), 15.0);
 }
 
 TEST(MultiplicationTests, BackwardAtPointCorrect) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto mul = new Multiplication(cons1, cons2);
-    vector<float> inputs({3.0, 5.0});
-    vector<float> gradsOut = mul->Backward(inputs);
+    DataObject d3(3.0);
+    DataObject d5(5.0);
+    vector<DataObject> inputs({d3, d5});
+    vector<DataObject> gradsOut = mul->Backward(inputs);
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_FLOAT_EQ(gradsOut.at(0), 5.0);
-    EXPECT_FLOAT_EQ(gradsOut.at(1), 3.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(0).GetData<float>(), 5.0);
+    EXPECT_FLOAT_EQ(gradsOut.at(1).GetData<float>(), 3.0);
 }
 
 TEST(DivisionTests, ForwardDivides) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto div = new Division(cons1, cons2);
-    vector<float> inputs({7.0, 2.0});
-    EXPECT_FLOAT_EQ(div->Forward(inputs), 3.5);
+    DataObject d7(7.0);
+    DataObject d2(2.0);
+    vector<DataObject> inputs({d7, d2});
+    EXPECT_FLOAT_EQ(div->Forward(inputs).GetData<float>(), 3.5);
 }
 
 TEST(DivisionTests, BackwardAtPointCorrect) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto div = new Division(cons1, cons2);
-    vector<float> inputs({7.0, 2.0});
-    vector<float> gradsOut = div->Backward(inputs);
+    DataObject d7(7.0);
+    DataObject d2(2.0);
+    vector<DataObject> inputs({d7, d2});
+    vector<DataObject> gradsOut = div->Backward(inputs);
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_FLOAT_EQ(gradsOut.at(0), 0.5);
-    EXPECT_FLOAT_EQ(gradsOut.at(1), -1.75);
+    EXPECT_FLOAT_EQ(gradsOut.at(0).GetData<float>(), 0.5);
+    EXPECT_FLOAT_EQ(gradsOut.at(1).GetData<float>(), -1.75);
 }

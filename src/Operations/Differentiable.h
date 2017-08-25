@@ -9,7 +9,7 @@ using namespace std;
 class Differentiable: public virtual Node {
     public:
         Differentiable(): Node() {}
-        virtual vector<float> Backward(const vector<float>& prevInputs) const = 0;
+        virtual vector<DataObject> Backward(const vector<DataObject>& prevInputs) const = 0;
 };
 
 #endif

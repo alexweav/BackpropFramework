@@ -6,8 +6,8 @@
 class Input: public Differentiable {
     public:
         Input();
-        float Forward(const vector<float>& inputs) const;
-        vector<float> Backward(const vector<float>&) const;
+        DataObject Forward(const vector<DataObject>& inputs) const;
+        vector<DataObject> Backward(const vector<DataObject>&) const;
         void RegisterNewDefaultValue(float);
         float GetDefaultOutput();
     private:

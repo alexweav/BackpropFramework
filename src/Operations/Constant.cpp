@@ -4,12 +4,13 @@ Constant::Constant(float value): Node({}, true) {
     _value = value;
 }
 
-float Constant::Forward(const vector<float>& inputs) const {
-    return _value;
+DataObject Constant::Forward(const vector<DataObject>& inputs) const {
+    DataObject result(_value);
+    return result;
 }
 
-vector<float> Constant::Backward(const vector<float>& prevInputs) const {
-    vector<float> gradsOut;
+vector<DataObject> Constant::Backward(const vector<DataObject>& prevInputs) const {
+    vector<DataObject> gradsOut;
     return gradsOut;
 }
 

@@ -11,22 +11,18 @@ DataObject Evaluator::ForwardEvaluate(Node* node, const Variables& vars) {
     }
     vector<Node*>* order = new vector<Node*>();
     vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
-    vector<float> inputs_f = GetFloatVectorFromDataObjectVector(inputs);
-    float result = node->Forward(inputs_f);
-    DataObject res(result);
-    evaluated[node] = res;
+    DataObject result = node->Forward(inputs);
+    evaluated[node] = result;
     order->push_back(node);
     free(order);
-    return res;
+    return result;
 }
 
 DataObject Evaluator::ForwardEvaluate(Node* node, Dictionary<Node*, DataObject>& evaluated, vector<Node*>* order) {
     vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);   
-    vector<float> inputs_f = GetFloatVectorFromDataObjectVector(inputs);
-    float result = node->Forward(inputs_f);
-    DataObject res(result);
+    DataObject result = node->Forward(inputs);
     order->push_back(node);
-    return res;
+    return result;
 }
 
 vector<DataObject> Evaluator::EvaluatePredecessors(Node* node, Dictionary<Node*, DataObject>& evaluated, vector<Node*>* order) {
@@ -56,26 +52,18 @@ Dictionary<Node*, DataObject> Evaluator::BackwardEvaluate(Differentiable* node, 
     grads[node] = 1.0;
     for(Node* n : *order) {
         Differentiable* diffNode = dynamic_cast<Differentiable*>(n);
-        vector<float> prevInputs;
+        vector<DataObject> prevInputs;
         vector<Node*>* predecessors = n->Predecessors();
         for (Node* pred : *predecessors) {
-            prevInputs.push_back(forwardResults[pred].GetData<float>());
+            prevInputs.push_back(forwardResults[pred]);
         }
-        vector<float> gradOut = diffNode->Backward(prevInputs);
+        vector<DataObject> gradOut = diffNode->Backward(prevInputs);
         for (int i = 0; i < n->Arity(); i++) {
-            float prevGrad = grads[predecessors->at(i)].GetData<float>();
-            DataObject newGrad(prevGrad + (gradOut.at(i) * grads[n].GetData<float>()));
+            DataObject prevGrad = grads[predecessors->at(i)];
+            DataObject newGrad(prevGrad.GetData<float>() + (gradOut.at(i).GetData<float>() * grads[n].GetData<float>()));
             grads[predecessors->at(i)] = newGrad;
         }
         
     }
     return grads;
-}
-
-vector<float> Evaluator::GetFloatVectorFromDataObjectVector(const vector<DataObject>& vec) {
-    vector<float> result;
-    for(DataObject data : vec) {
-        result.push_back(data.GetData<float>());
-    }
-    return result;
 }

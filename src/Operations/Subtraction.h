@@ -7,8 +7,8 @@
 class Subtraction: public Operation, public Differentiable {
     public:
         Subtraction(Node* i1, Node* i2);
-        float Forward(const vector<float>& inputs) const;
-        vector<float> Backward(const vector<float>& prevInputs) const;
+        DataObject Forward(const vector<DataObject>& inputs) const;
+        vector<DataObject> Backward(const vector<DataObject>& prevInputs) const;
 };
 
 #endif
