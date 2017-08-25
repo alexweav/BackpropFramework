@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     DataObject d3(3.0);
     vars[var1] = d2;
     vars[var2] = d3;
-    cout << eval->ForwardEvaluate(mul, vars) << endl;
+    cout << eval->ForwardEvaluate(mul, vars).GetData<float>() << endl;
     auto res = eval->BackwardEvaluate(mul, vars);
     cout << "(var1 + cons) * var2" << endl;
     cout << "(2 + 5) * 3" << endl;

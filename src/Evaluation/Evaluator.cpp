@@ -4,37 +4,41 @@
 
 using namespace utils;
 
-float Evaluator::ForwardEvaluate(Node* node, const Variables& vars) {
+DataObject Evaluator::ForwardEvaluate(Node* node, const Variables& vars) {
     Dictionary<Node*, DataObject> evaluated;
     for(pair<Input*, DataObject> element : vars) {
         evaluated[element.first] = element.second;
     }
     vector<Node*>* order = new vector<Node*>();
-    vector<float> inputs = EvaluatePredecessors(node, evaluated, order);
-    float result = node->Forward(inputs);
+    vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
+    vector<float> inputs_f = GetFloatVectorFromDataObjectVector(inputs);
+    float result = node->Forward(inputs_f);
     DataObject res(result);
     evaluated[node] = res;
     order->push_back(node);
     free(order);
-    return result;
+    return res;
 }
 
-float Evaluator::ForwardEvaluate(Node* node, Dictionary<Node*, DataObject>& evaluated, vector<Node*>* order) {
-    vector<float> inputs = EvaluatePredecessors(node, evaluated, order);   
-    float result = node->Forward(inputs);
+DataObject Evaluator::ForwardEvaluate(Node* node, Dictionary<Node*, DataObject>& evaluated, vector<Node*>* order) {
+    vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);   
+    vector<float> inputs_f = GetFloatVectorFromDataObjectVector(inputs);
+    float result = node->Forward(inputs_f);
+    DataObject res(result);
     order->push_back(node);
-    return result;
+    return res;
 }
 
-vector<float> Evaluator::EvaluatePredecessors(Node* node, Dictionary<Node*, DataObject>& evaluated, vector<Node*>* order) {
-    vector<float> inputs(node->Arity());
+vector<DataObject> Evaluator::EvaluatePredecessors(Node* node, Dictionary<Node*, DataObject>& evaluated, vector<Node*>* order) {
+    vector<DataObject> inputs(node->Arity());
     for (int i = 0; i < node->Arity(); i++) {
         if (evaluated.find(node->Predecessors()->at(i)) == evaluated.end()) {
-            inputs.at(i) = ForwardEvaluate(node->Predecessors()->at(i), evaluated, order);
-            DataObject res(inputs.at(i));
+            DataObject res = ForwardEvaluate(node->Predecessors()->at(i), evaluated, order);
+            inputs.at(i) = res;
             evaluated[node->Predecessors()->at(i)] = res;
         } else {
-            inputs.at(i) = evaluated[node->Predecessors()->at(i)].GetData<float>();
+            DataObject res = evaluated[node->Predecessors()->at(i)];
+            inputs.at(i) = res;
         }
     }
     return inputs;
@@ -66,4 +70,12 @@ Dictionary<Node*, DataObject> Evaluator::BackwardEvaluate(Differentiable* node, 
         
     }
     return grads;
+}
+
+vector<float> Evaluator::GetFloatVectorFromDataObjectVector(const vector<DataObject>& vec) {
+    vector<float> result;
+    for(DataObject data : vec) {
+        result.push_back(data.GetData<float>());
+    }
+    return result;
 }

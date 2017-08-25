@@ -11,11 +11,13 @@ using namespace utils;
 
 class Evaluator {
     public:
-        float ForwardEvaluate(Node*, const Variables& vars);
+        DataObject ForwardEvaluate(Node*, const Variables& vars);
         Dictionary<Node*, DataObject> BackwardEvaluate(Differentiable*, const Variables&);
     protected:
-        float ForwardEvaluate(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
-        vector<float> EvaluatePredecessors(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
+        DataObject ForwardEvaluate(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
+        vector<DataObject> EvaluatePredecessors(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
+    private:
+        vector<float> GetFloatVectorFromDataObjectVector(const vector<DataObject>&);
 };
 
 #endif
