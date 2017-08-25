@@ -12,7 +12,7 @@ using namespace utils;
 class Evaluator {
     public:
         float ForwardEvaluate(Node*, const Variables& vars);
-        Dictionary<Node*, float> BackwardEvaluate(Differentiable*, const Variables&);
+        Dictionary<Node*, DataObject> BackwardEvaluate(Differentiable*, const Variables&);
     protected:
         float ForwardEvaluate(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
         vector<float> EvaluatePredecessors(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);

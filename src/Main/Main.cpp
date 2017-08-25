@@ -28,11 +28,11 @@ int main(int argc, char** argv) {
     auto res = eval->BackwardEvaluate(mul, vars);
     cout << "(var1 + cons) * var2" << endl;
     cout << "(2 + 5) * 3" << endl;
-    cout << "var1: " << res[var1] << endl;
-    cout << "var2: " << res[var2] << endl;
-    cout << "cons: " << res[cons] << endl;
-    cout << "add:  " << res[add] << endl;
-    cout << "mul:  " << res[mul] << endl;
+    cout << "var1: " << res[var1].GetData<float>() << endl;
+    cout << "var2: " << res[var2].GetData<float>() << endl;
+    cout << "cons: " << res[cons].GetData<float>() << endl;
+    cout << "add:  " << res[add].GetData<float>() << endl;
+    cout << "mul:  " << res[mul].GetData<float>() << endl;
     cout << endl;
     MatrixXf m(2, 2);
     cout << m << endl;

@@ -1,5 +1,6 @@
 #include "Evaluator.h"
 #include <algorithm>
+#include <iostream>
 
 using namespace utils;
 
@@ -39,7 +40,7 @@ vector<float> Evaluator::EvaluatePredecessors(Node* node, Dictionary<Node*, Data
     return inputs;
 }
 
-Dictionary<Node*, float> Evaluator::BackwardEvaluate(Differentiable* node, const Variables& vars) {
+Dictionary<Node*, DataObject> Evaluator::BackwardEvaluate(Differentiable* node, const Variables& vars) {
     Dictionary<Node*, DataObject> forwardResults;
     for (pair<Input*, DataObject> element : vars) {
         forwardResults[element.first] = element.second;
@@ -47,7 +48,7 @@ Dictionary<Node*, float> Evaluator::BackwardEvaluate(Differentiable* node, const
     vector<Node*>* order = new vector<Node*>();
     this->ForwardEvaluate(node, forwardResults, order);
     reverse(order->begin(), order->end());
-    Dictionary<Node*, float> grads;
+    Dictionary<Node*, DataObject> grads;
     grads[node] = 1.0;
     for(Node* n : *order) {
         Differentiable* diffNode = dynamic_cast<Differentiable*>(n);
@@ -58,7 +59,9 @@ Dictionary<Node*, float> Evaluator::BackwardEvaluate(Differentiable* node, const
         }
         vector<float> gradOut = diffNode->Backward(prevInputs);
         for (int i = 0; i < n->Arity(); i++) {
-            grads[predecessors->at(i)] += gradOut.at(i) * grads[n];
+            float prevGrad = grads[predecessors->at(i)].GetData<float>();
+            DataObject newGrad(prevGrad + (gradOut.at(i) * grads[n].GetData<float>()));
+            grads[predecessors->at(i)] = newGrad;
         }
         
     }
