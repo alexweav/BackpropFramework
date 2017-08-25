@@ -4,7 +4,12 @@ DataObject::DataObject(void) : DataObject({}) { }
 
 DataObject::DataObject(const std::initializer_list<uint32_t>& shape)
             : _dimension(shape.size()), 
-              _shape(shape) { }
+              _shape(shape) { 
+    if (shape.size() == 0) {
+        this->_kind = DataKind::SCALAR;
+        this->_scalar = 0.0;
+    }            
+}
 
 DataObject::DataObject(float value) {
     this->_kind = DataKind::SCALAR;

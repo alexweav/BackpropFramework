@@ -8,10 +8,10 @@ class Input: public Differentiable {
         Input();
         DataObject Forward(const vector<DataObject>& inputs) const;
         vector<DataObject> Backward(const vector<DataObject>&) const;
-        void RegisterNewDefaultValue(float);
-        float GetDefaultOutput();
+        void RegisterNewDefaultValue(const DataObject&);
+        DataObject GetDefaultOutput();
     private:
-        float _defaultOutput = 0;
+        DataObject _defaultOutput;
 };
 
 typedef Dictionary<Input*, DataObject> Variables;

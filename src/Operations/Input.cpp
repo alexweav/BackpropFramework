@@ -2,13 +2,12 @@
 
 Input::Input(): Node({}, true) { }
 
-float Input::GetDefaultOutput() {
+DataObject Input::GetDefaultOutput() {
     return _defaultOutput;
 }
 
 DataObject Input::Forward(const vector<DataObject>& inputs) const {
-    DataObject result(_defaultOutput);
-    return result;
+    return _defaultOutput;
 }
 
 vector<DataObject> Input::Backward(const vector<DataObject>& prevInputs) const {
@@ -16,6 +15,6 @@ vector<DataObject> Input::Backward(const vector<DataObject>& prevInputs) const {
     return gradsOut;
 }
 
-void Input::RegisterNewDefaultValue(float newValue) {
+void Input::RegisterNewDefaultValue(const DataObject& newValue) {
     _defaultOutput = newValue;
 }

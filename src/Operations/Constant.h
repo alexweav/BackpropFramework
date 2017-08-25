@@ -6,13 +6,13 @@
 
 class Constant: public Differentiable {
     public:
-        Constant(float value);
+        Constant(const DataObject& value);
         DataObject Forward(const vector<DataObject>&) const;
         vector<DataObject> Backward(const vector<DataObject>&) const;
-        float getValue();
+        DataObject getValue();
 
     private:
-        float _value;
+        DataObject _value;
 };
 
 #endif
