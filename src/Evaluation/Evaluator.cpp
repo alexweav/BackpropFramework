@@ -3,7 +3,7 @@
 
 using namespace utils;
 
-float Evaluator::ForwardEvaluate(Node* node, const Dictionary<Input*, DataObject>& vars) {
+float Evaluator::ForwardEvaluate(Node* node, const Variables& vars) {
     Dictionary<Node*, DataObject> evaluated;
     for(pair<Input*, DataObject> element : vars) {
         evaluated[element.first] = element.second;
@@ -39,7 +39,7 @@ vector<float> Evaluator::EvaluatePredecessors(Node* node, Dictionary<Node*, Data
     return inputs;
 }
 
-Dictionary<Node*, float> Evaluator::BackwardEvaluate(Differentiable* node, const Dictionary<Input*, DataObject>& vars) {
+Dictionary<Node*, float> Evaluator::BackwardEvaluate(Differentiable* node, const Variables& vars) {
     Dictionary<Node*, DataObject> forwardResults;
     for (pair<Input*, DataObject> element : vars) {
         forwardResults[element.first] = element.second;
