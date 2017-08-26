@@ -15,6 +15,14 @@ vector<DataObject> Input::Backward(const vector<DataObject>& prevInputs) const {
     return gradsOut;
 }
 
+void Input::RegisterNewDefaultValue(float value) {
+    RegisterNewDefaultValue(Scalar(value));
+}
+
+void Input::RegisterNewDefaultValue(const MatrixXf& matrix) {
+    RegisterNewDefaultValue(Mat(matrix));
+}
+
 void Input::RegisterNewDefaultValue(const DataObject& newValue) {
     _defaultOutput = newValue;
 }

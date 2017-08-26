@@ -36,4 +36,7 @@ class DataObject {
         MatrixXf _matrix;
 };
 
+DataObject Scalar(float);
+DataObject Mat(const MatrixXf&);
+
 #endif

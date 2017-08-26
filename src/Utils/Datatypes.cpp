@@ -54,3 +54,12 @@ bool DataObject::operator==(const DataObject& other) {
     }
 }
 
+DataObject Scalar(float value) {
+    DataObject result(value);
+    return result;
+}
+
+DataObject Mat(const MatrixXf& matrix) {
+    DataObject result(matrix);
+    return result;
+}

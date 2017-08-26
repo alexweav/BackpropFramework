@@ -6,7 +6,9 @@
 
 class Constant: public Differentiable {
     public:
-        Constant(const DataObject& value);
+        Constant(float);
+        Constant(const MatrixXf&);
+        Constant(const DataObject&);
         DataObject Forward(const vector<DataObject>&) const;
         vector<DataObject> Backward(const vector<DataObject>&) const;
         DataObject getValue();
