@@ -3,7 +3,7 @@
 
 DataObject::DataObject(void) : DataObject({}) { }
 
-DataObject::DataObject(const std::initializer_list<uint32_t>& shape)
+DataObject::DataObject(const std::initializer_list<int64_t>& shape)
             : _dimension(shape.size()), 
               _shape(shape) { 
     if (shape.size() == 0) {
@@ -17,7 +17,9 @@ DataObject::DataObject(float value)
     AllocateScalar(value);
 }
 
-DataObject::DataObject(const MatrixXf& matrix) {
+DataObject::DataObject(const MatrixXf& matrix)
+            : _dimension(2),
+              _shape({matrix.rows(), matrix.cols()}) {
     this->_kind = DataKind::MATRIX;
     this->_matrix = matrix;
 }
@@ -33,7 +35,7 @@ uint8_t DataObject::Dim(void) const {
     return _dimension;
 }
 
-std::vector<uint32_t> DataObject::Shape(void) {
+std::vector<int64_t> DataObject::Shape(void) {
     return _shape;
 }
 

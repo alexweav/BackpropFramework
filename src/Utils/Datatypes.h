@@ -18,11 +18,11 @@ typedef enum dataKind {
 class DataObject {
     public:
         DataObject(void);
-        DataObject(const std::initializer_list<uint32_t>&);
+        DataObject(const std::initializer_list<int64_t>&);
         DataObject(float);
         DataObject(const MatrixXf&);
         uint8_t Dim(void) const;
-        std::vector<uint32_t> Shape(void);
+        std::vector<int64_t> Shape(void);
         DataKind GetKind(void) const;
         template<typename T>
         T GetData(void) const;
@@ -30,7 +30,7 @@ class DataObject {
         
     private:
         uint8_t _dimension;
-        std::vector<uint32_t> _shape;
+        std::vector<int64_t> _shape;
         DataKind _kind;
         MatrixXf _matrix;
 

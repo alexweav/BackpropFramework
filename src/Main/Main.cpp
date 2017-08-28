@@ -35,10 +35,11 @@ int main(int argc, char** argv) {
     cout << "mul:  " << res[mul].GetData<float>() << endl;
     cout << endl;
 
-    MatrixXf m(2, 2);
-    m << 1, 2, 3, 4;
+    MatrixXf m(3, 2);
+    m << 1, 2, 3, 4, 5, 6;
     auto consMat = new Constant(m);
-    cout << eval->ForwardEvaluate(consMat, vars).GetData<MatrixXf>() << endl;
+    cout << eval->ForwardEvaluate(consMat, vars).Shape().at(0) << endl;
+    cout << eval->ForwardEvaluate(consMat, vars).Shape().at(1) << endl;
 
     return 0;
 }
