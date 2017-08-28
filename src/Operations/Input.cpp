@@ -1,6 +1,8 @@
 #include "Input.h"
 
-Input::Input(): Node({}, true) { }
+Input::Input(): Node({}, true) { 
+    
+}
 
 DataObject Input::GetDefaultOutput() {
     return _defaultOutput;

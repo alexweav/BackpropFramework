@@ -1,4 +1,5 @@
 #include "Datatypes.h"
+#include <iostream>
 
 DataObject::DataObject(void) : DataObject({}) { }
 
@@ -6,19 +7,26 @@ DataObject::DataObject(const std::initializer_list<uint32_t>& shape)
             : _dimension(shape.size()), 
               _shape(shape) { 
     if (shape.size() == 0) {
-        this->_kind = DataKind::SCALAR;
-        this->_scalar = 0.0;
+        AllocateScalar(0.0);
     }            
 }
 
-DataObject::DataObject(float value) {
-    this->_kind = DataKind::SCALAR;
-    this->_scalar = value;
+DataObject::DataObject(float value) 
+            : _dimension(0), 
+              _shape({}) {
+    AllocateScalar(value);
 }
 
 DataObject::DataObject(const MatrixXf& matrix) {
     this->_kind = DataKind::MATRIX;
     this->_matrix = matrix;
+}
+
+void DataObject::AllocateScalar(float value) {
+    this->_kind = DataKind::SCALAR;
+    MatrixXf valueMatrix(1, 1);
+    valueMatrix << value;
+    this->_matrix = valueMatrix;
 }
 
 uint8_t DataObject::Dim(void) {
@@ -35,7 +43,7 @@ DataKind DataObject::GetKind(void) const {
 
 template<>
 float DataObject::GetData<float>(void) const {
-    return this->_scalar;
+    return this->_matrix(0);
 }
 
 template<>
@@ -47,11 +55,7 @@ bool DataObject::operator==(const DataObject& other) {
     if (this->_kind != other.GetKind()) {
         return false;
     }
-    if (this->_kind == DataKind::SCALAR) {
-        return this->_scalar == other.GetData<float>();
-    } else {
-        return this->_matrix == other.GetData<MatrixXf>();
-    }
+    return this->_matrix == other.GetData<MatrixXf>();
 }
 
 DataObject Scalar(float value) {

@@ -46,6 +46,10 @@ int main(int argc, char** argv) {
     cout << "Is Matrix: " << (mData->GetKind() == DataKind::MATRIX) << endl;
     cout << "Value: " << mData->GetData<MatrixXf>() << endl;
 
+    DataObject asdf(3.0);
+    cout << asdf.GetData<MatrixXf>() << endl;
+    cout << asdf.GetData<float>() << endl;
+
     return 0;
 }
 

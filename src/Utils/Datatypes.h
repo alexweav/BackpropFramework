@@ -32,8 +32,9 @@ class DataObject {
         uint8_t _dimension;
         std::vector<uint32_t> _shape;
         DataKind _kind;
-        float _scalar;
         MatrixXf _matrix;
+
+        void AllocateScalar(float);
 };
 
 DataObject Scalar(float);
