@@ -26,36 +26,36 @@ void DataObject::AllocateScalar(float value) {
     this->_kind = DataKind::SCALAR;
     MatrixXf valueMatrix(1, 1);
     valueMatrix << value;
-    this->_matrix = valueMatrix;
+    _matrix = valueMatrix;
 }
 
-uint8_t DataObject::Dim(void) {
-    return this->_dimension;
+uint8_t DataObject::Dim(void) const {
+    return _dimension;
 }
 
 std::vector<uint32_t> DataObject::Shape(void) {
-    return this->_shape;
+    return _shape;
 }
 
 DataKind DataObject::GetKind(void) const {
-    return this->_kind;
+    return _kind;
 }
 
 template<>
 float DataObject::GetData<float>(void) const {
-    return this->_matrix(0);
+    return _matrix(0);
 }
 
 template<>
 MatrixXf DataObject::GetData<MatrixXf>(void) const {
-    return this->_matrix;
+    return _matrix;
 }
 
 bool DataObject::operator==(const DataObject& other) {
-    if (this->_kind != other.GetKind()) {
+    if (_kind != other.GetKind()) {
         return false;
     }
-    return this->_matrix == other.GetData<MatrixXf>();
+    return _matrix == other.GetData<MatrixXf>();
 }
 
 DataObject Scalar(float value) {

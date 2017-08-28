@@ -34,21 +34,11 @@ int main(int argc, char** argv) {
     cout << "add:  " << res[add].GetData<float>() << endl;
     cout << "mul:  " << res[mul].GetData<float>() << endl;
     cout << endl;
+
     MatrixXf m(2, 2);
-    cout << m << endl;
-    DataObject tensor1({1, 2});
-    cout << +tensor1.Dim() << endl;
-
-    DataObject* data = new DataObject();
-    cout << "Is Scalar: " << (data->GetKind() == DataKind::SCALAR) << endl;
-    cout << "Value: " << data->GetData<float>() << endl;
-    DataObject* mData = new DataObject(m);
-    cout << "Is Matrix: " << (mData->GetKind() == DataKind::MATRIX) << endl;
-    cout << "Value: " << mData->GetData<MatrixXf>() << endl;
-
-    DataObject asdf(3.0);
-    cout << asdf.GetData<MatrixXf>() << endl;
-    cout << asdf.GetData<float>() << endl;
+    m << 1, 2, 3, 4;
+    auto consMat = new Constant(m);
+    cout << eval->ForwardEvaluate(consMat, vars).GetData<MatrixXf>() << endl;
 
     return 0;
 }

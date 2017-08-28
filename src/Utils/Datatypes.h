@@ -21,7 +21,7 @@ class DataObject {
         DataObject(const std::initializer_list<uint32_t>&);
         DataObject(float);
         DataObject(const MatrixXf&);
-        uint8_t Dim(void);
+        uint8_t Dim(void) const;
         std::vector<uint32_t> Shape(void);
         DataKind GetKind(void) const;
         template<typename T>

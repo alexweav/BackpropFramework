@@ -9,6 +9,12 @@ class Addition: public Operation, public Differentiable {
         Addition(Node* input1, Node* input2);
         DataObject Forward(const vector<DataObject>& inputs) const;
         vector<DataObject> Backward(const vector<DataObject>& prevInputs) const;
+
+    private:
+        DataObject HandleAdd(const DataObject&, const DataObject&) const;
+        DataObject AddScalars(const DataObject&, const DataObject&) const;
+        vector<DataObject> HandleBackward(const DataObject&, const DataObject&) const;
+        vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&) const;
 };
 
 #endif
