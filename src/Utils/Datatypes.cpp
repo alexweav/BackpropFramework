@@ -35,7 +35,7 @@ uint8_t DataObject::Dim(void) const {
     return _dimension;
 }
 
-std::vector<int64_t> DataObject::Shape(void) {
+std::vector<int64_t> DataObject::Shape(void) const {
     return _shape;
 }
 
