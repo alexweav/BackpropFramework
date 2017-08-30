@@ -60,6 +60,24 @@ bool DataObject::operator==(const DataObject& other) {
     return _matrix == other.GetData<MatrixXf>();
 }
 
+DataObject DataObject::Add(const DataObject& other) const {
+    if (_dimension == 0 && other.Dim() == 0) {
+        return Scalar(GetData<float>() + other.GetData<float>());
+    }
+    if (_dimension == other.Dim() && _shape == other.Shape()) {
+        return Mat(GetData<MatrixXf>() + other.GetData<MatrixXf>());
+    }
+}
+
+DataObject DataObject::ElementwiseMultiply(const DataObject& other) const {
+    if (_dimension == 0 && other.Dim() == 0) {
+        return Scalar(GetData<float>() * other.GetData<float>());
+    }
+    if (_dimension == other.Dim() && _shape == other.Shape()) {
+        return Mat(GetData<MatrixXf>().cwiseProduct(other.GetData<MatrixXf>()));
+    }
+}
+
 DataObject Scalar(float value) {
     DataObject result(value);
     return result;
@@ -69,3 +87,4 @@ DataObject Mat(const MatrixXf& matrix) {
     DataObject result(matrix);
     return result;
 }
+

@@ -27,6 +27,8 @@ class DataObject {
         template<typename T>
         T GetData(void) const;
         bool operator==(const DataObject&);
+        DataObject Add(const DataObject& other) const;
+        DataObject ElementwiseMultiply(const DataObject& other) const;
         
     private:
         uint8_t _dimension;
