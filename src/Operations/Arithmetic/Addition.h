@@ -1,8 +1,8 @@
 #ifndef ADDITION_H
 #define ADDITION_H
 
-#include "Operation.h"
-#include "Differentiable.h"
+#include "Operations/Base/Operation.h"
+#include "Operations/Base/Differentiable.h"
 
 class Addition: public Operation, public Differentiable {
     public:

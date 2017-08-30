@@ -1,8 +1,8 @@
 #ifndef MULTIPLICATION_H
 #define MULTIPLICATION_H
 
-#include "Operation.h"
-#include "Differentiable.h"
+#include "Operations/Base/Operation.h"
+#include "Operations/Base/Differentiable.h"
 
 class Multiplication: public Operation, public Differentiable {
     public:

@@ -2,10 +2,8 @@
 #define TEST_EVALUATION_H
 
 #include "gtest/gtest.h"
-#include "Operations/Constant.h"
-#include "Operations/Addition.h"
-#include "Operations/Subtraction.h"
-#include "Operations/Multiplication.h"
+#include "Operations/Base/Constant.h"
+#include "Operations/Arithmetic.h"
 #include "Evaluation/Evaluator.h"
 #include "FakeForwardEvaluationCounter.h"
 

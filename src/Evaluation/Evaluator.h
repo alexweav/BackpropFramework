@@ -2,8 +2,8 @@
 #define EVALUATOR_H
 
 #include <vector>
-#include "Operations/Differentiable.h"
-#include "Operations/Input.h"
+#include "Operations/Base/Differentiable.h"
+#include "Operations/Base/Input.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Datatypes.h"
 

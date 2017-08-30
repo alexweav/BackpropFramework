@@ -4,7 +4,7 @@
 #include <vector>
 #include <unordered_map>
 #include "Node.h"
-#include "../Utils/Dictionary.h"
+#include "Utils/Dictionary.h"
 
 class Operation: public virtual Node {
 public:

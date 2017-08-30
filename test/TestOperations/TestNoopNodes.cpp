@@ -1,6 +1,6 @@
 #include "TestOperations.h"
-#include "Operations/Constant.h"
-#include "Operations/Input.h"
+#include "Operations/Base/Constant.h"
+#include "Operations/Base/Input.h"
 
 TEST(ConstantTests, ForwardReturnsValue) {
     auto cons = new Constant(2.0);

@@ -1,8 +1,8 @@
 #ifndef SUBTRACTION_H
 #define SUBTRACTION_H
 
-#include "Operation.h"
-#include "Differentiable.h"
+#include "Operations/Base/Operation.h"
+#include "Operations/Base/Differentiable.h"
 
 class Subtraction: public Operation, public Differentiable {
     public:

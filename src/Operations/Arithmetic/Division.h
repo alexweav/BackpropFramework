@@ -1,8 +1,8 @@
 #ifndef DIVISION_H
 #define DIVISION_H
 
-#include "Operation.h"
-#include "Differentiable.h"
+#include "Operations/Base/Operation.h"
+#include "Operations/Base/Differentiable.h"
 
 class Division: public Operation, public Differentiable {
     public:

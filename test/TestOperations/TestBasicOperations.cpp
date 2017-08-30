@@ -1,10 +1,7 @@
 #include "TestOperations.h"
 #include <iostream>
-#include "Operations/Constant.h"
-#include "Operations/Addition.h"
-#include "Operations/Subtraction.h"
-#include "Operations/Multiplication.h"
-#include "Operations/Division.h"
+#include "Operations/Base/Constant.h"
+#include "Operations/Arithmetic.h"
 
 TEST(AdditionTests, ForwardAdds) {
     auto cons1 = new Constant(0);
