@@ -1,18 +1,22 @@
 #include "Constant.h"
 
-Constant::Constant(float value): Node({}, true) {
+Constant::Constant(const float value): Constant(Scalar(value)) { }
+
+Constant::Constant(const MatrixXf& value): Constant(Mat(value)) { }
+
+Constant::Constant(const DataObject& value): Node({}, true) {
     _value = value;
 }
 
-float Constant::Forward(const vector<float>& inputs) const {
+DataObject Constant::Forward(const vector<DataObject>& inputs) const {
     return _value;
 }
 
-vector<float> Constant::Backward(const vector<float>& prevInputs) const {
-    vector<float> gradsOut;
+vector<DataObject> Constant::Backward(const vector<DataObject>& prevInputs) const {
+    vector<DataObject> gradsOut;
     return gradsOut;
 }
 
-float Constant::getValue() {
+DataObject Constant::getValue() {
     return _value;
 }

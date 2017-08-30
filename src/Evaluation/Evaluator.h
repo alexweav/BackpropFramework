@@ -5,16 +5,17 @@
 #include "Operations/Differentiable.h"
 #include "Operations/Input.h"
 #include "Utils/Dictionary.h"
+#include "Utils/Datatypes.h"
 
 using namespace utils;
 
 class Evaluator {
     public:
-        float ForwardEvaluate(Node*, const Dictionary<Input*, float>& vars);
-        Dictionary<Node*, float> BackwardEvaluate(Differentiable*, const Dictionary<Input*, float>&);
+        DataObject ForwardEvaluate(Node*, const Variables& vars);
+        Dictionary<Node*, DataObject> BackwardEvaluate(Differentiable*, const Variables&);
     protected:
-        float ForwardEvaluate(Node*, Dictionary<Node*, float>&, vector<Node*>*);
-        vector<float> EvaluatePredecessors(Node*, Dictionary<Node*, float>&, vector<Node*>*);
+        DataObject ForwardEvaluate(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
+        vector<DataObject> EvaluatePredecessors(Node*, Dictionary<Node*, DataObject>&, vector<Node*>*);
 };
 
 #endif

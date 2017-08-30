@@ -16,7 +16,7 @@ script:
 
 after_success:
   - lcov -c --directory . --output-file coverage.info
-  - lcov -r coverage.info '/usr/include/*' '*/gtest/*' -o coverage.info
+  - lcov -r coverage.info '/usr/include/*' '*/gtest/*' '*external/*' -o coverage.info
   - lcov --list coverage.info
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 

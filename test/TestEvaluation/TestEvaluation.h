@@ -21,7 +21,7 @@ class ForwardPropagationTest : public ::testing::Test {
             add47 = new Addition(mul45, cons2);
             sub0 = new Subtraction(add47, add47);
         }
-        Dictionary<Input*, float> vars;
+        Variables vars;
         Evaluator* eval;
         Constant* cons2;
         Constant* cons3;
@@ -42,7 +42,7 @@ class MultipleEvaluationTest : public ::testing::Test {
             addSingle = new Addition(counterConstant, zero);
             addDual = new Addition(counterConstant, counterConstant);
         }
-        Dictionary<Input*, float> vars;
+        Variables vars;
         Evaluator* eval;
         FakeForwardEvaluationCounter* counterConstant;
         Constant* zero;

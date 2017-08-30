@@ -7,8 +7,15 @@
 class Addition: public Operation, public Differentiable {
     public:
         Addition(Node* input1, Node* input2);
-        float Forward(const vector<float>& inputs) const;
-        vector<float> Backward(const vector<float>& prevInputs) const;
+        DataObject Forward(const vector<DataObject>& inputs) const;
+        vector<DataObject> Backward(const vector<DataObject>& prevInputs) const;
+
+    private:
+        DataObject HandleAdd(const DataObject&, const DataObject&) const;
+        DataObject AddScalars(const DataObject&, const DataObject&) const;
+        DataObject AddMatrices(const DataObject&, const DataObject&) const;
+        vector<DataObject> HandleBackward(const DataObject&, const DataObject&) const;
+        vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&) const;
 };
 
 #endif

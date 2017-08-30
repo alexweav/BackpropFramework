@@ -2,8 +2,9 @@
 
 FakeForwardEvaluationCounter::FakeForwardEvaluationCounter() : Node({}, false) { }
 
-float FakeForwardEvaluationCounter::Forward(const vector<float>& inputs) const {
-    return ++_numEvaluations;
+DataObject FakeForwardEvaluationCounter::Forward(const vector<DataObject>& inputs) const {
+    DataObject result(++_numEvaluations);
+    return result;
 }
 
 int FakeForwardEvaluationCounter::GetNumEvaluations() {
