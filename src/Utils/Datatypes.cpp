@@ -1,18 +1,17 @@
-#include "Datatypes.h"
-#include <iostream>
+#include "src/Utils/Datatypes.h"
 
 DataObject::DataObject(void) : DataObject({}) { }
 
 DataObject::DataObject(const std::initializer_list<int64_t>& shape)
-            : _dimension(shape.size()), 
-              _shape(shape) { 
+            : _dimension(shape.size()),
+              _shape(shape) {
     if (shape.size() == 0) {
         AllocateScalar(0.0);
-    }            
+    }
 }
 
-DataObject::DataObject(float value) 
-            : _dimension(0), 
+DataObject::DataObject(float value)
+            : _dimension(0),
               _shape({}) {
     AllocateScalar(value);
 }
