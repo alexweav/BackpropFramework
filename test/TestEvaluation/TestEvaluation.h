@@ -50,4 +50,25 @@ class MultipleEvaluationTest : public ::testing::Test {
         Addition* addDual;
 };
 
+class BackpropagationTest : public ::testing::Test {
+    protected:
+        virtual void SetUp() {
+            x = new Input();
+            y = new Input();
+            vars[x] = Scalar(2.0);
+            vars[y] = Scalar(3.0);
+            eval = new Evaluator();
+            cons5 = new Constant(5.0);
+            xp5 = new Addition(x, cons5);
+            ax3 = new Multiplication(xp5, y);
+        }
+        Variables vars;
+        Evaluator* eval;
+        Input* x;
+        Input* y;
+        Constant* cons5;
+        Addition* xp5;
+        Multiplication* ax3;
+};
+
 #endif
