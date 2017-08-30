@@ -16,6 +16,16 @@ TEST(AdditionTests, ForwardAdds) {
     EXPECT_FLOAT_EQ(add->Forward(inputs).GetData<float>(), 5.0);
 }
 
+TEST(AdditionTests, ForwardMatrixAdds) {
+    auto cons1 = new Constant(0);
+    auto cons2 = new Constant(0);
+    auto add = new Addition(cons1, cons2);
+    MatrixXf m(2, 2);
+    m << 1, 2, 3, 4;
+    vector<DataObject> inputs({m, m});
+    EXPECT_EQ(add->Forward(inputs).GetData<MatrixXf>(), m + m);
+}
+
 TEST(AdditionTests, BackwardAtPointCorrect) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);

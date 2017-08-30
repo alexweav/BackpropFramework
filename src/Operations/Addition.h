@@ -11,9 +11,6 @@ class Addition: public Operation, public Differentiable {
         vector<DataObject> Backward(const vector<DataObject>& prevInputs) const;
 
     private:
-        DataObject HandleAdd(const DataObject&, const DataObject&) const;
-        DataObject AddScalars(const DataObject&, const DataObject&) const;
-        DataObject AddMatrices(const DataObject&, const DataObject&) const;
         vector<DataObject> HandleBackward(const DataObject&, const DataObject&) const;
         vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&) const;
 };
