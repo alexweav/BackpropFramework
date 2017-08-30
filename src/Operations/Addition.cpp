@@ -16,11 +16,22 @@ vector<DataObject> Addition::HandleBackward(const DataObject& i1, const DataObje
     if (i1.Dim() == 0 && i2.Dim() == 0) {
         return DifferentiateScalarAddition(i1, i2);
     }
+    if (i1.Dim() == i2.Dim() && i1.Shape() == i2.Shape()) {
+        return DifferentiateMatrixAddition(i1, i2);
+    }
 }
 
 vector<DataObject> Addition::DifferentiateScalarAddition(const DataObject& i1, const DataObject& i2) const {
     vector<DataObject> grads(this->_arity);
     grads.at(0) = Scalar(1.0);
     grads.at(1) = Scalar(1.0);
+    return grads;
+}
+
+vector<DataObject> Addition::DifferentiateMatrixAddition(const DataObject& i1, const DataObject& i2) const {
+    vector<DataObject> grads(this->_arity);
+    MatrixXf mat = Eigen::MatrixXf::Constant(i1.GetData<MatrixXf>().rows(), i1.GetData<MatrixXf>().cols(), 1.0);
+    grads.at(0) = Mat(mat);
+    grads.at(1) = Mat(mat);
     return grads;
 }

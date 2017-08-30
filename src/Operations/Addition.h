@@ -13,6 +13,7 @@ class Addition: public Operation, public Differentiable {
     private:
         vector<DataObject> HandleBackward(const DataObject&, const DataObject&) const;
         vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&) const;
+        vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&) const;
 };
 
 #endif

@@ -39,6 +39,19 @@ TEST(AdditionTests, BackwardAtPointCorrect) {
     EXPECT_FLOAT_EQ(gradsOut.at(1).GetData<float>(), 1.0);
 }
 
+TEST(AdditionTests, BackwardMatrixCorrect) {
+    auto cons1 = new Constant(0);
+    auto cons2 = new Constant(0);
+    auto add = new Addition(cons1, cons2);
+    MatrixXf m(2, 2);
+    m << 1, 2, 3, 4;
+    vector<DataObject> inputs({m, m});
+    vector<DataObject> gradsOut = add->Backward(inputs);
+    EXPECT_EQ(gradsOut.size(), 2);
+    EXPECT_EQ(gradsOut.at(0).GetData<MatrixXf>(), Eigen::MatrixXf::Constant(2, 2, 1.0));
+    EXPECT_EQ(gradsOut.at(1).GetData<MatrixXf>(), Eigen::MatrixXf::Constant(2, 2, 1.0));
+}
+
 TEST(SubtractionTests, ForwardSubtracts) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
