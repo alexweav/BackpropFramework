@@ -9,6 +9,11 @@ class Multiplication: public Operation, public Differentiable {
         Multiplication(Node* i1, Node* i2);
         DataObject Forward(const vector<DataObject>& inputs) const;
         vector<DataObject> Backward(const vector<DataObject>& prevInputs) const;
+
+    private:
+        DataObject HandleMultiply(const DataObject&, const DataObject&) const;
+        DataObject ScalarMultiply(const DataObject&, const DataObject&) const;
+        DataObject MatrixMultiply(const DataObject&, const DataObject&) const;
 };
 
 #endif
