@@ -60,7 +60,7 @@ Dictionary<Node*, DataObject> Evaluator::BackwardEvaluate(Differentiable* node, 
         vector<DataObject> gradOut = diffNode->Backward(prevInputs);
         for (int i = 0; i < n->Arity(); i++) {
             DataObject prevGrad = grads[predecessors->at(i)];
-            DataObject newGrad(prevGrad.GetData<float>() + (gradOut.at(i).GetData<float>() * grads[n].GetData<float>()));
+            DataObject newGrad = prevGrad.Add(gradOut.at(i).ElementwiseMultiply(grads[n]));
             grads[predecessors->at(i)] = newGrad;
         }
         
