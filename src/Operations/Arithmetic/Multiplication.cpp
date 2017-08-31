@@ -38,6 +38,9 @@ std::vector<DataObject> Multiplication::HandleBackward(const DataObject& i1, con
     if (i1.Dim() == 0 && i2.Dim() == 0) {
         return DifferentiateScalarMultiplication(i1, i2);
     }
+    if (i1.Dim() == i2.Dim() && i1.Shape().at(1) == i2.Shape().at(0)) {
+        return DifferentiateMatrixMultiplication(i1, i2);
+    }
 }
 
 std::vector<DataObject> Multiplication::DifferentiateScalarMultiplication(const DataObject& i1, const DataObject& i2) const {
@@ -45,4 +48,8 @@ std::vector<DataObject> Multiplication::DifferentiateScalarMultiplication(const 
     grads.at(0) = i2;
     grads.at(1) = i1;
     return grads;
+}
+
+std::vector<DataObject> Multiplication::DifferentiateMatrixMultiplication(const DataObject& i1, const DataObject& i2) const {
+
 }
