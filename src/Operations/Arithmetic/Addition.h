@@ -12,9 +12,9 @@ class Addition: public Operation, public Differentiable {
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
  private:
-    std::vector<DataObject> HandleBackward(const DataObject&, const DataObject&) const;
-    std::vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&) const;
-    std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&) const;
+    std::vector<DataObject> HandleBackward(const DataObject&, const DataObject&, const DataObject&) const;
+    std::vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&, const DataObject&) const;
+    std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&, const DataObject&) const;
 };
 
 Addition* Add(Node*, Node*);

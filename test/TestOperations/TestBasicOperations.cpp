@@ -32,7 +32,7 @@ TEST(AdditionTests, BackwardAtPointCorrect) {
     DataObject d2(2.0);
     DataObject d3(3.0);
     vector<DataObject> inputs({d2, d3});
-    vector<DataObject> gradsOut = add->Backward(inputs, Scalar(0));
+    vector<DataObject> gradsOut = add->Backward(inputs, Scalar(1.0));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_FLOAT_EQ(gradsOut.at(0).ToScalar(), 1.0);
     EXPECT_FLOAT_EQ(gradsOut.at(1).ToScalar(), 1.0);
@@ -42,13 +42,13 @@ TEST(AdditionTests, BackwardMatrixCorrect) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);
     auto add = new Addition(cons1, cons2);
-    Eigen::MatrixXf m(2, 2);
-    m << 1, 2, 3, 4;
+    Eigen::MatrixXf m(3, 2);
+    m << 1, 2, 3, 4, 5, 6;
     vector<DataObject> inputs({Mat(m), Mat(m)});
-    vector<DataObject> gradsOut = add->Backward(inputs, Scalar(0));
+    vector<DataObject> gradsOut = add->Backward(inputs, Mat(Eigen::MatrixXf::Constant(3, 2, 1.0)));
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_EQ(gradsOut.at(0).ToMatrix(), Eigen::MatrixXf::Constant(2, 2, 1.0));
-    EXPECT_EQ(gradsOut.at(1).ToMatrix(), Eigen::MatrixXf::Constant(2, 2, 1.0));
+    EXPECT_EQ(gradsOut.at(0).ToMatrix(), Eigen::MatrixXf::Constant(3, 2, 1.0));
+    EXPECT_EQ(gradsOut.at(1).ToMatrix(), Eigen::MatrixXf::Constant(3, 2, 1.0));
 }
 
 TEST(SubtractionTests, ForwardSubtracts) {
