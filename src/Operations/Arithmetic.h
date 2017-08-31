@@ -1,10 +1,10 @@
-#ifndef ARITHMETIC_H
-#define ARITHMETIC_H
+#ifndef SRC_OPERATIONS_ARITHMETIC_H_
+#define SRC_OPERATIONS_ARITHMETIC_H_
 
 #include "Arithmetic/Addition.h"
 #include "Arithmetic/Subtraction.h"
 #include "Arithmetic/Multiplication.h"
 #include "Arithmetic/Division.h"
 
-#endif
+#endif  // SRC_OPERATIONS_ARITHMETIC_H_
 

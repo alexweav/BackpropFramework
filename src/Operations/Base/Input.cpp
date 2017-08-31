@@ -1,19 +1,18 @@
-#include "Input.h"
+#include "src/Operations/Base/Input.h"
+#include <vector>
 
-Input::Input(): Node({}, true) { 
-    
-}
+Input::Input(): Node({}, true) { }
 
 DataObject Input::GetDefaultOutput() {
     return _defaultOutput;
 }
 
-DataObject Input::Forward(const vector<DataObject>& inputs) const {
+DataObject Input::Forward(const std::vector<DataObject>& inputs) const {
     return _defaultOutput;
 }
 
-vector<DataObject> Input::Backward(const vector<DataObject>& prevInputs) const {
-    vector<DataObject> gradsOut;
+std::vector<DataObject> Input::Backward(const std::vector<DataObject>& prevInputs) const {
+    std::vector<DataObject> gradsOut;
     return gradsOut;
 }
 

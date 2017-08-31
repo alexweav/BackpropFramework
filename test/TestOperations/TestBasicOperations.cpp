@@ -3,6 +3,8 @@
 #include "Operations/Base/Constant.h"
 #include "Operations/Arithmetic.h"
 
+using namespace std;
+
 TEST(AdditionTests, ForwardAdds) {
     auto cons1 = new Constant(0);
     auto cons2 = new Constant(0);

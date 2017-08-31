@@ -7,8 +7,8 @@
 class Division: public Operation, public Differentiable {
     public:
         Division(Node* i1, Node* i2);
-        DataObject Forward(const vector<DataObject>& inputs) const;
-        vector<DataObject> Backward(const vector<DataObject>& prevInputs) const;
+        DataObject Forward(const std::vector<DataObject>& inputs) const;
+        std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs) const;
 };
 
 #endif

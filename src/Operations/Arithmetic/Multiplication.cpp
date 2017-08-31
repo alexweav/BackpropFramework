@@ -2,7 +2,7 @@
 
 Multiplication::Multiplication(Node* i1, Node* i2): Node({i1, i2}, true) { }
 
-DataObject Multiplication::Forward(const vector<DataObject>& inputs) const {
+DataObject Multiplication::Forward(const std::vector<DataObject>& inputs) const {
     return HandleMultiply(inputs.at(0), inputs.at(1));
 }
 
@@ -23,8 +23,8 @@ DataObject Multiplication::MatrixMultiply(const DataObject& i1, const DataObject
     return Mat(i1.ToMatrix() * i2.ToMatrix());
 }
 
-vector<DataObject> Multiplication::Backward(const vector<DataObject>& prevInputs) const {
-    vector<DataObject> grads(this->_arity);
+std::vector<DataObject> Multiplication::Backward(const std::vector<DataObject>& prevInputs) const {
+    std::vector<DataObject> grads(this->_arity);
     DataObject grad0(prevInputs.at(1).ToScalar());
     DataObject grad1(prevInputs.at(0).ToScalar());
     grads.at(0) = grad0;

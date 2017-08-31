@@ -1,20 +1,21 @@
-#ifndef CONSTANT_H
-#define CONSTANT_H
+#ifndef SRC_OPERATIONS_BASE_CONSTANT_H_
+#define SRC_OPERATIONS_BASE_CONSTANT_H_
 
 #include "Node.h"
 #include "Differentiable.h"
+#include <vector>
 
 class Constant: public Differentiable {
-    public:
-        Constant(float);
-        Constant(const Eigen::MatrixXf&);
-        Constant(const DataObject&);
-        DataObject Forward(const vector<DataObject>&) const;
-        vector<DataObject> Backward(const vector<DataObject>&) const;
-        DataObject getValue();
+ public:
+    explicit Constant(float);
+    explicit Constant(const Eigen::MatrixXf&);
+    explicit Constant(const DataObject&);
+    DataObject Forward(const std::vector<DataObject>&) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>&) const;
+    DataObject getValue();
 
-    private:
-        DataObject _value;
+ private:
+    DataObject _value;
 };
 
-#endif
+#endif  // SRC_OPERATIONS_BASE_CONSTANT_H_

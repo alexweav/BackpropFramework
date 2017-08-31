@@ -2,13 +2,13 @@
 
 Subtraction::Subtraction(Node* i1, Node* i2): Node({i1, i2}, true) { }
 
-DataObject Subtraction::Forward(const vector<DataObject>& inputs) const {
+DataObject Subtraction::Forward(const std::vector<DataObject>& inputs) const {
     DataObject result(inputs.at(0).ToScalar() - inputs.at(1).ToScalar());
     return result;
 }
 
-vector<DataObject> Subtraction::Backward(const vector<DataObject>& prevInputs) const {
-    vector<DataObject> grads(this->_arity);
+std::vector<DataObject> Subtraction::Backward(const std::vector<DataObject>& prevInputs) const {
+    std::vector<DataObject> grads(this->_arity);
     DataObject grad0(1.0);
     DataObject grad1(-1.0);
     grads.at(0) = grad0;

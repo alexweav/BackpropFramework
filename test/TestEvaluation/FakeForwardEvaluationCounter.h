@@ -6,7 +6,7 @@
 class FakeForwardEvaluationCounter : public Node {
     public:
         FakeForwardEvaluationCounter();
-        DataObject Forward(const vector<DataObject>&) const;
+        DataObject Forward(const std::vector<DataObject>&) const;
         int GetNumEvaluations();
         void ResetCounter();
     protected:

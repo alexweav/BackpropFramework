@@ -1,4 +1,5 @@
-#include "Constant.h"
+#include "src/Operations/Base/Constant.h"
+#include <vector>
 
 Constant::Constant(const float value): Constant(Scalar(value)) { }
 
@@ -8,12 +9,12 @@ Constant::Constant(const DataObject& value): Node({}, true) {
     _value = value;
 }
 
-DataObject Constant::Forward(const vector<DataObject>& inputs) const {
+DataObject Constant::Forward(const std::vector<DataObject>& inputs) const {
     return _value;
 }
 
-vector<DataObject> Constant::Backward(const vector<DataObject>& prevInputs) const {
-    vector<DataObject> gradsOut;
+std::vector<DataObject> Constant::Backward(const std::vector<DataObject>& prevInputs) const {
+    std::vector<DataObject> gradsOut;
     return gradsOut;
 }
 

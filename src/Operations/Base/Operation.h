@@ -1,5 +1,5 @@
-#ifndef OPERATION_H
-#define OPERATION_H
+#ifndef SRC_OPERATIONS_BASE_OPERATION_H_
+#define SRC_OPERATIONS_BASE_OPERATION_H_
 
 #include <vector>
 #include <unordered_map>
@@ -7,9 +7,9 @@
 #include "Utils/Dictionary.h"
 
 class Operation: public virtual Node {
-public:
+ public:
     Operation(): Node() {}
-    virtual DataObject Forward(const vector<DataObject>& inputs) const = 0;
+    virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
 };
 
-#endif
+#endif  // SRC_OPERATIONS_BASE_OPERATION_H_

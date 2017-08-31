@@ -1,9 +1,9 @@
-#include "Node.h"
+#include "src/Operations/Base/Node.h"
 
-Node::Node(initializer_list<Node*> inputs, bool isDifferentiable): _arity(inputs.size()), 
+Node::Node(std::initializer_list<Node*> inputs, bool isDifferentiable): _arity(inputs.size()),
          _hasDifferentiableTree(isDifferentiable) {
-    this->_predecessors = new vector<Node*>(_arity);
-    this->_successors = new vector<Node*>();
+    this->_predecessors = new std::vector<Node*>(_arity);
+    this->_successors = new std::vector<Node*>();
     int i = 0;
     for (Node* node : inputs) {
         _predecessors->at(i++) = node;
@@ -16,7 +16,7 @@ int Node::Arity() {
     return this->_arity;
 }
 
-vector<Node*>* Node::Predecessors() {
+std::vector<Node*>* Node::Predecessors() {
     return this->_predecessors;
 }
 

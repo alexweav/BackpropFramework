@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef SRC_OPERATIONS_BASE_NODE_H_
+#define SRC_OPERATIONS_BASE_NODE_H_
 
 #include <vector>
 #include <initializer_list>
@@ -7,26 +7,23 @@
 #include "Utils/Dictionary.h"
 #include "Utils/Datatypes.h"
 
-using namespace std;
-using namespace utils;
-
 class Node {
-    public:
-        Node() {}
-        Node(initializer_list<Node*>, bool isDifferentiable);
-        virtual DataObject Forward(const vector<DataObject>&) const = 0;
-        int Arity();
-        vector<Node*>* Predecessors();
-        void RegisterSuccessor(Node* node);
-        bool HasDifferentiableTree() const;
+ public:
+    Node() {}
+    Node(std::initializer_list<Node*>, bool isDifferentiable);
+    virtual DataObject Forward(const std::vector<DataObject>&) const = 0;
+    int Arity();
+    std::vector<Node*>* Predecessors();
+    void RegisterSuccessor(Node* node);
+    bool HasDifferentiableTree() const;
 
-    protected:
-        int _arity;
-        bool _hasDifferentiableTree = false;
-        vector<Node*>* _predecessors;
-        vector<Node*>* _successors;
+ protected:
+    int _arity;
+    bool _hasDifferentiableTree = false;
+    std::vector<Node*>* _predecessors;
+    std::vector<Node*>* _successors;
 };
 
-typedef Dictionary<Node*, DataObject> Overrides;
+typedef utils::Dictionary<Node*, DataObject> Overrides;
 
-#endif
+#endif  // SRC_OPERATIONS_BASE_NODE_H_

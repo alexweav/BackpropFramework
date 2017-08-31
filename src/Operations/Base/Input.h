@@ -1,21 +1,22 @@
-#ifndef INPUT_H
-#define INPUT_H
+#ifndef SRC_OPERATIONS_BASE_INPUT_H_
+#define SRC_OPERATIONS_BASE_INPUT_H_
 
 #include "Differentiable.h"
+#include <vector>
 
 class Input: public Differentiable {
-    public:
-        Input();
-        DataObject Forward(const vector<DataObject>& inputs) const;
-        vector<DataObject> Backward(const vector<DataObject>&) const;
-        void RegisterNewDefaultValue(float);
-        void RegisterNewDefaultValue(const Eigen::MatrixXf&);
-        void RegisterNewDefaultValue(const DataObject&);
-        DataObject GetDefaultOutput();
-    private:
-        DataObject _defaultOutput;
+ public:
+    Input();
+    DataObject Forward(const std::vector<DataObject>& inputs) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>&) const;
+    void RegisterNewDefaultValue(float);
+    void RegisterNewDefaultValue(const Eigen::MatrixXf&);
+    void RegisterNewDefaultValue(const DataObject&);
+    DataObject GetDefaultOutput();
+ private:
+    DataObject _defaultOutput;
 };
 
-typedef Dictionary<Input*, DataObject> Variables;
+typedef utils::Dictionary<Input*, DataObject> Variables;
 
-#endif
+#endif  // SRC_OPERATIONS_BASE_INPUT_H_

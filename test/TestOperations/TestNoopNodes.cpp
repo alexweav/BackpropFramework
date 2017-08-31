@@ -2,6 +2,8 @@
 #include "Operations/Base/Constant.h"
 #include "Operations/Base/Input.h"
 
+using namespace std;
+
 TEST(ConstantTests, ForwardReturnsValue) {
     auto cons = new Constant(2.0);
     vector<DataObject> inputs;
