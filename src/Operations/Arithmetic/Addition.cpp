@@ -30,7 +30,7 @@ vector<DataObject> Addition::DifferentiateScalarAddition(const DataObject& i1, c
 
 vector<DataObject> Addition::DifferentiateMatrixAddition(const DataObject& i1, const DataObject& i2) const {
     vector<DataObject> grads(this->_arity);
-    MatrixXf mat = Eigen::MatrixXf::Constant(i1.GetData<MatrixXf>().rows(), i1.GetData<MatrixXf>().cols(), 1.0);
+    Eigen::MatrixXf mat = Eigen::MatrixXf::Constant(i1.ToMatrix().rows(), i1.ToMatrix().cols(), 1.0);
     grads.at(0) = Mat(mat);
     grads.at(1) = Mat(mat);
     return grads;

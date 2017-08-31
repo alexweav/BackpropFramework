@@ -21,7 +21,7 @@ void Input::RegisterNewDefaultValue(float value) {
     RegisterNewDefaultValue(Scalar(value));
 }
 
-void Input::RegisterNewDefaultValue(const MatrixXf& matrix) {
+void Input::RegisterNewDefaultValue(const Eigen::MatrixXf& matrix) {
     RegisterNewDefaultValue(Mat(matrix));
 }
 

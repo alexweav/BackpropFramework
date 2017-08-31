@@ -2,7 +2,7 @@
 
 Constant::Constant(const float value): Constant(Scalar(value)) { }
 
-Constant::Constant(const MatrixXf& value): Constant(Mat(value)) { }
+Constant::Constant(const Eigen::MatrixXf& value): Constant(Mat(value)) { }
 
 Constant::Constant(const DataObject& value): Node({}, true) {
     _value = value;

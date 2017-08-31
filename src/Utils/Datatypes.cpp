@@ -16,7 +16,7 @@ DataObject::DataObject(float value)
     AllocateScalar(value);
 }
 
-DataObject::DataObject(const MatrixXf& matrix)
+DataObject::DataObject(const Eigen::MatrixXf& matrix)
             : _dimension(2),
               _shape({matrix.rows(), matrix.cols()}) {
     this->_kind = DataKind::MATRIX;
@@ -25,7 +25,7 @@ DataObject::DataObject(const MatrixXf& matrix)
 
 void DataObject::AllocateScalar(float value) {
     this->_kind = DataKind::SCALAR;
-    MatrixXf valueMatrix(1, 1);
+    Eigen::MatrixXf valueMatrix(1, 1);
     valueMatrix << value;
     _matrix = valueMatrix;
 }
@@ -42,13 +42,11 @@ DataKind DataObject::GetKind(void) const {
     return _kind;
 }
 
-template<>
-float DataObject::GetData<float>(void) const {
+float DataObject::ToScalar(void) const {
     return _matrix(0);
 }
 
-template<>
-MatrixXf DataObject::GetData<MatrixXf>(void) const {
+Eigen::MatrixXf DataObject::ToMatrix(void) const {
     return _matrix;
 }
 
@@ -56,24 +54,24 @@ bool DataObject::operator==(const DataObject& other) {
     if (_kind != other.GetKind()) {
         return false;
     }
-    return _matrix == other.GetData<MatrixXf>();
+    return _matrix == other.ToMatrix();
 }
 
 DataObject DataObject::Add(const DataObject& other) const {
     if (_dimension == 0 && other.Dim() == 0) {
-        return Scalar(GetData<float>() + other.GetData<float>());
+        return Scalar(ToScalar() + other.ToScalar());
     }
     if (_dimension == other.Dim() && _shape == other.Shape()) {
-        return Mat(GetData<MatrixXf>() + other.GetData<MatrixXf>());
+        return Mat(ToMatrix() + other.ToMatrix());
     }
 }
 
 DataObject DataObject::ElementwiseMultiply(const DataObject& other) const {
     if (_dimension == 0 && other.Dim() == 0) {
-        return Scalar(GetData<float>() * other.GetData<float>());
+        return Scalar(ToScalar() * other.ToScalar());
     }
     if (_dimension == other.Dim() && _shape == other.Shape()) {
-        return Mat(GetData<MatrixXf>().cwiseProduct(other.GetData<MatrixXf>()));
+        return Mat(ToMatrix().cwiseProduct(other.ToMatrix()));
     }
 }
 
@@ -82,7 +80,7 @@ DataObject Scalar(float value) {
     return result;
 }
 
-DataObject Mat(const MatrixXf& matrix) {
+DataObject Mat(const Eigen::MatrixXf& matrix) {
     DataObject result(matrix);
     return result;
 }

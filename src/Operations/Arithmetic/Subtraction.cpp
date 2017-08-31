@@ -3,7 +3,7 @@
 Subtraction::Subtraction(Node* i1, Node* i2): Node({i1, i2}, true) { }
 
 DataObject Subtraction::Forward(const vector<DataObject>& inputs) const {
-    DataObject result(inputs.at(0).GetData<float>() - inputs.at(1).GetData<float>());
+    DataObject result(inputs.at(0).ToScalar() - inputs.at(1).ToScalar());
     return result;
 }
 

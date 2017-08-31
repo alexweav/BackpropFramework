@@ -9,7 +9,7 @@ class Input: public Differentiable {
         DataObject Forward(const vector<DataObject>& inputs) const;
         vector<DataObject> Backward(const vector<DataObject>&) const;
         void RegisterNewDefaultValue(float);
-        void RegisterNewDefaultValue(const MatrixXf&);
+        void RegisterNewDefaultValue(const Eigen::MatrixXf&);
         void RegisterNewDefaultValue(const DataObject&);
         DataObject GetDefaultOutput();
     private:

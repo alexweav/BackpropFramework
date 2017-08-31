@@ -22,25 +22,25 @@ int main(int argc, char** argv) {
     DataObject d3(3.0);
     vars[var1] = d2;
     vars[var2] = d3;
-    cout << eval->ForwardEvaluate(mul, vars).GetData<float>() << endl;
+    cout << eval->ForwardEvaluate(mul, vars).ToScalar() << endl;
     auto res = eval->BackwardEvaluate(mul, vars);
     cout << "(var1 + cons) * var2" << endl;
     cout << "(2 + 5) * 3" << endl;
-    cout << "var1: " << res[var1].GetData<float>() << endl;
-    cout << "var2: " << res[var2].GetData<float>() << endl;
-    cout << "cons: " << res[cons].GetData<float>() << endl;
-    cout << "add:  " << res[add].GetData<float>() << endl;
-    cout << "mul:  " << res[mul].GetData<float>() << endl;
+    cout << "var1: " << res[var1].ToScalar() << endl;
+    cout << "var2: " << res[var2].ToScalar() << endl;
+    cout << "cons: " << res[cons].ToScalar() << endl;
+    cout << "add:  " << res[add].ToScalar() << endl;
+    cout << "mul:  " << res[mul].ToScalar() << endl;
     cout << endl;
 
-    MatrixXf m(2, 2);
+    Eigen::MatrixXf m(2, 2);
     m << 1, 2, 3, 4;
-    MatrixXf m2(2, 2);
+    Eigen::MatrixXf m2(2, 2);
     m2 << 5, 6, 7, 8;
     auto cm1 = new Constant(m);
     auto cm2 = new Constant(m2);
     auto addm = new Addition(cm1, cm2);
-    cout << eval->ForwardEvaluate(addm, vars).GetData<MatrixXf>() << endl;
+    cout << eval->ForwardEvaluate(addm, vars).ToMatrix() << endl;
 
     return 0;
 }
