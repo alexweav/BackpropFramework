@@ -34,3 +34,7 @@ std::vector<DataObject> Addition::DifferentiateMatrixAddition(const DataObject& 
     grads.at(1) = Mat(mat);
     return grads;
 }
+
+Addition* Add(Node* i1, Node* i2) {
+    return new Addition(i1, i2);
+}

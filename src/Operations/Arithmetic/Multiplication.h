@@ -15,6 +15,8 @@ class Multiplication: public Operation, public Differentiable {
     DataObject HandleMultiply(const DataObject&, const DataObject&) const;
     DataObject ScalarMultiply(const DataObject&, const DataObject&) const;
     DataObject MatrixMultiply(const DataObject&, const DataObject&) const;
+    std::vector<DataObject> HandleBackward(const DataObject&, const DataObject&) const;
+    std::vector<DataObject> DifferentiateScalarMultiplication(const DataObject&, const DataObject&) const;
 };
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_MULTIPLICATION_H_

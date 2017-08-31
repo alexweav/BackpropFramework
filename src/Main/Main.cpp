@@ -8,10 +8,10 @@
 #include <iostream>
 
 int main(int argc, char** argv) {
-    auto var1 = new Input();
-    auto var2 = new Input();
-    auto cons = new Constant(5.0);
-    auto add = new Addition(var1, cons);
+    auto var1 = Var();
+    auto var2 = Var();
+    auto cons = Value(5.0);
+    auto add = Add(var1, cons);
     auto mul = new Multiplication(add, var2);
 
     auto eval = new Evaluator();
@@ -35,9 +35,9 @@ int main(int argc, char** argv) {
     m << 1, 2, 3, 4;
     Eigen::MatrixXf m2(2, 2);
     m2 << 5, 6, 7, 8;
-    auto cm1 = new Constant(m);
-    auto cm2 = new Constant(m2);
-    auto addm = new Addition(cm1, cm2);
+    auto cm1 = Value(m);
+    auto cm2 = Value(m2);
+    auto addm = Add(cm1, cm2);
     std::cout << eval->ForwardEvaluate(addm, vars).ToMatrix() << std::endl;
 
     return 0;

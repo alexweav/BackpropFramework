@@ -17,4 +17,6 @@ class Addition: public Operation, public Differentiable {
     std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&) const;
 };
 
+Addition* Add(Node*, Node*);
+
 #endif  // SRC_OPERATIONS_ARITHMETIC_ADDITION_H_

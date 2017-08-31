@@ -21,3 +21,15 @@ std::vector<DataObject> Constant::Backward(const std::vector<DataObject>& prevIn
 DataObject Constant::getValue() {
     return _value;
 }
+
+Constant* Value(float value) {
+    return new Constant(value);
+}
+
+Constant* Value(const Eigen::MatrixXf& value) {
+    return new Constant(value);
+}
+
+Constant* Value(const DataObject& value) {
+    return new Constant(value);
+}

@@ -19,4 +19,6 @@ class Input: public Differentiable {
 
 typedef utils::Dictionary<Input*, DataObject> Variables;
 
+Input* Var(void);
+
 #endif  // SRC_OPERATIONS_BASE_INPUT_H_

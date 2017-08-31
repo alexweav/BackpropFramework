@@ -18,4 +18,8 @@ class Constant: public Differentiable {
     DataObject _value;
 };
 
+Constant* Value(float);
+Constant* Value(const Eigen::MatrixXf&);
+Constant* Value(const DataObject&);
+
 #endif  // SRC_OPERATIONS_BASE_CONSTANT_H_

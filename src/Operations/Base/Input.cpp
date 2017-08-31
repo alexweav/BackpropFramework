@@ -27,3 +27,7 @@ void Input::RegisterNewDefaultValue(const Eigen::MatrixXf& matrix) {
 void Input::RegisterNewDefaultValue(const DataObject& newValue) {
     _defaultOutput = newValue;
 }
+
+Input* Var(void) {
+    return new Input();
+}
