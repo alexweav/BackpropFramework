@@ -91,7 +91,7 @@ TEST(MultiplicationTests, BackwardAtPointCorrect) {
     DataObject d3(3.0);
     DataObject d5(5.0);
     vector<DataObject> inputs({d3, d5});
-    vector<DataObject> gradsOut = mul->Backward(inputs, Scalar(0));
+    vector<DataObject> gradsOut = mul->Backward(inputs, Scalar(1));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_FLOAT_EQ(gradsOut.at(0).ToScalar(), 5.0);
     EXPECT_FLOAT_EQ(gradsOut.at(1).ToScalar(), 3.0);
