@@ -59,6 +59,7 @@ class BackpropagationTest : public ::testing::Test {
             cons5 = new Constant(5.0);
             xp5 = new Addition(x, cons5);
             ax3 = new Multiplication(xp5, y);
+            x2 = new Multiplication(x, x);
         }
         Variables vars;
         Evaluator* eval;
@@ -67,6 +68,7 @@ class BackpropagationTest : public ::testing::Test {
         Constant* cons5;
         Addition* xp5;
         Multiplication* ax3;
+        Multiplication* x2;
 };
 
 #endif
