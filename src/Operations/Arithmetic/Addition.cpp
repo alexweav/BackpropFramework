@@ -1,6 +1,5 @@
-#include "Addition.h"
-
-using namespace std;
+#include "src/Operations/Arithmetic/Addition.h"
+#include <vector>
 
 Addition::Addition(Node* i1, Node* i2): Node({i1, i2}, true) { }
 

@@ -1,4 +1,5 @@
-#include "Subtraction.h"
+#include "src/Operations/Arithmetic/Subtraction.h"
+#include <vector>
 
 Subtraction::Subtraction(Node* i1, Node* i2): Node({i1, i2}, true) { }
 

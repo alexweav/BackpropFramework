@@ -1,4 +1,5 @@
-#include "Multiplication.h"
+#include "src/Operations/Arithmetic/Multiplication.h"
+#include <vector>
 
 Multiplication::Multiplication(Node* i1, Node* i2): Node({i1, i2}, true) { }
 

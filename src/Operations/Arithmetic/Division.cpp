@@ -1,4 +1,5 @@
-#include "Division.h"
+#include "src/Operations/Arithmetic/Division.h"
+#include <vector>
 
 Division::Division(Node* i1, Node* i2) : Node({i1, i2}, true) { }
 
