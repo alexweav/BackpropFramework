@@ -8,7 +8,7 @@ class Input: public Differentiable {
  public:
     Input();
     DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>&) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
     void RegisterNewDefaultValue(float);
     void RegisterNewDefaultValue(const Eigen::MatrixXf&);
     void RegisterNewDefaultValue(const DataObject&);

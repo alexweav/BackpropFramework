@@ -24,13 +24,7 @@ DataObject Multiplication::MatrixMultiply(const DataObject& i1, const DataObject
     return Mat(i1.ToMatrix() * i2.ToMatrix());
 }
 
-std::vector<DataObject> Multiplication::Backward(const std::vector<DataObject>& prevInputs) const {
-    /*std::vector<DataObject> grads(this->_arity);
-    DataObject grad0(prevInputs.at(1).ToScalar());
-    DataObject grad1(prevInputs.at(0).ToScalar());
-    grads.at(0) = grad0;
-    grads.at(1) = grad1;
-    return grads;*/
+std::vector<DataObject> Multiplication::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
     return HandleBackward(prevInputs.at(0), prevInputs.at(1));
 }
 

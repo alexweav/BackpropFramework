@@ -32,7 +32,7 @@ TEST(AdditionTests, BackwardAtPointCorrect) {
     DataObject d2(2.0);
     DataObject d3(3.0);
     vector<DataObject> inputs({d2, d3});
-    vector<DataObject> gradsOut = add->Backward(inputs);
+    vector<DataObject> gradsOut = add->Backward(inputs, Scalar(0));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_FLOAT_EQ(gradsOut.at(0).ToScalar(), 1.0);
     EXPECT_FLOAT_EQ(gradsOut.at(1).ToScalar(), 1.0);
@@ -45,7 +45,7 @@ TEST(AdditionTests, BackwardMatrixCorrect) {
     Eigen::MatrixXf m(2, 2);
     m << 1, 2, 3, 4;
     vector<DataObject> inputs({Mat(m), Mat(m)});
-    vector<DataObject> gradsOut = add->Backward(inputs);
+    vector<DataObject> gradsOut = add->Backward(inputs, Scalar(0));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_EQ(gradsOut.at(0).ToMatrix(), Eigen::MatrixXf::Constant(2, 2, 1.0));
     EXPECT_EQ(gradsOut.at(1).ToMatrix(), Eigen::MatrixXf::Constant(2, 2, 1.0));
@@ -68,7 +68,7 @@ TEST(SubtractionTests, BackwardAtPointCorrect) {
     DataObject d5(5.0);
     DataObject d3(3.0);
     vector<DataObject> inputs({d5, d3});
-    vector<DataObject> gradsOut = sub->Backward(inputs);
+    vector<DataObject> gradsOut = sub->Backward(inputs, Scalar(0));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_FLOAT_EQ(gradsOut.at(0).ToScalar(), 1.0);
     EXPECT_FLOAT_EQ(gradsOut.at(1).ToScalar(), -1.0);
@@ -91,7 +91,7 @@ TEST(MultiplicationTests, BackwardAtPointCorrect) {
     DataObject d3(3.0);
     DataObject d5(5.0);
     vector<DataObject> inputs({d3, d5});
-    vector<DataObject> gradsOut = mul->Backward(inputs);
+    vector<DataObject> gradsOut = mul->Backward(inputs, Scalar(0));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_FLOAT_EQ(gradsOut.at(0).ToScalar(), 5.0);
     EXPECT_FLOAT_EQ(gradsOut.at(1).ToScalar(), 3.0);
@@ -114,7 +114,7 @@ TEST(DivisionTests, BackwardAtPointCorrect) {
     DataObject d7(7.0);
     DataObject d2(2.0);
     vector<DataObject> inputs({d7, d2});
-    vector<DataObject> gradsOut = div->Backward(inputs);
+    vector<DataObject> gradsOut = div->Backward(inputs, Scalar(0));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_FLOAT_EQ(gradsOut.at(0).ToScalar(), 0.5);
     EXPECT_FLOAT_EQ(gradsOut.at(1).ToScalar(), -1.75);

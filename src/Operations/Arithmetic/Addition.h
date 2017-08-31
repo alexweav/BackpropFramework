@@ -9,7 +9,7 @@ class Addition: public Operation, public Differentiable {
  public:
     Addition(Node* input1, Node* input2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
  private:
     std::vector<DataObject> HandleBackward(const DataObject&, const DataObject&) const;

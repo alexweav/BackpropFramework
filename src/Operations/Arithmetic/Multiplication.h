@@ -9,7 +9,7 @@ class Multiplication: public Operation, public Differentiable {
  public:
     Multiplication(Node* i1, Node* i2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
  private:
     DataObject HandleMultiply(const DataObject&, const DataObject&) const;

@@ -13,7 +13,7 @@ DataObject Constant::Forward(const std::vector<DataObject>& inputs) const {
     return _value;
 }
 
-std::vector<DataObject> Constant::Backward(const std::vector<DataObject>& prevInputs) const {
+std::vector<DataObject> Constant::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
     std::vector<DataObject> gradsOut;
     return gradsOut;
 }

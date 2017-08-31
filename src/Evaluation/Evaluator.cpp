@@ -56,7 +56,7 @@ utils::Dictionary<Node*, DataObject> Evaluator::BackwardEvaluate(Differentiable*
         for (Node* pred : *predecessors) {
             prevInputs.push_back(forwardResults[pred]);
         }
-        std::vector<DataObject> gradOut = diffNode->Backward(prevInputs);
+        std::vector<DataObject> gradOut = diffNode->Backward(prevInputs, Scalar(0));
         for (int i = 0; i < n->Arity(); i++) {
             DataObject prevGrad = grads[predecessors->at(i)];
             DataObject newGrad = prevGrad.Add(gradOut.at(i).ElementwiseMultiply(grads[n]));

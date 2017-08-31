@@ -21,7 +21,7 @@ TEST(ConstantTests, ForwardMatrixReturnsValue) {
 TEST(ConstantTests, BackwardReturnsEmptyVector) {
     auto cons = new Constant(2.0);
     vector<DataObject> prevInputs;
-    EXPECT_EQ(cons->Backward(prevInputs).size(), 0);
+    EXPECT_EQ(cons->Backward(prevInputs, Scalar(0)).size(), 0);
 }
 
 TEST(InputTests, ForwardReturnsDefaultValue) {
@@ -51,5 +51,5 @@ TEST(InputTests, NewDefaultMatrixAppearsInForward) {
 TEST(InputTests, BackwardReturnsEmptyVector) {
     auto input = new Input();
     vector<DataObject> prevInputs;
-    EXPECT_EQ(input->Backward(prevInputs).size(), 0);
+    EXPECT_EQ(input->Backward(prevInputs, Scalar(0)).size(), 0);
 }

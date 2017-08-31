@@ -8,7 +8,7 @@ DataObject Division::Forward(const std::vector<DataObject>& inputs) const {
     return result;
 }
 
-std::vector<DataObject> Division::Backward(const std::vector<DataObject>& prevInputs) const {
+std::vector<DataObject> Division::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
     std::vector<DataObject> grads(this->_arity);
     DataObject grad0(1.0 / prevInputs.at(1).ToScalar());
     DataObject grad1(prevInputs.at(0).ToScalar() * -(1.0 / (prevInputs.at(1).ToScalar() * prevInputs.at(1).ToScalar())));

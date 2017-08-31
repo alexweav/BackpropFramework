@@ -7,7 +7,7 @@ DataObject Addition::Forward(const std::vector<DataObject>& inputs) const {
     return inputs.at(0).Add(inputs.at(1));
 }
 
-std::vector<DataObject> Addition::Backward(const std::vector<DataObject>& prevInputs) const {
+std::vector<DataObject> Addition::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
     return HandleBackward(prevInputs.at(0), prevInputs.at(1));
 }
 

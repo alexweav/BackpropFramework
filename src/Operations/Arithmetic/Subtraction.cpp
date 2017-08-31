@@ -8,7 +8,7 @@ DataObject Subtraction::Forward(const std::vector<DataObject>& inputs) const {
     return result;
 }
 
-std::vector<DataObject> Subtraction::Backward(const std::vector<DataObject>& prevInputs) const {
+std::vector<DataObject> Subtraction::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
     std::vector<DataObject> grads(this->_arity);
     DataObject grad0(1.0);
     DataObject grad1(-1.0);

@@ -11,7 +11,7 @@ class Constant: public Differentiable {
     explicit Constant(const Eigen::MatrixXf&);
     explicit Constant(const DataObject&);
     DataObject Forward(const std::vector<DataObject>&) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>&) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
     DataObject getValue();
 
  private:

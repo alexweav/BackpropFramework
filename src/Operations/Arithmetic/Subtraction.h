@@ -9,7 +9,7 @@ class Subtraction: public Operation, public Differentiable {
  public:
     Subtraction(Node* i1, Node* i2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 };
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_SUBTRACTION_H_
