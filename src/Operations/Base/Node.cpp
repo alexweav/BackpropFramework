@@ -1,4 +1,5 @@
 #include "src/Operations/Base/Node.h"
+#include "src/Operations/Arithmetic/Addition.h"
 
 Node::Node(std::initializer_list<Node*> inputs, bool isDifferentiable): _arity(inputs.size()),
          _hasDifferentiableTree(isDifferentiable) {
@@ -28,3 +29,6 @@ bool Node::HasDifferentiableTree() const {
     return this->_hasDifferentiableTree;
 }
 
+Node* Node::operator+(Node* const& other) {
+    return new Addition(this, other);
+}
