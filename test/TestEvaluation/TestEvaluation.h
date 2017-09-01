@@ -18,6 +18,7 @@ class ForwardPropagationTest : public ::testing::Test {
             mul45 = Multiply(add9, cons5);
             add47 = Add(mul45, cons2);
             sub0 = Subtract(add47, add47);
+            input = Var();
         }
         Variables vars;
         Evaluator* eval;
@@ -29,6 +30,7 @@ class ForwardPropagationTest : public ::testing::Test {
         Multiplication* mul45;
         Addition* add47;
         Subtraction* sub0;
+        Input* input;
 };
 
 class MultipleEvaluationTest : public ::testing::Test {

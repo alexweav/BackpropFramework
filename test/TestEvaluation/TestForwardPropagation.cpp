@@ -18,3 +18,19 @@ TEST_F(ForwardPropagationTest, MultiNodeAcyclicForwardEvaluationIsCorrect) {
 TEST_F(ForwardPropagationTest, RepeatedEdgeMultiNodeAcyclicForwardEvaluationIsCorrect) {
     EXPECT_FLOAT_EQ(eval->ForwardEvaluate(sub0, vars).ToScalar(), 0.0);
 }
+
+TEST_F(ForwardPropagationTest, VariableDefaultsToScalarZero) {
+    EXPECT_FLOAT_EQ(eval->ForwardEvaluate(input, vars).ToScalar(), 0.0);
+}
+
+TEST_F(ForwardPropagationTest, VariableRegisterNewDefaultCreatesNewDefault) {
+    EXPECT_FLOAT_EQ(eval->ForwardEvaluate(input, vars).ToScalar(), 0.0);
+    input->RegisterNewDefaultValue(Scalar(3.0));
+    EXPECT_FLOAT_EQ(eval->ForwardEvaluate(input, vars).ToScalar(), 3.0);
+}
+
+TEST_F(ForwardPropagationTest, SpecifiedVariableValueOverridesDefault) {
+    EXPECT_FLOAT_EQ(eval->ForwardEvaluate(input, vars).ToScalar(), 0.0);
+    vars[input] = Scalar(5.0);
+    EXPECT_FLOAT_EQ(eval->ForwardEvaluate(input, vars).ToScalar(), 5.0);
+}
