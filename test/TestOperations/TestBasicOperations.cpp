@@ -68,7 +68,7 @@ TEST(SubtractionTests, BackwardAtPointCorrect) {
     DataObject d5(5.0);
     DataObject d3(3.0);
     vector<DataObject> inputs({d5, d3});
-    vector<DataObject> gradsOut = sub->Backward(inputs, Scalar(0));
+    vector<DataObject> gradsOut = sub->Backward(inputs, Scalar(1.0));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_FLOAT_EQ(gradsOut.at(0).ToScalar(), 1.0);
     EXPECT_FLOAT_EQ(gradsOut.at(1).ToScalar(), -1.0);
@@ -114,7 +114,7 @@ TEST(DivisionTests, BackwardAtPointCorrect) {
     DataObject d7(7.0);
     DataObject d2(2.0);
     vector<DataObject> inputs({d7, d2});
-    vector<DataObject> gradsOut = div->Backward(inputs, Scalar(0));
+    vector<DataObject> gradsOut = div->Backward(inputs, Scalar(1.0));
     EXPECT_EQ(gradsOut.size(), 2);
     EXPECT_FLOAT_EQ(gradsOut.at(0).ToScalar(), 0.5);
     EXPECT_FLOAT_EQ(gradsOut.at(1).ToScalar(), -1.75);

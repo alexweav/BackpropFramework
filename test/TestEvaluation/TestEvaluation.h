@@ -55,9 +55,12 @@ class BackpropagationTest : public ::testing::Test {
         virtual void SetUp() {
             x = Var();
             y = Var();
+            z = Var();
             vars[x] = Scalar(2.0);
             vars[y] = Scalar(3.0);
             eval = new Evaluator();
+            cons3 = Value(3.0);
+            cons4 = Value(4.0);
             cons5 = Value(5.0);
             xp5 = Add(x, cons5);
             ax3 = Multiply(xp5, y);
@@ -67,6 +70,9 @@ class BackpropagationTest : public ::testing::Test {
         Evaluator* eval;
         Input* x;
         Input* y;
+        Input* z;
+        Constant* cons3;
+        Constant* cons4;
         Constant* cons5;
         Addition* xp5;
         Multiplication* ax3;
