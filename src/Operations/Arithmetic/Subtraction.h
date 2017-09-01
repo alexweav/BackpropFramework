@@ -12,4 +12,6 @@ class Subtraction: public Operation, public Differentiable {
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 };
 
+Subtraction* Subtract(Node*, Node*);
+
 #endif  // SRC_OPERATIONS_ARITHMETIC_SUBTRACTION_H_

@@ -16,3 +16,7 @@ std::vector<DataObject> Subtraction::Backward(const std::vector<DataObject>& pre
     grads.at(1) = grad1;
     return grads;
 }
+
+Subtraction* Subtract(Node* i1, Node* i2) {
+    return new Subtraction(i1, i2);
+}

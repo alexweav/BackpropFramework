@@ -16,3 +16,7 @@ std::vector<DataObject> Division::Backward(const std::vector<DataObject>& prevIn
     grads.at(1) = grad1;
     return grads;
 }
+
+Division* Divide(Node* i1, Node* i2) {
+    return new Division(i1, i2);
+}

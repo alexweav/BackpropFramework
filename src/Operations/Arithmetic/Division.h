@@ -12,4 +12,6 @@ class Division: public Operation, public Differentiable {
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 };
 
+Division* Divide(Node*, Node*);
+
 #endif  // SRC_OPERATIONS_ARITHMETIC_DIVISION_H_

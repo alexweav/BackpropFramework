@@ -20,4 +20,6 @@ class Multiplication: public Operation, public Differentiable {
     std::vector<DataObject> DifferentiateMatrixMultiplication(const DataObject&, const DataObject&, const DataObject&) const;
 };
 
+Multiplication* Multiply(Node*, Node*);
+
 #endif  // SRC_OPERATIONS_ARITHMETIC_MULTIPLICATION_H_

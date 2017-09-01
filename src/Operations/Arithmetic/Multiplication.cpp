@@ -50,3 +50,7 @@ std::vector<DataObject> Multiplication::DifferentiateMatrixMultiplication(const 
     grads.at(1) = Mat((i1.ToMatrix().transpose()) * dout.ToMatrix());
     return grads;
 }
+
+Multiplication* Multiply(Node* i1, Node* i2) {
+    return new Multiplication(i1, i2);
+}

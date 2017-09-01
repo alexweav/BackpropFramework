@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     auto var2 = Var();
     auto cons = Value(5.0);
     auto add = Add(var1, cons);
-    auto mul = new Multiplication(add, var2);
+    auto mul = Multiply(add, var2);
 
     auto eval = new Evaluator();
     Variables vars;
