@@ -10,9 +10,11 @@ DataObject Subtraction::Forward(const std::vector<DataObject>& inputs) const {
 
 std::vector<DataObject> Subtraction::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
     std::vector<DataObject> grads(this->_arity);
-    DataObject grad0(1.0);
-    DataObject grad1(-1.0);
-    grads.at(0) = grad0;
-    grads.at(1) = grad1;
+    grads.at(0) = Scalar(1.0).ElementwiseMultiply(dout);
+    grads.at(1) = Scalar(-1.0).ElementwiseMultiply(dout);
     return grads;
+}
+
+Subtraction* Subtract(Node* i1, Node* i2) {
+    return new Subtraction(i1, i2);
 }

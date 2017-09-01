@@ -5,41 +5,29 @@
 #include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Datatypes.h"
-#include <iostream>
 
 int main(int argc, char** argv) {
-    auto var1 = Var();
-    auto var2 = Var();
-    auto cons = Value(5.0);
-    auto add = Add(var1, cons);
-    auto mul = new Multiplication(add, var2);
+    auto x = Var();
+    auto y = Var();
+    auto z = Var();
+    auto v4 = Value(4.0);
+    auto v3 = Value(3.0);
+    auto fn_sqrt = Multiply(Add(x, v4), Subtract(y, Divide(z, v3)));
+    auto f = Multiply(fn_sqrt, fn_sqrt);
 
-    auto eval = new Evaluator();
     Variables vars;
-    DataObject d2(2.0);
-    DataObject d3(3.0);
-    vars[var1] = d2;
-    vars[var2] = d3;
-    std::cout << eval->ForwardEvaluate(mul, vars).ToScalar() << std::endl;
-    auto res = eval->BackwardEvaluate(mul, vars);
-    std::cout << "(var1 + cons) * var2" << std::endl;
-    std::cout << "(2 + 5) * 3" << std::endl;
-    std::cout << "var1: " << res[var1].ToScalar() << std::endl;
-    std::cout << "var2: " << res[var2].ToScalar() << std::endl;
-    std::cout << "cons: " << res[cons].ToScalar() << std::endl;
-    std::cout << "add:  " << res[add].ToScalar() << std::endl;
-    std::cout << "mul:  " << res[mul].ToScalar() << std::endl;
-    std::cout << std::endl;
-
-    Eigen::MatrixXf m(2, 2);
-    m << 1, 2, 3, 4;
-    Eigen::MatrixXf m2(2, 2);
-    m2 << 5, 6, 7, 8;
-    auto cm1 = Value(m);
-    auto cm2 = Value(m2);
-    auto addm = Add(cm1, cm2);
-    std::cout << eval->ForwardEvaluate(addm, vars).ToMatrix() << std::endl;
-
+    Evaluator eval;
+    
+    vars[x] = Scalar(3.0);
+    vars[y] = Scalar(2.0);
+    vars[z] = Scalar(1.0);
+    std::cout << "Point: " << "(" << vars[x].ToScalar() << ", " << vars[y].ToScalar() << ", " << vars[z].ToScalar() << ")" << std::endl;
+    std::cout << "Value: " << eval.ForwardEvaluate(f, vars).ToScalar() << std::endl;
+    auto grads = eval.BackwardEvaluate(f, vars);
+    std::cout << "df/dx: " << grads[x].ToScalar() << std::endl;
+    std::cout << "df/dy: " << grads[y].ToScalar() << std::endl;
+    std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;
+    
     return 0;
 }
 

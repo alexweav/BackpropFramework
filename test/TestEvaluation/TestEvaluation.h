@@ -11,13 +11,14 @@ class ForwardPropagationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
             eval = new Evaluator();
-            cons2 = new Constant(2.0);
-            cons7 = new Constant(7.0);
-            add9 = new Addition(cons2, cons7);
-            cons5 = new Constant(5.0);
-            mul45 = new Multiplication(add9, cons5);
-            add47 = new Addition(mul45, cons2);
-            sub0 = new Subtraction(add47, add47);
+            cons2 = Value(2.0);
+            cons7 = Value(7.0);
+            add9 = Add(cons2, cons7);
+            cons5 = Value(5.0);
+            mul45 = Multiply(add9, cons5);
+            add47 = Add(mul45, cons2);
+            sub0 = Subtract(add47, add47);
+            input = Var();
         }
         Variables vars;
         Evaluator* eval;
@@ -29,6 +30,7 @@ class ForwardPropagationTest : public ::testing::Test {
         Multiplication* mul45;
         Addition* add47;
         Subtraction* sub0;
+        Input* input;
 };
 
 class MultipleEvaluationTest : public ::testing::Test {
@@ -36,9 +38,9 @@ class MultipleEvaluationTest : public ::testing::Test {
         virtual void SetUp() {
             eval = new Evaluator();
             counterConstant = new FakeForwardEvaluationCounter();
-            zero = new Constant(0.0);
-            addSingle = new Addition(counterConstant, zero);
-            addDual = new Addition(counterConstant, counterConstant);
+            zero = Value(0.0);
+            addSingle = Add(counterConstant, zero);
+            addDual = Add(counterConstant, counterConstant);
         }
         Variables vars;
         Evaluator* eval;
@@ -51,20 +53,26 @@ class MultipleEvaluationTest : public ::testing::Test {
 class BackpropagationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
-            x = new Input();
-            y = new Input();
+            x = Var();
+            y = Var();
+            z = Var();
             vars[x] = Scalar(2.0);
             vars[y] = Scalar(3.0);
             eval = new Evaluator();
-            cons5 = new Constant(5.0);
-            xp5 = new Addition(x, cons5);
-            ax3 = new Multiplication(xp5, y);
-            x2 = new Multiplication(x, x);
+            cons3 = Value(3.0);
+            cons4 = Value(4.0);
+            cons5 = Value(5.0);
+            xp5 = Add(x, cons5);
+            ax3 = Multiply(xp5, y);
+            x2 = Multiply(x, x);
         }
         Variables vars;
         Evaluator* eval;
         Input* x;
         Input* y;
+        Input* z;
+        Constant* cons3;
+        Constant* cons4;
         Constant* cons5;
         Addition* xp5;
         Multiplication* ax3;

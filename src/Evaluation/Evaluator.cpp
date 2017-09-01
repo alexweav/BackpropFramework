@@ -10,8 +10,13 @@ DataObject Evaluator::ForwardEvaluate(Node* node, const Variables& vars) {
     }
     std::vector<Node*>* order = new std::vector<Node*>();
     std::vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
-    DataObject result = node->Forward(inputs);
-    evaluated[node] = result;
+    DataObject result;
+    if (evaluated.find(node) == evaluated.end()) {
+        result = node->Forward(inputs);
+        evaluated[node] = result;
+    } else {
+        result = evaluated[node];
+    }
     order->push_back(node);
     free(order);
     return result;

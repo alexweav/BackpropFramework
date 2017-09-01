@@ -16,6 +16,7 @@ class Node {
     std::vector<Node*>* Predecessors();
     void RegisterSuccessor(Node* node);
     bool HasDifferentiableTree() const;
+    Node* operator+(Node* const& other);
 
  protected:
     int _arity;
