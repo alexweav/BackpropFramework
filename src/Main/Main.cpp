@@ -7,7 +7,7 @@
 #include "Utils/Datatypes.h"
 
 int main(int argc, char** argv) {
-    auto x = Var();
+    /*auto x = Var();
     auto y = Var();
     auto z = Var();
     auto v4 = Value(4.0);
@@ -26,7 +26,14 @@ int main(int argc, char** argv) {
     auto grads = eval.BackwardEvaluate(f, vars);
     std::cout << "df/dx: " << grads[x].ToScalar() << std::endl;
     std::cout << "df/dy: " << grads[y].ToScalar() << std::endl;
-    std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;
+    std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;*/
+    std::hash<Node> hash;
+    Constant cons1(5.0);
+    Constant cons2(5.0);
+    std::cout << hash(cons1) << std::endl;
+    std::cout << hash(cons1) << std::endl;
+    std::cout << hash(cons2) << std::endl;
+
     
     return 0;
 }
