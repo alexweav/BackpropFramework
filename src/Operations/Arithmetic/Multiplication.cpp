@@ -1,7 +1,8 @@
 #include "src/Operations/Arithmetic/Multiplication.h"
 #include <vector>
+#include <iostream>
 
-Multiplication::Multiplication(Node* i1, Node* i2): Node({i1, i2}, true) { }
+Multiplication::Multiplication(NodePtr i1, NodePtr i2): Node({i1, i2}, true) { }
 
 DataObject Multiplication::Forward(const std::vector<DataObject>& inputs) const {
     return HandleMultiply(inputs.at(0), inputs.at(1));
@@ -51,6 +52,6 @@ std::vector<DataObject> Multiplication::DifferentiateMatrixMultiplication(const 
     return grads;
 }
 
-Multiplication* Multiply(Node* i1, Node* i2) {
-    return new Multiplication(i1, i2);
+std::shared_ptr<Multiplication> Multiply(NodePtr i1, NodePtr i2) {
+    return std::shared_ptr<Multiplication>(new Multiplication(i1, i2));
 }

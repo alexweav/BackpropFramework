@@ -27,17 +27,12 @@ int main(int argc, char** argv) {
     std::cout << "df/dx: " << grads[x].ToScalar() << std::endl;
     std::cout << "df/dy: " << grads[y].ToScalar() << std::endl;
     std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;*/
+    auto x = Var();
+    auto f = Multiply(x, x);
+    Evaluator eval;
+    Variables vars;
+    std::cout << eval.ForwardEvaluate(f, vars).ToScalar() << std::endl;
 
-    utils::SharedDictionary<Node, float> sdict;
-    std::shared_ptr<Node> cons1 (new Constant(5.0));
-    std::shared_ptr<Node> cons2 (new Constant(2.0));
-    sdict[cons1] = 5.0;
-    sdict[cons2] = 2.0;
-    std::cout << sdict[cons1] << std::endl;
-    std::cout << sdict[cons1] << std::endl;
-    std::cout << sdict[cons2] << std::endl;
-
-    
     return 0;
 }
 

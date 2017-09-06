@@ -1,5 +1,6 @@
 #include "src/Operations/Base/Input.h"
 #include <vector>
+#include <memory>
 
 Input::Input(): Node({}, true) { }
 
@@ -28,6 +29,6 @@ void Input::RegisterNewDefaultValue(const DataObject& newValue) {
     _defaultOutput = newValue;
 }
 
-Input* Var(void) {
-    return new Input();
+std::shared_ptr<Input> Var(void) {
+    return std::shared_ptr<Input>(new Input());
 }

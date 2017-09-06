@@ -7,11 +7,11 @@
 
 class Division: public Operation, public Differentiable {
  public:
-    Division(Node* i1, Node* i2);
+    Division(NodePtr i1, NodePtr i2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 };
 
-Division* Divide(Node*, Node*);
+std::shared_ptr<Division> Divide(NodePtr, NodePtr);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_DIVISION_H_

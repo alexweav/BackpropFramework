@@ -3,12 +3,12 @@
 #include <iostream>
 #include <utility>
 
-DataObject Evaluator::ForwardEvaluate(Node* node, const Variables& vars) {
-    utils::Dictionary<Node*, DataObject> evaluated;
-    for (std::pair<Input*, DataObject> element : vars) {
+DataObject Evaluator::ForwardEvaluate(NodePtr node, const Variables& vars) {
+    utils::Dictionary<Node, DataObject> evaluated;
+    for (std::pair<InputPtr, DataObject> element : vars) {
         evaluated[element.first] = element.second;
     }
-    std::vector<Node*>* order = new std::vector<Node*>();
+    std::vector<NodePtr>* order = new std::vector<NodePtr>();
     std::vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
     DataObject result;
     if (evaluated.find(node) == evaluated.end()) {
@@ -22,14 +22,14 @@ DataObject Evaluator::ForwardEvaluate(Node* node, const Variables& vars) {
     return result;
 }
 
-DataObject Evaluator::ForwardEvaluate(Node* node, utils::Dictionary<Node*, DataObject>& evaluated, std::vector<Node*>* order) {
+DataObject Evaluator::ForwardEvaluate(NodePtr node, utils::Dictionary<Node, DataObject>& evaluated, std::vector<NodePtr>* order) {
     std::vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
     DataObject result = node->Forward(inputs);
     order->push_back(node);
     return result;
 }
 
-std::vector<DataObject> Evaluator::EvaluatePredecessors(Node* node, utils::Dictionary<Node*, DataObject>& evaluated, std::vector<Node*>* order) {
+std::vector<DataObject> Evaluator::EvaluatePredecessors(NodePtr node, utils::Dictionary<Node, DataObject>& evaluated, std::vector<NodePtr>* order) {
     std::vector<DataObject> inputs(node->Arity());
     for (int i = 0; i < node->Arity(); i++) {
         if (evaluated.find(node->Predecessors().at(i)) == evaluated.end()) {
@@ -44,21 +44,21 @@ std::vector<DataObject> Evaluator::EvaluatePredecessors(Node* node, utils::Dicti
     return inputs;
 }
 
-utils::Dictionary<Node*, DataObject> Evaluator::BackwardEvaluate(Differentiable* node, const Variables& vars) {
-    utils::Dictionary<Node*, DataObject> forwardResults;
-    for (std::pair<Input*, DataObject> element : vars) {
+utils::Dictionary<Node, DataObject> Evaluator::BackwardEvaluate(DifferentiablePtr node, const Variables& vars) {
+    utils::Dictionary<Node, DataObject> forwardResults;
+    for (std::pair<InputPtr, DataObject> element : vars) {
         forwardResults[element.first] = element.second;
     }
-    std::vector<Node*>* order = new std::vector<Node*>();
+    std::vector<NodePtr>* order = new std::vector<NodePtr>();
     this->ForwardEvaluate(node, forwardResults, order);
     reverse(order->begin(), order->end());
-    utils::Dictionary<Node*, DataObject> grads;
+    utils::Dictionary<Node, DataObject> grads;
     grads[node] = Scalar(1.0);
-    for (Node* n : *order) {
-        Differentiable* diffNode = dynamic_cast<Differentiable*>(n);
+    for (NodePtr n : *order) {
+        DifferentiablePtr diffNode = std::dynamic_pointer_cast<Differentiable>(n);
         std::vector<DataObject> prevInputs;
-        std::vector<Node*> predecessors = n->Predecessors();
-        for (Node* pred : predecessors) {
+        std::vector<NodePtr> predecessors = n->Predecessors();
+        for (NodePtr pred : predecessors) {
             prevInputs.push_back(forwardResults[pred]);
         }
         std::vector<DataObject> gradOut = diffNode->Backward(prevInputs, grads[n]);

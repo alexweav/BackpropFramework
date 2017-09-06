@@ -1,7 +1,7 @@
 #include "src/Operations/Arithmetic/Subtraction.h"
 #include <vector>
 
-Subtraction::Subtraction(Node* i1, Node* i2): Node({i1, i2}, true) { }
+Subtraction::Subtraction(NodePtr i1, NodePtr i2): Node({i1, i2}, true) { }
 
 DataObject Subtraction::Forward(const std::vector<DataObject>& inputs) const {
     DataObject result(inputs.at(0).ToScalar() - inputs.at(1).ToScalar());
@@ -15,6 +15,7 @@ std::vector<DataObject> Subtraction::Backward(const std::vector<DataObject>& pre
     return grads;
 }
 
-Subtraction* Subtract(Node* i1, Node* i2) {
-    return new Subtraction(i1, i2);
+std::shared_ptr<Subtraction> Subtract(NodePtr i1, NodePtr i2) {
+    std::shared_ptr<Subtraction> ptr(new Subtraction(i1, i2));
+    return ptr;
 }

@@ -9,11 +9,11 @@
 
 class Evaluator {
  public:
-    DataObject ForwardEvaluate(Node*, const Variables& vars);
-    utils::Dictionary<Node*, DataObject> BackwardEvaluate(Differentiable*, const Variables&);
+    DataObject ForwardEvaluate(NodePtr, const Variables& vars);
+    utils::Dictionary<Node, DataObject> BackwardEvaluate(DifferentiablePtr, const Variables&);
  protected:
-    DataObject ForwardEvaluate(Node*, utils::Dictionary<Node*, DataObject>&, std::vector<Node*>*);
-    std::vector<DataObject> EvaluatePredecessors(Node*, utils::Dictionary<Node*, DataObject>&, std::vector<Node*>*);
+    DataObject ForwardEvaluate(NodePtr, utils::Dictionary<Node, DataObject>&, std::vector<NodePtr>*);
+    std::vector<DataObject> EvaluatePredecessors(NodePtr, utils::Dictionary<Node, DataObject>&, std::vector<NodePtr>*);
 };
 
 #endif  // SRC_EVALUATION_EVALUATOR_H_

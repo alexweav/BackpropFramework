@@ -20,10 +20,10 @@ struct PointerHash {
 };
 
 template<typename K, typename V>
-using Dictionary = std::unordered_map<K, V, PointerHash<typename std::remove_pointer<K>::type>>;
+using PtrDictionary = std::unordered_map<K, V, PointerHash<typename std::remove_pointer<K>::type>>;
 
 template<typename K, typename V>
-using SharedDictionary = std::unordered_map<std::shared_ptr<K>, V, std::hash<std::shared_ptr<K>>>;
+using Dictionary = std::unordered_map<std::shared_ptr<K>, V, std::hash<std::shared_ptr<K>>>;
 
 }   // namespace utils
 
