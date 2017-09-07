@@ -3,7 +3,7 @@
 #include <iostream>
 #include <utility>
 
-DataObject Evaluator::ForwardEvaluate(NodePtr node, const Variables& vars) {
+DataObject Evaluator::ForwardEvaluate(const NodePtr& node, const Variables& vars) {
     utils::Dictionary<Node, DataObject> evaluated;
     for (std::pair<InputPtr, DataObject> element : vars) {
         evaluated[element.first] = element.second;
@@ -22,14 +22,14 @@ DataObject Evaluator::ForwardEvaluate(NodePtr node, const Variables& vars) {
     return result;
 }
 
-DataObject Evaluator::ForwardEvaluate(NodePtr node, utils::Dictionary<Node, DataObject>& evaluated, std::vector<NodePtr>* order) {
+DataObject Evaluator::ForwardEvaluate(const NodePtr& node, utils::Dictionary<Node, DataObject>& evaluated, std::vector<NodePtr>* order) {
     std::vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
     DataObject result = node->Forward(inputs);
     order->push_back(node);
     return result;
 }
 
-std::vector<DataObject> Evaluator::EvaluatePredecessors(NodePtr node, utils::Dictionary<Node, DataObject>& evaluated, std::vector<NodePtr>* order) {
+std::vector<DataObject> Evaluator::EvaluatePredecessors(const NodePtr& node, utils::Dictionary<Node, DataObject>& evaluated, std::vector<NodePtr>* order) {
     std::vector<DataObject> inputs(node->Arity());
     for (int i = 0; i < node->Arity(); i++) {
         if (evaluated.find(node->Predecessors().at(i)) == evaluated.end()) {
@@ -44,7 +44,7 @@ std::vector<DataObject> Evaluator::EvaluatePredecessors(NodePtr node, utils::Dic
     return inputs;
 }
 
-utils::Dictionary<Node, DataObject> Evaluator::BackwardEvaluate(DifferentiablePtr node, const Variables& vars) {
+utils::Dictionary<Node, DataObject> Evaluator::BackwardEvaluate(const DifferentiablePtr& node, const Variables& vars) {
     utils::Dictionary<Node, DataObject> forwardResults;
     for (std::pair<InputPtr, DataObject> element : vars) {
         forwardResults[element.first] = element.second;
