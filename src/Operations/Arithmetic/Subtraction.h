@@ -7,11 +7,12 @@
 
 class Subtraction: public Operation, public Differentiable {
  public:
-    Subtraction(Node* i1, Node* i2);
+    Subtraction(const NodePtr& i1, const NodePtr& i2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 };
 
-Subtraction* Subtract(Node*, Node*);
+std::shared_ptr<Subtraction> Subtract(const NodePtr&, const NodePtr&);
+std::shared_ptr<Subtraction> operator-(const NodePtr&, const NodePtr&);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_SUBTRACTION_H_

@@ -22,32 +22,33 @@ class ForwardPropagationTest : public ::testing::Test {
         }
         Variables vars;
         Evaluator* eval;
-        Constant* cons2;
-        Constant* cons3;
-        Constant* cons5;
-        Constant* cons7;
-        Addition* add9;
-        Multiplication* mul45;
-        Addition* add47;
-        Subtraction* sub0;
-        Input* input;
+        NodePtr cons2;
+        NodePtr cons3;
+        NodePtr cons5;
+        NodePtr cons7;
+        NodePtr add9;
+        NodePtr mul45;
+        NodePtr add47;
+        NodePtr sub0;
+        InputPtr input;
 };
 
 class MultipleEvaluationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
             eval = new Evaluator();
-            counterConstant = new FakeForwardEvaluationCounter();
+            std::shared_ptr<FakeForwardEvaluationCounter> ptr(new FakeForwardEvaluationCounter());
+            counterConstant = ptr;
             zero = Value(0.0);
             addSingle = Add(counterConstant, zero);
             addDual = Add(counterConstant, counterConstant);
         }
         Variables vars;
         Evaluator* eval;
-        FakeForwardEvaluationCounter* counterConstant;
-        Constant* zero;
-        Addition* addSingle;
-        Addition* addDual;
+        std::shared_ptr<FakeForwardEvaluationCounter> counterConstant;
+        NodePtr zero;
+        NodePtr addSingle;
+        NodePtr addDual;
 };
 
 class BackpropagationTest : public ::testing::Test {
@@ -68,15 +69,15 @@ class BackpropagationTest : public ::testing::Test {
         }
         Variables vars;
         Evaluator* eval;
-        Input* x;
-        Input* y;
-        Input* z;
-        Constant* cons3;
-        Constant* cons4;
-        Constant* cons5;
-        Addition* xp5;
-        Multiplication* ax3;
-        Multiplication* x2;
+        InputPtr x;
+        InputPtr y;
+        InputPtr z;
+        NodePtr cons3;
+        NodePtr cons4;
+        NodePtr cons5;
+        NodePtr xp5;
+        DifferentiablePtr ax3;
+        DifferentiablePtr x2;
 };
 
 #endif

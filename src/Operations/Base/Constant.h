@@ -18,8 +18,8 @@ class Constant: public Differentiable {
     DataObject _value;
 };
 
-Constant* Value(float);
-Constant* Value(const Eigen::MatrixXf&);
-Constant* Value(const DataObject&);
+std::shared_ptr<Constant> Value(float);
+std::shared_ptr<Constant> Value(const Eigen::MatrixXf&);
+std::shared_ptr<Constant> Value(const DataObject&);
 
 #endif  // SRC_OPERATIONS_BASE_CONSTANT_H_
