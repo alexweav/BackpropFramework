@@ -7,7 +7,7 @@
 
 class Multiplication: public Operation, public Differentiable {
  public:
-    Multiplication(NodePtr i1, NodePtr i2);
+    Multiplication(const NodePtr& i1, const NodePtr& i2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
@@ -20,7 +20,7 @@ class Multiplication: public Operation, public Differentiable {
     std::vector<DataObject> DifferentiateMatrixMultiplication(const DataObject&, const DataObject&, const DataObject&) const;
 };
 
-std::shared_ptr<Multiplication> Multiply(NodePtr, NodePtr);
+std::shared_ptr<Multiplication> Multiply(const NodePtr&, const NodePtr&);
 std::shared_ptr<Multiplication> operator*(const NodePtr&, const NodePtr&);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_MULTIPLICATION_H_

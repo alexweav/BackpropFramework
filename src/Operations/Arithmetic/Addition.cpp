@@ -1,7 +1,7 @@
 #include "src/Operations/Arithmetic/Addition.h"
 #include <vector>
 
-Addition::Addition(NodePtr i1, NodePtr i2): Node({i1, i2}, true) { }
+Addition::Addition(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { }
 
 DataObject Addition::Forward(const std::vector<DataObject>& inputs) const {
     return inputs.at(0).Add(inputs.at(1));
@@ -35,7 +35,7 @@ std::vector<DataObject> Addition::DifferentiateMatrixAddition(const DataObject& 
     return grads;
 }
 
-std::shared_ptr<Addition> Add(NodePtr i1, NodePtr i2) {
+std::shared_ptr<Addition> Add(const NodePtr& i1, const NodePtr& i2) {
     std::shared_ptr<Addition> ptr(new Addition(i1, i2));
     return ptr;
 }

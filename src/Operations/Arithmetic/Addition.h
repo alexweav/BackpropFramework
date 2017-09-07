@@ -7,7 +7,7 @@
 
 class Addition: public Operation, public Differentiable {
  public:
-    Addition(NodePtr input1, NodePtr input2);
+    Addition(const NodePtr& input1, const NodePtr& input2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
@@ -17,7 +17,7 @@ class Addition: public Operation, public Differentiable {
     std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&, const DataObject&) const;
 };
 
-std::shared_ptr<Addition> Add(NodePtr, NodePtr);
+std::shared_ptr<Addition> Add(const NodePtr&, const NodePtr&);
 std::shared_ptr<Addition> operator+(const NodePtr& i1, const NodePtr& i2);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_ADDITION_H_
