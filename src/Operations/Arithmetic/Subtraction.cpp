@@ -19,3 +19,7 @@ std::shared_ptr<Subtraction> Subtract(NodePtr i1, NodePtr i2) {
     std::shared_ptr<Subtraction> ptr(new Subtraction(i1, i2));
     return ptr;
 }
+
+std::shared_ptr<Subtraction> operator-(const NodePtr& i1, const NodePtr& i2) {
+    return Subtract(i1, i2);
+}

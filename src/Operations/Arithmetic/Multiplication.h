@@ -21,5 +21,6 @@ class Multiplication: public Operation, public Differentiable {
 };
 
 std::shared_ptr<Multiplication> Multiply(NodePtr, NodePtr);
+std::shared_ptr<Multiplication> operator*(const NodePtr&, const NodePtr&);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_MULTIPLICATION_H_

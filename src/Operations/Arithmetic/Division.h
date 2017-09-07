@@ -13,5 +13,6 @@ class Division: public Operation, public Differentiable {
 };
 
 std::shared_ptr<Division> Divide(NodePtr, NodePtr);
+std::shared_ptr<Division> operator/(const NodePtr&, const NodePtr&);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_DIVISION_H_

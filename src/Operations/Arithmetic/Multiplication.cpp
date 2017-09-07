@@ -55,3 +55,7 @@ std::vector<DataObject> Multiplication::DifferentiateMatrixMultiplication(const 
 std::shared_ptr<Multiplication> Multiply(NodePtr i1, NodePtr i2) {
     return std::shared_ptr<Multiplication>(new Multiplication(i1, i2));
 }
+
+std::shared_ptr<Multiplication> operator*(const NodePtr& i1, const NodePtr& i2) {
+    return Multiply(i1, i2);
+}

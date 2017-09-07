@@ -39,3 +39,7 @@ std::shared_ptr<Addition> Add(NodePtr i1, NodePtr i2) {
     std::shared_ptr<Addition> ptr(new Addition(i1, i2));
     return ptr;
 }
+
+std::shared_ptr<Addition> operator+(const NodePtr& i1, const NodePtr& i2) {
+    return Add(i1, i2);
+}

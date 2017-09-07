@@ -13,5 +13,6 @@ class Subtraction: public Operation, public Differentiable {
 };
 
 std::shared_ptr<Subtraction> Subtract(NodePtr, NodePtr);
+std::shared_ptr<Subtraction> operator-(const NodePtr&, const NodePtr&);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_SUBTRACTION_H_

@@ -28,19 +28,4 @@ class Node {
 
 typedef utils::Dictionary<Node, DataObject> Overrides;
 
-namespace std {
-
-template<> struct hash<Node> {
-    size_t operator()(const Node& node) const {
-        auto addr = reinterpret_cast<uintptr_t>(&node);
-        return addr;
-
-    }
-};
-
-}   // namespace std
-
-//template<typename V>
-//using NodeMap = std::unordered_map<Node, V, std::hash<Node>>;
-
 #endif  // SRC_OPERATIONS_BASE_NODE_H_

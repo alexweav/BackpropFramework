@@ -18,5 +18,6 @@ class Addition: public Operation, public Differentiable {
 };
 
 std::shared_ptr<Addition> Add(NodePtr, NodePtr);
+std::shared_ptr<Addition> operator+(const NodePtr& i1, const NodePtr& i2);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_ADDITION_H_

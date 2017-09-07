@@ -7,13 +7,13 @@
 #include "Utils/Datatypes.h"
 
 int main(int argc, char** argv) {
-    /*auto x = Var();
+    auto x = Var();
     auto y = Var();
     auto z = Var();
     auto v4 = Value(4.0);
     auto v3 = Value(3.0);
-    auto fn_sqrt = Multiply(Add(x, v4), Subtract(y, Divide(z, v3)));
-    auto f = Multiply(fn_sqrt, fn_sqrt);
+    auto fn_sqrt = (x + v4) * (y - (z/v3));
+    auto f = fn_sqrt * fn_sqrt;
 
     Variables vars;
     Evaluator eval;
@@ -26,12 +26,7 @@ int main(int argc, char** argv) {
     auto grads = eval.BackwardEvaluate(f, vars);
     std::cout << "df/dx: " << grads[x].ToScalar() << std::endl;
     std::cout << "df/dy: " << grads[y].ToScalar() << std::endl;
-    std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;*/
-    auto x = Var();
-    auto f = Multiply(x, x);
-    Evaluator eval;
-    Variables vars;
-    std::cout << eval.ForwardEvaluate(f, vars).ToScalar() << std::endl;
+    std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;
 
     return 0;
 }
