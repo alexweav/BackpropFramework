@@ -1,5 +1,6 @@
 #include "src/Operations/Base/Constant.h"
 #include <vector>
+#include <memory>
 
 Constant::Constant(const float value): Constant(Scalar(value)) { }
 
@@ -22,14 +23,17 @@ DataObject Constant::getValue() {
     return _value;
 }
 
-Constant* Value(float value) {
-    return new Constant(value);
+std::shared_ptr<Constant> Value(float value) {
+    std::shared_ptr<Constant> ptr(new Constant(value));
+    return ptr;
 }
 
-Constant* Value(const Eigen::MatrixXf& value) {
-    return new Constant(value);
+std::shared_ptr<Constant> Value(const Eigen::MatrixXf& value) {
+    std::shared_ptr<Constant> ptr(new Constant(value));
+    return ptr;
 }
 
-Constant* Value(const DataObject& value) {
-    return new Constant(value);
+std::shared_ptr<Constant> Value(const DataObject& value) {
+    std::shared_ptr<Constant> ptr(new Constant(value));
+    return ptr;
 }

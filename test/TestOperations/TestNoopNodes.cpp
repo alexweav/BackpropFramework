@@ -5,7 +5,7 @@
 using namespace std;
 
 TEST(ConstantTests, ForwardReturnsValue) {
-    auto cons = new Constant(2.0);
+    auto cons = Value(2.0);
     vector<DataObject> inputs;
     EXPECT_FLOAT_EQ(cons->Forward(inputs).ToScalar(), 2.0);
 }
@@ -13,25 +13,25 @@ TEST(ConstantTests, ForwardReturnsValue) {
 TEST(ConstantTests, ForwardMatrixReturnsValue) {
     Eigen::MatrixXf m(2, 2);
     m << 1, 2, 3, 4;
-    auto cons = new Constant(m);
+    auto cons = Value(m);
     vector<DataObject> inputs;
     EXPECT_EQ(cons->Forward(inputs).ToMatrix(), m);
 }
 
 TEST(ConstantTests, BackwardReturnsEmptyVector) {
-    auto cons = new Constant(2.0);
+    auto cons = Value(2.0);
     vector<DataObject> prevInputs;
     EXPECT_EQ(cons->Backward(prevInputs, Scalar(0)).size(), 0);
 }
 
 TEST(InputTests, ForwardReturnsDefaultValue) {
-    auto input = new Input();
+    auto input = Var();
     vector<DataObject> inputs;
     EXPECT_FLOAT_EQ(input->Forward(inputs).ToScalar(), 0.0);
 }
 
 TEST(InputTests, NewDefaultValueAppearsInForward) {
-    auto input = new Input();
+    auto input = Var();
     vector<DataObject> inputs;
     EXPECT_FLOAT_EQ(input->Forward(inputs).ToScalar(), 0.0);
     input->RegisterNewDefaultValue(Scalar(3.0));
@@ -39,7 +39,7 @@ TEST(InputTests, NewDefaultValueAppearsInForward) {
 }
 
 TEST(InputTests, NewDefaultMatrixAppearsInForward) {
-    auto input = new Input();
+    auto input = Var();
     vector<DataObject> inputs;
     EXPECT_FLOAT_EQ(input->Forward(inputs).ToScalar(), 0.0);
     Eigen::MatrixXf m(2, 2);
@@ -49,7 +49,7 @@ TEST(InputTests, NewDefaultMatrixAppearsInForward) {
 }
 
 TEST(InputTests, BackwardReturnsEmptyVector) {
-    auto input = new Input();
+    auto input = Var();
     vector<DataObject> prevInputs;
     EXPECT_EQ(input->Backward(prevInputs, Scalar(0)).size(), 0);
 }

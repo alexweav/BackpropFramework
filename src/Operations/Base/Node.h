@@ -4,27 +4,28 @@
 #include <vector>
 #include <initializer_list>
 #include <iostream>
+#include <memory>
 #include "Utils/Dictionary.h"
 #include "Utils/Datatypes.h"
+
+class Node;
+typedef std::shared_ptr<Node> NodePtr;
 
 class Node {
  public:
     Node() {}
-    Node(std::initializer_list<Node*>, bool isDifferentiable);
+    Node(std::initializer_list<NodePtr>, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>&) const = 0;
     int Arity();
-    std::vector<Node*>* Predecessors();
-    void RegisterSuccessor(Node* node);
+    std::vector<NodePtr> Predecessors();
     bool HasDifferentiableTree() const;
-    Node* operator+(Node* const& other);
 
  protected:
     int _arity;
     bool _hasDifferentiableTree = false;
-    std::vector<Node*>* _predecessors;
-    std::vector<Node*>* _successors;
+    std::vector<NodePtr> _predecessors;
 };
 
-typedef utils::Dictionary<Node*, DataObject> Overrides;
+typedef utils::Dictionary<Node, DataObject> Overrides;
 
 #endif  // SRC_OPERATIONS_BASE_NODE_H_

@@ -3,6 +3,7 @@
 
 #include "Differentiable.h"
 #include <vector>
+#include <memory>
 
 class Input: public Differentiable {
  public:
@@ -17,8 +18,9 @@ class Input: public Differentiable {
     DataObject _defaultOutput;
 };
 
-typedef utils::Dictionary<Input*, DataObject> Variables;
+typedef utils::Dictionary<Input, DataObject> Variables;
+typedef std::shared_ptr<Input> InputPtr;
 
-Input* Var(void);
+std::shared_ptr<Input> Var(void);
 
 #endif  // SRC_OPERATIONS_BASE_INPUT_H_
