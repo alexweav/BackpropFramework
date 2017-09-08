@@ -5,6 +5,7 @@
 #include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
+#include "Data/Initializers/Zeros.h"
 
 int main(int argc, char** argv) {
     auto x = Var();
@@ -27,6 +28,8 @@ int main(int argc, char** argv) {
     std::cout << "df/dx: " << grads[x].ToScalar() << std::endl;
     std::cout << "df/dy: " << grads[y].ToScalar() << std::endl;
     std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;
+
+    std::cout << Initializers::Zeros(3, 4).ToMatrix() << std::endl;
 
     return 0;
 }
