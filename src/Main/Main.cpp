@@ -4,7 +4,8 @@
 #include "Operations/Base/Input.h"
 #include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
-#include "Utils/Datatypes.h"
+#include "Data/Datatypes.h"
+#include "Data/Initializers/Ones.h"
 
 int main(int argc, char** argv) {
     auto x = Var();
@@ -27,6 +28,8 @@ int main(int argc, char** argv) {
     std::cout << "df/dx: " << grads[x].ToScalar() << std::endl;
     std::cout << "df/dy: " << grads[y].ToScalar() << std::endl;
     std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;
+
+    std::cout << Initializers::Ones(3, 4).ToMatrix() << std::endl;
 
     return 0;
 }

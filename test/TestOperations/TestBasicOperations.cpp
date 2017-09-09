@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Operations/Base/Constant.h"
 #include "Operations/Arithmetic.h"
+#include "Data/Initializers/Ones.h"
+#include "Data/Initializers/Zeros.h"
 
 using namespace std;
 
@@ -45,10 +47,10 @@ TEST(AdditionTests, BackwardMatrixCorrect) {
     Eigen::MatrixXf m(3, 2);
     m << 1, 2, 3, 4, 5, 6;
     vector<DataObject> inputs({Mat(m), Mat(m)});
-    vector<DataObject> gradsOut = add->Backward(inputs, Mat(Eigen::MatrixXf::Constant(3, 2, 1.0)));
+    vector<DataObject> gradsOut = add->Backward(inputs, Initializers::Ones(3, 2));
     EXPECT_EQ(gradsOut.size(), 2);
-    EXPECT_EQ(gradsOut.at(0).ToMatrix(), Eigen::MatrixXf::Constant(3, 2, 1.0));
-    EXPECT_EQ(gradsOut.at(1).ToMatrix(), Eigen::MatrixXf::Constant(3, 2, 1.0));
+    EXPECT_EQ(gradsOut.at(0).ToMatrix(), Initializers::Ones(3, 2).ToMatrix());
+    EXPECT_EQ(gradsOut.at(1).ToMatrix(), Initializers::Ones(3, 2).ToMatrix());
 }
 
 TEST(SubtractionTests, ForwardSubtracts) {
