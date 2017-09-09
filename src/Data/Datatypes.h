@@ -43,4 +43,6 @@ class DataObject {
 DataObject Scalar(float);
 DataObject Mat(const Eigen::MatrixXf&);
 
+std::ostream& operator<<(std::ostream& os, const DataObject& obj);
+
 #endif  // SRC_UTILS_DATATYPES_H_

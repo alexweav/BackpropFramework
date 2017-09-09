@@ -22,14 +22,14 @@ int main(int argc, char** argv) {
     vars[x] = Scalar(3.0);
     vars[y] = Scalar(2.0);
     vars[z] = Scalar(1.0);
-    std::cout << "Point: " << "(" << vars[x].ToScalar() << ", " << vars[y].ToScalar() << ", " << vars[z].ToScalar() << ")" << std::endl;
-    std::cout << "Value: " << eval.ForwardEvaluate(f, vars).ToScalar() << std::endl;
+    std::cout << "Point: " << "(" << vars[x] << ", " << vars[y] << ", " << vars[z] << ")" << std::endl;
+    std::cout << "Value: " << eval.ForwardEvaluate(f, vars) << std::endl;
     auto grads = eval.BackwardEvaluate(f, vars);
-    std::cout << "df/dx: " << grads[x].ToScalar() << std::endl;
-    std::cout << "df/dy: " << grads[y].ToScalar() << std::endl;
-    std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;
+    std::cout << "df/dx: " << grads[x] << std::endl;
+    std::cout << "df/dy: " << grads[y] << std::endl;
+    std::cout << "df/dz: " << grads[z] << std::endl;
 
-    std::cout << Initializers::Ones(3, 4).ToMatrix() << std::endl;
+    std::cout << Initializers::Ones(3, 4) << std::endl;
 
     return 0;
 }

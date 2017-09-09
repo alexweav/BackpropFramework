@@ -85,3 +85,9 @@ DataObject Mat(const Eigen::MatrixXf& matrix) {
     return result;
 }
 
+std::ostream& operator<<(std::ostream& os, const DataObject& obj) {
+    if (obj.Dim() == 0) {
+        return os << obj.ToScalar();
+    }
+    return os << obj.ToMatrix();
+}
