@@ -5,7 +5,7 @@
 #include "Operations/Base/Differentiable.h"
 #include "Operations/Base/Input.h"
 #include "Utils/Dictionary.h"
-#include "Utils/Datatypes.h"
+#include "Data/Datatypes.h"
 
 class Evaluator {
  public:

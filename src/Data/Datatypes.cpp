@@ -1,4 +1,4 @@
-#include "src/Utils/Datatypes.h"
+#include "src/Data/Datatypes.h"
 
 DataObject::DataObject(void) : DataObject({}) { }
 
@@ -57,6 +57,20 @@ bool DataObject::operator==(const DataObject& other) {
     return _matrix == other.ToMatrix();
 }
 
+bool DataObject::operator==(float other) {
+    if (_dimension == 0) {
+        return ToScalar() == other;
+    }
+    return false;
+}
+
+bool DataObject::operator==(const Eigen::MatrixXf& other) {
+    if (_dimension > 0) {
+        return ToMatrix() == other;
+    }
+    return false;
+}
+
 DataObject DataObject::Add(const DataObject& other) const {
     if (_dimension == 0 && other.Dim() == 0) {
         return Scalar(ToScalar() + other.ToScalar());
@@ -85,3 +99,9 @@ DataObject Mat(const Eigen::MatrixXf& matrix) {
     return result;
 }
 
+std::ostream& operator<<(std::ostream& os, const DataObject& obj) {
+    if (obj.Dim() == 0) {
+        return os << obj.ToScalar();
+    }
+    return os << obj.ToMatrix();
+}

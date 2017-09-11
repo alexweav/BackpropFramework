@@ -28,6 +28,8 @@ class DataObject {
     float ToScalar(void) const;
     Eigen::MatrixXf ToMatrix(void) const;
     bool operator==(const DataObject&);
+    bool operator==(float);
+    bool operator==(const Eigen::MatrixXf&);
     DataObject Add(const DataObject& other) const;
     DataObject ElementwiseMultiply(const DataObject& other) const;
 
@@ -42,5 +44,7 @@ class DataObject {
 
 DataObject Scalar(float);
 DataObject Mat(const Eigen::MatrixXf&);
+
+std::ostream& operator<<(std::ostream& os, const DataObject& obj);
 
 #endif  // SRC_UTILS_DATATYPES_H_

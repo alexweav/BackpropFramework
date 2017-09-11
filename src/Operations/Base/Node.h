@@ -6,7 +6,7 @@
 #include <iostream>
 #include <memory>
 #include "Utils/Dictionary.h"
-#include "Utils/Datatypes.h"
+#include "Data/Datatypes.h"
 
 class Node;
 typedef std::shared_ptr<Node> NodePtr;

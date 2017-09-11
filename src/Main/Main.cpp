@@ -4,7 +4,9 @@
 #include "Operations/Base/Input.h"
 #include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
-#include "Utils/Datatypes.h"
+#include "Data/Datatypes.h"
+#include "Data/Initializers/Ones.h"
+#include "Data/Initializers/Constant.h"
 
 int main(int argc, char** argv) {
     auto x = Var();
@@ -21,12 +23,14 @@ int main(int argc, char** argv) {
     vars[x] = Scalar(3.0);
     vars[y] = Scalar(2.0);
     vars[z] = Scalar(1.0);
-    std::cout << "Point: " << "(" << vars[x].ToScalar() << ", " << vars[y].ToScalar() << ", " << vars[z].ToScalar() << ")" << std::endl;
-    std::cout << "Value: " << eval.ForwardEvaluate(f, vars).ToScalar() << std::endl;
+    std::cout << "Point: " << "(" << vars[x] << ", " << vars[y] << ", " << vars[z] << ")" << std::endl;
+    std::cout << "Value: " << eval.ForwardEvaluate(f, vars) << std::endl;
     auto grads = eval.BackwardEvaluate(f, vars);
-    std::cout << "df/dx: " << grads[x].ToScalar() << std::endl;
-    std::cout << "df/dy: " << grads[y].ToScalar() << std::endl;
-    std::cout << "df/dz: " << grads[z].ToScalar() << std::endl;
+    std::cout << "df/dx: " << grads[x] << std::endl;
+    std::cout << "df/dy: " << grads[y] << std::endl;
+    std::cout << "df/dz: " << grads[z] << std::endl;
+
+    std::cout << Initializers::Constant(3, 4, 5.0) << std::endl;
 
     return 0;
 }
