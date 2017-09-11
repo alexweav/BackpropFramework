@@ -57,6 +57,20 @@ bool DataObject::operator==(const DataObject& other) {
     return _matrix == other.ToMatrix();
 }
 
+bool DataObject::operator==(float other) {
+    if (_dimension == 0) {
+        return ToScalar() == other;
+    }
+    return false;
+}
+
+bool DataObject::operator==(const Eigen::MatrixXf& other) {
+    if (_dimension > 0) {
+        return ToMatrix() == other;
+    }
+    return false;
+}
+
 DataObject DataObject::Add(const DataObject& other) const {
     if (_dimension == 0 && other.Dim() == 0) {
         return Scalar(ToScalar() + other.ToScalar());
