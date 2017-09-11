@@ -6,6 +6,7 @@
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
 #include "Data/Initializers/Ones.h"
+#include "Data/Initializers/Constant.h"
 
 int main(int argc, char** argv) {
     auto x = Var();
@@ -29,7 +30,7 @@ int main(int argc, char** argv) {
     std::cout << "df/dy: " << grads[y] << std::endl;
     std::cout << "df/dz: " << grads[z] << std::endl;
 
-    std::cout << Initializers::Ones(3, 4) << std::endl;
+    std::cout << Initializers::Constant(3, 4, 5.0) << std::endl;
 
     return 0;
 }
