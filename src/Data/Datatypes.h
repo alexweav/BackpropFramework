@@ -28,7 +28,7 @@ class DataObject {
     float ToScalar(void) const;
     Eigen::MatrixXf ToMatrix(void) const;
     bool operator==(const DataObject&);
-    bool operator==(float);
+    bool operator==(const float);
     bool operator==(const Eigen::MatrixXf&);
     DataObject Add(const DataObject& other) const;
     DataObject ElementwiseMultiply(const DataObject& other) const;

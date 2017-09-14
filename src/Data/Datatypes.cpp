@@ -57,7 +57,7 @@ bool DataObject::operator==(const DataObject& other) {
     return _matrix == other.ToMatrix();
 }
 
-bool DataObject::operator==(float other) {
+bool DataObject::operator==(const float other) {
     if (_dimension == 0) {
         return ToScalar() == other;
     }
