@@ -3,6 +3,7 @@
 
 #include "gtest/gtest.h"
 #include "Data/Datatypes.h"
+#include "Data/Initializers/Zeros.h"
 
 class DataPropertyTest : public ::testing::Test {
  protected:
