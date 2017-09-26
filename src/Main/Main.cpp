@@ -7,6 +7,7 @@
 #include "Data/Datatypes.h"
 #include "Data/Initializers/Ones.h"
 #include "Data/Initializers/Constant.h"
+#include "Optimizers/GradientDescentOptimizer.h"
 
 int main(int argc, char** argv) {
     auto x = Var();
@@ -31,6 +32,11 @@ int main(int argc, char** argv) {
     std::cout << "df/dz: " << grads[z] << std::endl;
 
     std::cout << Initializers::Constant(3, 4, 5.0) << std::endl;
+    DataObject base = Initializers::Constant(3, 4, 5.0);
+    DataObject grad = Initializers::Constant(3, 4, 1.0);
+    GradientDescentOptimizer optimizer(1.5);
+    DataObject result = optimizer.Optimize(base, grad);
+    std::cout << result << std::endl;
 
     return 0;
 }
