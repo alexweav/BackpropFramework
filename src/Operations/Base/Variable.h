@@ -13,6 +13,7 @@ class Variable: public Differentiable, public Parameterized {
     Variable(const DataObject&);
     DataObject GetValue();
     DataObject Forward(const std::vector<DataObject>&) const;
+    DataObject FindParameterGradients(const DataObject&) const;
     void Update(const IOptimizer&) const;
 };
 
