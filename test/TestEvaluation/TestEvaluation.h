@@ -33,7 +33,7 @@ class ForwardPropagationTest : public ::testing::Test {
         InputPtr input;
 };
 
-class MultipleEvaluationTest : public ::testing::Test {
+class RepeatedEvaluationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
             eval = new Evaluator();
