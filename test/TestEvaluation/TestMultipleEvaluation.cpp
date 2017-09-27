@@ -6,6 +6,7 @@ TEST_F(MultipleEvaluationTest, EvaluateMultipleNodesCorrectValues) {
     EXPECT_FLOAT_EQ(results[c3].ToScalar(), 3.0);
     EXPECT_FLOAT_EQ(results[c4].ToScalar(), 4.0);
     std::vector<NodePtr> nodes({c2, c3, c4});
+    results = eval.MultipleEvaluate(nodes);
     EXPECT_FLOAT_EQ(results[c2].ToScalar(), 2.0);
     EXPECT_FLOAT_EQ(results[c3].ToScalar(), 3.0);
     EXPECT_FLOAT_EQ(results[c4].ToScalar(), 4.0);
