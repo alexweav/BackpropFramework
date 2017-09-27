@@ -33,6 +33,26 @@ class ForwardPropagationTest : public ::testing::Test {
         InputPtr input;
 };
 
+class MultipleEvaluationTest : public ::testing::Test {
+ protected:
+    virtual void SetUp() {
+        x = Var();
+        y = Var();
+        z = Var();
+        c2 = Value(2.0);
+        c3 = Value(3.0);
+        c4 = Value(4.0);
+    }
+    Evaluator eval;
+    Variables vars;
+    InputPtr x;
+    InputPtr y;
+    InputPtr z;
+    NodePtr c2;
+    NodePtr c3;
+    NodePtr c4;
+};
+
 class RepeatedEvaluationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
