@@ -69,15 +69,21 @@ class RepeatedEvaluationTest : public ::testing::Test {
             std::shared_ptr<FakeForwardEvaluationCounter> ptr(new FakeForwardEvaluationCounter());
             counterConstant = ptr;
             zero = Value(0.0);
+            one = Value(1.0);
             addSingle = Add(counterConstant, zero);
             addDual = Add(counterConstant, counterConstant);
+            zeroPlusCounter = zero + counterConstant;
+            counterPlusOne = counterConstant + one;
         }
         Variables vars;
         Evaluator* eval;
         std::shared_ptr<FakeForwardEvaluationCounter> counterConstant;
         NodePtr zero;
+        NodePtr one;
         NodePtr addSingle;
         NodePtr addDual;
+        NodePtr zeroPlusCounter;
+        NodePtr counterPlusOne;
 };
 
 class BackpropagationTest : public ::testing::Test {
