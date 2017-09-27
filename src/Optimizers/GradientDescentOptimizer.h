@@ -6,6 +6,9 @@
 
 struct GradientDescentFunctor {
     DataObject operator()(float learningRate, const DataObject& parameter, const DataObject& grad){
+        if (parameter.Dim() == 0) {
+            return Scalar(parameter.ToScalar() - (learningRate * grad.ToScalar()));
+        }
         return Mat(parameter.ToMatrix() - (learningRate * grad.ToMatrix()));
     }
 };
@@ -13,7 +16,7 @@ struct GradientDescentFunctor {
 class GradientDescentOptimizer: public IOptimizer {
  public:
     GradientDescentOptimizer(float learningRate);
-    DataObject Optimize(const DataObject& parameter, const DataObject& grad);
+    DataObject AdjustNode(const DataObject& parameter, const DataObject& grad) const;
 
  private:
     float _learningRate;

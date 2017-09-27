@@ -3,7 +3,7 @@
 
 class IOptimizer {
  public:
-    virtual DataObject Optimize(const DataObject& parameter, const DataObject& grad) = 0;
+    virtual DataObject AdjustNode(const DataObject& parameter, const DataObject& grad) const = 0;
 };
 
 #endif  // SRC_OPTIMIZERS_IOPTIMIZER_H_

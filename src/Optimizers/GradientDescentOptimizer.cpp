@@ -4,7 +4,7 @@ GradientDescentOptimizer::GradientDescentOptimizer(float learningRate) {
     _learningRate = learningRate;
 }
 
-DataObject GradientDescentOptimizer::Optimize(const DataObject& parameter, const DataObject& grad) {
+DataObject GradientDescentOptimizer::AdjustNode(const DataObject& parameter, const DataObject& grad) const {
     if (parameter.Shape() == grad.Shape()) {
         GradientDescentFunctor functor;
         return functor(_learningRate, parameter, grad);

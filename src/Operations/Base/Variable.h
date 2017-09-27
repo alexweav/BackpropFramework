@@ -8,13 +8,17 @@
 
 class Variable: public Differentiable, public Parameterized {
  public:
+    Variable();
     Variable(float);
     Variable(const Eigen::MatrixXf&);
     Variable(const DataObject&);
     DataObject GetValue();
     DataObject Forward(const std::vector<DataObject>&) const;
-    DataObject FindParameterGradients(const DataObject&) const;
-    void Update(const IOptimizer&) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
+    void Update(const IOptimizer&, const DataObject&);
+
+ private:
+    DataObject _value;
 };
 
 #endif  // SRC_OPERATIONS_BASE_VARIABLE_H_

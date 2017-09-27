@@ -2,6 +2,7 @@
 #include "Operations/Arithmetic.h"
 #include "Operations/Base/Constant.h"
 #include "Operations/Base/Input.h"
+#include "Operations/Base/Variable.h"
 #include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
@@ -10,7 +11,7 @@
 #include "Optimizers/GradientDescentOptimizer.h"
 
 int main(int argc, char** argv) {
-    auto x = Var();
+    /*auto x = Var();
     auto y = Var();
     auto z = Var();
     auto v4 = Value(4.0);
@@ -35,8 +36,23 @@ int main(int argc, char** argv) {
     DataObject base = Initializers::Constant(3, 4, 5.0);
     DataObject grad = Initializers::Constant(3, 4, 1.0);
     GradientDescentOptimizer optimizer(1.5);
-    DataObject result = optimizer.Optimize(base, grad);
-    std::cout << result << std::endl;
+    DataObject result = optimizer.AdjustNode(base, grad);
+    std::cout << result << std::endl;*/
+
+    auto x = std::shared_ptr<Variable>(new Variable(3.0));
+    auto x_squared = x * x;
+    Variables vars;
+    Evaluator eval;
+    std::cout << eval.ForwardEvaluate(x_squared, vars) << std::endl;
+    GradientDescentOptimizer optimizer(0.25);
+    int i;
+    auto grads = eval.BackwardEvaluate(x_squared, vars);
+    for (i = 0; i < 10; i++) {
+        grads = eval.BackwardEvaluate(x_squared, vars);
+        std::cout << "grad: " << grads[x] << std::endl;
+        x->Update(optimizer, grads[x]);
+        std::cout << eval.ForwardEvaluate(x_squared, vars) << std::endl;
+    }
 
     return 0;
 }
