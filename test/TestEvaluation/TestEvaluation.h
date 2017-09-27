@@ -42,6 +42,10 @@ class MultipleEvaluationTest : public ::testing::Test {
         c2 = Value(2.0);
         c3 = Value(3.0);
         c4 = Value(4.0);
+        yTimesZPlusFour = y * z + c4;
+        xTimesTwoMinusThree = x * c2 - c3;
+        plusFunction = xTimesTwoMinusThree + yTimesZPlusFour;
+        minusFunctionPlusTwo = xTimesTwoMinusThree - yTimesZPlusFour + c2;
     }
     Evaluator eval;
     Variables vars;
@@ -51,6 +55,11 @@ class MultipleEvaluationTest : public ::testing::Test {
     NodePtr c2;
     NodePtr c3;
     NodePtr c4;
+    NodePtr yTimesZPlusFour;
+    NodePtr xTimesTwoMinusThree;
+    NodePtr plusFunction;
+    NodePtr minusFunctionPlusTwo;
+
 };
 
 class RepeatedEvaluationTest : public ::testing::Test {
