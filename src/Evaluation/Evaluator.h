@@ -9,6 +9,7 @@
 
 class Evaluator {
  public:
+    DataObject ForwardEvaluate(const NodePtr& node);
     DataObject ForwardEvaluate(const NodePtr&, const Variables& vars);
     utils::Dictionary<Node, DataObject> BackwardEvaluate(const DifferentiablePtr&, const Variables&);
  protected:

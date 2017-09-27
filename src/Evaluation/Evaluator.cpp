@@ -3,6 +3,11 @@
 #include <iostream>
 #include <utility>
 
+DataObject Evaluator::ForwardEvaluate(const NodePtr& node) {
+    Variables vars;
+    return ForwardEvaluate(node, vars);
+}
+
 DataObject Evaluator::ForwardEvaluate(const NodePtr& node, const Variables& vars) {
     utils::Dictionary<Node, DataObject> evaluated;
     for (std::pair<InputPtr, DataObject> element : vars) {

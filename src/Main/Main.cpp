@@ -11,39 +11,11 @@
 #include "Optimizers/GradientDescentOptimizer.h"
 
 int main(int argc, char** argv) {
-    /*auto x = Var();
-    auto y = Var();
-    auto z = Var();
-    auto v4 = Value(4.0);
-    auto v3 = Value(3.0);
-    auto fn_sqrt = (x + v4) * (y - (z/v3));
-    auto f = fn_sqrt * fn_sqrt;
-
-    Variables vars;
-    Evaluator eval;
-    
-    vars[x] = Scalar(3.0);
-    vars[y] = Scalar(2.0);
-    vars[z] = Scalar(1.0);
-    std::cout << "Point: " << "(" << vars[x] << ", " << vars[y] << ", " << vars[z] << ")" << std::endl;
-    std::cout << "Value: " << eval.ForwardEvaluate(f, vars) << std::endl;
-    auto grads = eval.BackwardEvaluate(f, vars);
-    std::cout << "df/dx: " << grads[x] << std::endl;
-    std::cout << "df/dy: " << grads[y] << std::endl;
-    std::cout << "df/dz: " << grads[z] << std::endl;
-
-    std::cout << Initializers::Constant(3, 4, 5.0) << std::endl;
-    DataObject base = Initializers::Constant(3, 4, 5.0);
-    DataObject grad = Initializers::Constant(3, 4, 1.0);
-    GradientDescentOptimizer optimizer(1.5);
-    DataObject result = optimizer.AdjustNode(base, grad);
-    std::cout << result << std::endl;*/
-
     auto x = std::shared_ptr<Variable>(new Variable(3.0));
     auto x_squared = x * x;
     Variables vars;
     Evaluator eval;
-    std::cout << eval.ForwardEvaluate(x_squared, vars) << std::endl;
+    std::cout << eval.ForwardEvaluate(x_squared) << std::endl;
     GradientDescentOptimizer optimizer(0.25);
     int i;
     auto grads = eval.BackwardEvaluate(x_squared, vars);
@@ -51,7 +23,7 @@ int main(int argc, char** argv) {
         grads = eval.BackwardEvaluate(x_squared, vars);
         std::cout << "grad: " << grads[x] << std::endl;
         x->Update(optimizer, grads[x]);
-        std::cout << eval.ForwardEvaluate(x_squared, vars) << std::endl;
+        std::cout << eval.ForwardEvaluate(x_squared) << std::endl;
     }
 
     return 0;
