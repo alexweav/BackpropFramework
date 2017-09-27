@@ -25,6 +25,21 @@ int main(int argc, char** argv) {
         x->Update(optimizer, grads[x]);
         std::cout << eval.ForwardEvaluate(x_squared) << std::endl;
     }
+    
+    std::cout << std::endl;
+
+    auto y = Var();
+    auto z = Var();
+    auto c3 = Value(3.0);
+    auto c4 = Value(4.0);
+    auto inter1 = y * c3;
+    auto out1 = inter1 + z;
+    auto out2 = inter1 - z;
+    vars[y] = Scalar(2.0);
+    vars[z] = Scalar(1.0);
+    auto results = eval.MultipleEvaluate({out1, out2}, vars);
+    std::cout << "out1: " << results[out1] << std::endl;
+    std::cout << "out2: " << results[out2] << std::endl;
 
     return 0;
 }

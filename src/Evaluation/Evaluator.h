@@ -11,6 +11,10 @@ class Evaluator {
  public:
     DataObject ForwardEvaluate(const NodePtr& node);
     DataObject ForwardEvaluate(const NodePtr&, const Variables& vars);
+    utils::Dictionary<Node, DataObject> MultipleEvaluate(std::initializer_list<NodePtr>);
+    utils::Dictionary<Node, DataObject> MultipleEvaluate(std::initializer_list<NodePtr>, const Variables& vars);
+    utils::Dictionary<Node, DataObject> MultipleEvaluate(const std::vector<NodePtr>& nodes);
+    utils::Dictionary<Node, DataObject> MultipleEvaluate(const std::vector<NodePtr>& nodes, const Variables& vars);
     utils::Dictionary<Node, DataObject> BackwardEvaluate(const DifferentiablePtr&, const Variables&);
  protected:
     DataObject ForwardEvaluate(const NodePtr&, utils::Dictionary<Node, DataObject>&, std::vector<NodePtr>*);
