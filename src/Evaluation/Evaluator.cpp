@@ -27,22 +27,22 @@ DataObject Evaluator::ForwardEvaluate(const NodePtr& node, const Variables& vars
     return result;
 }
 
-utils::Dictionary<Node, DataObject> Evaluator::MultipleEvaluate(std::initializer_list<NodePtr> nodes) {
+ResultDictionary Evaluator::MultipleEvaluate(std::initializer_list<NodePtr> nodes) {
     Variables vars;
     return MultipleEvaluate(nodes, vars);
 }
 
-utils::Dictionary<Node, DataObject> Evaluator::MultipleEvaluate(std::initializer_list<NodePtr> nodes, const Variables& vars) {
+ResultDictionary Evaluator::MultipleEvaluate(std::initializer_list<NodePtr> nodes, const Variables& vars) {
     std::vector<NodePtr> nodeVector(nodes);
     return MultipleEvaluate(nodeVector, vars);
 }
 
-utils::Dictionary<Node, DataObject> Evaluator::MultipleEvaluate(const std::vector<NodePtr>& nodes) {
+ResultDictionary Evaluator::MultipleEvaluate(const std::vector<NodePtr>& nodes) {
     Variables vars;
     return MultipleEvaluate(nodes, vars);
 }
 
-utils::Dictionary<Node, DataObject> Evaluator::MultipleEvaluate(const std::vector<NodePtr>& nodes, const Variables& vars) {
+ResultDictionary Evaluator::MultipleEvaluate(const std::vector<NodePtr>& nodes, const Variables& vars) {
     utils::Dictionary<Node, DataObject> results;
     utils::Dictionary<Node, DataObject> evaluated;
     for (std::pair<InputPtr, DataObject> element : vars) {
@@ -85,7 +85,7 @@ std::vector<DataObject> Evaluator::EvaluatePredecessors(const NodePtr& node, uti
     return inputs;
 }
 
-utils::Dictionary<Node, DataObject> Evaluator::BackwardEvaluate(const DifferentiablePtr& node, const Variables& vars) {
+ResultDictionary Evaluator::BackwardEvaluate(const DifferentiablePtr& node, const Variables& vars) {
     utils::Dictionary<Node, DataObject> forwardResults;
     for (std::pair<InputPtr, DataObject> element : vars) {
         forwardResults[element.first] = element.second;

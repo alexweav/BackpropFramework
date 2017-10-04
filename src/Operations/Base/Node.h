@@ -26,6 +26,6 @@ class Node {
     std::vector<NodePtr> _predecessors;
 };
 
-typedef utils::Dictionary<Node, DataObject> Overrides;
+typedef utils::Dictionary<Node, DataObject> ResultDictionary;
 
 #endif  // SRC_OPERATIONS_BASE_NODE_H_
