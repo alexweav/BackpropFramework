@@ -9,6 +9,7 @@
 #include "Data/Datatypes.h"
 
 class Node;
+class Socket;
 typedef std::shared_ptr<Node> NodePtr;
 
 class Node {
@@ -22,8 +23,17 @@ class Node {
 
  protected:
     int _arity;
+    int _numOutputs;
     bool _hasDifferentiableTree = false;
     std::vector<NodePtr> _predecessors;
+    std::vector<Socket> _sockets;
+};
+
+class Socket {
+ public:
+    Socket(Node* node);
+ protected:
+    Node* _node;
 };
 
 typedef utils::Dictionary<Node, DataObject> ResultDictionary;

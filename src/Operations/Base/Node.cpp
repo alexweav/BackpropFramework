@@ -7,6 +7,8 @@ Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable): _arity
         _predecessors.push_back(node);
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
+    _numOutputs = 1;
+    _sockets.push_back(Socket(this));
 }
 
 int Node::Arity() {
@@ -19,4 +21,8 @@ std::vector<NodePtr> Node::Predecessors() {
 
 bool Node::HasDifferentiableTree() const {
     return this->_hasDifferentiableTree;
+}
+
+Socket::Socket(Node* node) {
+    _node = node;
 }
