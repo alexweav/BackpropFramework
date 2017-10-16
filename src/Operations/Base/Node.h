@@ -18,6 +18,7 @@ class Node {
     Node(std::initializer_list<NodePtr>, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>&) const = 0;
     int Arity();
+    std::vector<Socket> Sockets();
     std::vector<NodePtr> Predecessors();
     bool HasDifferentiableTree() const;
 

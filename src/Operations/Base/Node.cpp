@@ -23,6 +23,10 @@ bool Node::HasDifferentiableTree() const {
     return this->_hasDifferentiableTree;
 }
 
+std::vector<Socket> Node::Sockets() {
+    return _sockets;
+}
+
 Socket::Socket(Node* node) {
     _node = node;
 }
