@@ -9,30 +9,31 @@
 #include "Data/Datatypes.h"
 
 class Node;
-class Socket;
+class Channel;
 typedef std::shared_ptr<Node> NodePtr;
 
 class Node {
  public:
     Node() {}
     Node(std::initializer_list<NodePtr>, bool isDifferentiable);
-    virtual DataObject Forward(const std::vector<DataObject>&) const = 0;
-    int Arity();
-    std::vector<Socket> Sockets();
-    std::vector<NodePtr> Predecessors();
-    bool HasDifferentiableTree() const;
+    virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
+    int Arity(void);
+    std::vector<Channel> Channels(void);
+    std::vector<NodePtr> Predecessors(void);
+    bool HasDifferentiableTree(void) const;
+    int NumChannels(void);
 
  protected:
     int _arity;
-    int _numOutputs;
+    int _numChannels;
     bool _hasDifferentiableTree = false;
     std::vector<NodePtr> _predecessors;
-    std::vector<Socket> _sockets;
+    std::vector<Channel> _channels;
 };
 
-class Socket {
+class Channel {
  public:
-    Socket(Node* node);
+    Channel(Node* node);
  protected:
     Node* _node;
 };

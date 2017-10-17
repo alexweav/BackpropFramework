@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     std::cout << "out1: " << results[out1] << std::endl;
     std::cout << "out2: " << results[out2] << std::endl;
 
-    std::cout << y->Sockets().size() << std::endl;
+    std::cout << y->Channels().size() << std::endl;
 
     return 0;
 }
