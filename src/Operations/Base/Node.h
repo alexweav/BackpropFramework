@@ -11,11 +11,13 @@
 class Node;
 class Channel;
 typedef std::shared_ptr<Node> NodePtr;
+typedef std::shared_ptr<Channel> ChannelPtr;
 
 class Node {
  public:
     Node() {}
     Node(std::initializer_list<NodePtr>, bool isDifferentiable);
+    Node(std::vector<ChannelPtr>, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
     int Arity(void);
     std::vector<Channel> Channels(void);
@@ -34,10 +36,12 @@ class Node {
 class Channel {
  public:
     Channel(Node* node);
+    Node* ParentNode();
  protected:
     Node* _node;
 };
 
 typedef utils::Dictionary<Node, DataObject> ResultDictionary;
+typedef utils::Dictionary<Channel, DataObject> ChannelDictionary;
 
 #endif  // SRC_OPERATIONS_BASE_NODE_H_
