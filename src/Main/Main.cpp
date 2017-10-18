@@ -42,8 +42,10 @@ int main(int argc, char** argv) {
     std::cout << "out2: " << results[out2] << std::endl;
 
     std::cout << y->Channels().size() << std::endl;
-
-    std::cout << utils::HashCombine(std::hash<int>()(2), std::hash<int>()(3)) << std::endl;
+    std::cout << ChannelHash()(y->Channels(0)) << std::endl;
+    ChannelDictionary dict;
+    dict[y->Channels(0)] = Scalar(1);
+    std::cout << dict[y->Channels(0)] << std::endl;
 
     return 0;
 }

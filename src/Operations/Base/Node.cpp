@@ -36,8 +36,12 @@ bool Node::HasDifferentiableTree(void) const {
     return this->_hasDifferentiableTree;
 }
 
-std::vector<Channel> Node::Channels(void) {
+std::vector<Channel> Node::Channels(void) const {
     return _channels;
+}
+
+Channel Node::Channels(int index) const {
+    return _channels.at(index);
 }
 
 int Node::NumChannels(void) {
@@ -47,6 +51,10 @@ int Node::NumChannels(void) {
 Channel::Channel(Node* node, int index) {
     _node = node;
     _index = index;
+}
+
+bool Channel::operator==(const Channel& other) const {
+    return _node == other.ParentNode() && _index == other.Index();
 }
 
 Node* Channel::ParentNode(void) const {

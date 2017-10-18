@@ -20,7 +20,8 @@ class Node {
     Node(std::vector<ChannelPtr>, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
     int Arity(void);
-    std::vector<Channel> Channels(void);
+    std::vector<Channel> Channels(void) const;
+    Channel Channels(int index) const;
     std::vector<NodePtr> Predecessors(void);
     bool HasDifferentiableTree(void) const;
     int NumChannels(void);
@@ -40,13 +41,14 @@ class Channel {
     Channel(Node* node, int index);
     Node* ParentNode(void) const;
     int Index(void) const;
+    bool operator==(const Channel& other) const;
  protected:
     Node* _node;
     int _index;
 };
 
 struct ChannelHash {
-    size_t operator()(const Channel& channel) const {
+    std::size_t operator()(const Channel& channel) const {
         return utils::HashCombine(std::hash<Node*>()(channel.ParentNode()),
                                   std::hash<int>()(channel.Index()));
     }
