@@ -9,6 +9,7 @@ Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable):
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
     _numChannels = 1;
+    _channels.push_back(Channel(this));
 }
 
 int Node::Arity(void) {
@@ -23,7 +24,14 @@ bool Node::HasDifferentiableTree(void) const {
     return this->_hasDifferentiableTree;
 }
 
+std::vector<Channel> Node::Channels(void) {
+    return _channels;
+}
+
 int Node::NumChannels(void) {
     return _numChannels;
 }
 
+Channel::Channel(Node* node) {
+    _node = node;
+}

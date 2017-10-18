@@ -9,6 +9,7 @@
 #include "Data/Datatypes.h"
 
 class Node;
+class Channel;
 typedef std::shared_ptr<Node> NodePtr;
 
 class Node {
@@ -17,6 +18,7 @@ class Node {
     Node(std::initializer_list<NodePtr>, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
     int Arity(void);
+    std::vector<Channel> Channels(void);
     std::vector<NodePtr> Predecessors(void);
     bool HasDifferentiableTree(void) const;
     int NumChannels(void);
@@ -26,6 +28,14 @@ class Node {
     int _numChannels;
     bool _hasDifferentiableTree = false;
     std::vector<NodePtr> _predecessors;
+    std::vector<Channel> _channels;
+};
+
+class Channel {
+ public:
+    Channel(Node* node);
+ protected:
+    Node* _node;
 };
 
 typedef utils::Dictionary<Node, DataObject> ResultDictionary;
