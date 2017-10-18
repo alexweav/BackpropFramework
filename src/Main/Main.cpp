@@ -43,6 +43,8 @@ int main(int argc, char** argv) {
 
     std::cout << y->Channels().size() << std::endl;
 
+    std::cout << utils::HashCombine(std::hash<int>()(2), std::hash<int>()(3)) << std::endl;
+
     return 0;
 }
 
