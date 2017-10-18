@@ -11,14 +11,14 @@ class Evaluator {
  public:
     DataObject ForwardEvaluate(const NodePtr& node);
     DataObject ForwardEvaluate(const NodePtr&, const Variables& vars);
-    ResultDictionary MultipleEvaluate(std::initializer_list<NodePtr>);
-    ResultDictionary MultipleEvaluate(std::initializer_list<NodePtr>, const Variables& vars);
-    ResultDictionary MultipleEvaluate(const std::vector<NodePtr>& nodes);
-    ResultDictionary MultipleEvaluate(const std::vector<NodePtr>& nodes, const Variables& vars);
-    ResultDictionary BackwardEvaluate(const DifferentiablePtr&, const Variables&);
+    ChannelDictionary MultipleEvaluate(std::initializer_list<NodePtr>);
+    ChannelDictionary MultipleEvaluate(std::initializer_list<NodePtr>, const Variables& vars);
+    ChannelDictionary MultipleEvaluate(const std::vector<NodePtr>& nodes);
+    ChannelDictionary MultipleEvaluate(const std::vector<NodePtr>& nodes, const Variables& vars);
+    ChannelDictionary BackwardEvaluate(const DifferentiablePtr&, const Variables&);
  protected:
-    DataObject ForwardEvaluate(const NodePtr&, utils::Dictionary<Node, DataObject>&, std::vector<NodePtr>*);
-    std::vector<DataObject> EvaluatePredecessors(const NodePtr&, utils::Dictionary<Node, DataObject>&, std::vector<NodePtr>*);
+    DataObject ForwardEvaluate(const NodePtr&, ChannelDictionary&, std::vector<NodePtr>*);
+    std::vector<DataObject> EvaluatePredecessors(const NodePtr&, ChannelDictionary&, std::vector<NodePtr>*);
 };
 
 #endif  // SRC_EVALUATION_EVALUATOR_H_

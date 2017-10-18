@@ -14,7 +14,7 @@ TEST_F(RepeatedEvaluationTest, ForwardIncrementsCounter) {
 TEST_F(RepeatedEvaluationTest, MultipleForwardIncrementsCounterOnce) {
     counterConstant->ResetCounter();
     auto results = eval->MultipleEvaluate({counterConstant, counterConstant, counterConstant});
-    EXPECT_FLOAT_EQ(results[counterConstant].ToScalar(), 1.0);
+    EXPECT_FLOAT_EQ(results[counterConstant->Channels(0)].ToScalar(), 1.0);
     EXPECT_EQ(counterConstant->GetNumEvaluations(), 1);
 }
 
@@ -33,16 +33,16 @@ TEST_F(RepeatedEvaluationTest, DualEdgeGraphResourceNotRepeatedlyEvaluated) {
 TEST_F(RepeatedEvaluationTest, NodeAsSharedResourceNotRepeatedlyEvaluated) {
     counterConstant->ResetCounter();
     auto results = eval->MultipleEvaluate({zeroPlusCounter, counterPlusOne});
-    EXPECT_FLOAT_EQ(results[zeroPlusCounter].ToScalar(), 1.0);
-    EXPECT_FLOAT_EQ(results[counterPlusOne].ToScalar(), 2.0);
+    EXPECT_FLOAT_EQ(results[zeroPlusCounter->Channels(0)].ToScalar(), 1.0);
+    EXPECT_FLOAT_EQ(results[counterPlusOne->Channels(0)].ToScalar(), 2.0);
     EXPECT_EQ(counterConstant->GetNumEvaluations(), 1);
 }
 
 TEST_F(RepeatedEvaluationTest, NodeAsBothTargetAndSharedResourceNotRepeatedlyEvaluated) {
     counterConstant->ResetCounter();
     auto results = eval->MultipleEvaluate({counterConstant, zeroPlusCounter, counterPlusOne});
-    EXPECT_FLOAT_EQ(results[zeroPlusCounter].ToScalar(), 1.0);
-    EXPECT_FLOAT_EQ(results[counterPlusOne].ToScalar(), 2.0);
-    EXPECT_FLOAT_EQ(results[counterConstant].ToScalar(), 1.0);
+    EXPECT_FLOAT_EQ(results[zeroPlusCounter->Channels(0)].ToScalar(), 1.0);
+    EXPECT_FLOAT_EQ(results[counterPlusOne->Channels(0)].ToScalar(), 2.0);
+    EXPECT_FLOAT_EQ(results[counterConstant->Channels(0)].ToScalar(), 1.0);
     EXPECT_EQ(counterConstant->GetNumEvaluations(), 1);
 }

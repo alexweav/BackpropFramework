@@ -2,23 +2,23 @@
 
 TEST_F(BackpropagationTest, TestSimpleFunction) {
     auto res = eval->BackwardEvaluate(ax3, vars);
-    EXPECT_FLOAT_EQ(res[ax3].ToScalar(), 1.0);
-    EXPECT_FLOAT_EQ(res[cons5].ToScalar(), 3.0);
-    EXPECT_FLOAT_EQ(res[xp5].ToScalar(), 3.0);
-    EXPECT_FLOAT_EQ(res[x].ToScalar(), 3.0);
-    EXPECT_FLOAT_EQ(res[y].ToScalar(), 7.0);
+    EXPECT_FLOAT_EQ(res[ax3->Channels(0)].ToScalar(), 1.0);
+    EXPECT_FLOAT_EQ(res[cons5->Channels(0)].ToScalar(), 3.0);
+    EXPECT_FLOAT_EQ(res[xp5->Channels(0)].ToScalar(), 3.0);
+    EXPECT_FLOAT_EQ(res[x->Channels(0)].ToScalar(), 3.0);
+    EXPECT_FLOAT_EQ(res[y->Channels(0)].ToScalar(), 7.0);
 }
 
 TEST_F(BackpropagationTest, TestRepeatedEdgeFunction) {
     vars[x] = Scalar(0.0);
     auto res = eval->BackwardEvaluate(x2, vars);
-    EXPECT_FLOAT_EQ(res[x].ToScalar(), 0.0 * 2.0);
+    EXPECT_FLOAT_EQ(res[x->Channels(0)].ToScalar(), 0.0 * 2.0);
     vars[x] = Scalar(3.0);
     res = eval->BackwardEvaluate(x2, vars);
-    EXPECT_FLOAT_EQ(res[x].ToScalar(), 3.0 * 2.0);
+    EXPECT_FLOAT_EQ(res[x->Channels(0)].ToScalar(), 3.0 * 2.0);
     vars[x] = Scalar(-6.0);
     res = eval->BackwardEvaluate(x2, vars);
-    EXPECT_FLOAT_EQ(res[x].ToScalar(), -6.0 * 2.0);
+    EXPECT_FLOAT_EQ(res[x->Channels(0)].ToScalar(), -6.0 * 2.0);
 }
 
 TEST_F(BackpropagationTest, TestScalarArithmeticFunction) {
@@ -31,9 +31,9 @@ TEST_F(BackpropagationTest, TestScalarArithmeticFunction) {
     EXPECT_FLOAT_EQ(eval->ForwardEvaluate(f, vars).ToScalar(), f_actual);
     auto grads = eval->BackwardEvaluate(f, vars);
     float dx_actual = 2.0*(3.0+4.0)*(2.0-(1/3.0))*(2.0-(1/3.0));
-    EXPECT_FLOAT_EQ(grads[x].ToScalar(), dx_actual);
+    EXPECT_FLOAT_EQ(grads[x->Channels(0)].ToScalar(), dx_actual);
     float dy_actual = 2.0*49.0*(2.0 - (1/3.0));
-    EXPECT_FLOAT_EQ(grads[y].ToScalar(), dy_actual);
+    EXPECT_FLOAT_EQ(grads[y->Channels(0)].ToScalar(), dy_actual);
     float dz_actual = (-2/9.0)*49.0*(3.0*2.0 - 1.0);
-    EXPECT_FLOAT_EQ(grads[z].ToScalar(), dz_actual);
+    EXPECT_FLOAT_EQ(grads[z->Channels(0)].ToScalar(), dz_actual);
 }

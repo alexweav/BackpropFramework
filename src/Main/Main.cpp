@@ -21,8 +21,8 @@ int main(int argc, char** argv) {
     auto grads = eval.BackwardEvaluate(x_squared, vars);
     for (i = 0; i < 10; i++) {
         grads = eval.BackwardEvaluate(x_squared, vars);
-        std::cout << "grad: " << grads[x] << std::endl;
-        x->Update(optimizer, grads[x]);
+        std::cout << "grad: " << grads[x->Channels(0)] << std::endl;
+        x->Update(optimizer, grads[x->Channels(0)]);
         std::cout << eval.ForwardEvaluate(x_squared) << std::endl;
     }
     
@@ -38,8 +38,8 @@ int main(int argc, char** argv) {
     vars[y] = Scalar(2.0);
     vars[z] = Scalar(1.0);
     auto results = eval.MultipleEvaluate({out1, out2}, vars);
-    std::cout << "out1: " << results[out1] << std::endl;
-    std::cout << "out2: " << results[out2] << std::endl;
+    std::cout << "out1: " << results[out1->Channels(0)] << std::endl;
+    std::cout << "out2: " << results[out2->Channels(0)] << std::endl;
 
     std::cout << y->Channels().size() << std::endl;
     std::cout << ChannelHash()(y->Channels(0)) << std::endl;
