@@ -33,15 +33,25 @@ class Node {
     std::vector<Channel> _channels;
 };
 
+using ResultDictionary = utils::Dictionary<Node, DataObject>;
+
 class Channel {
  public:
-    Channel(Node* node);
-    Node* ParentNode();
+    Channel(Node* node, int index);
+    Node* ParentNode(void) const;
+    int Index(void) const;
  protected:
     Node* _node;
+    int _index;
 };
 
-typedef utils::Dictionary<Node, DataObject> ResultDictionary;
-typedef utils::Dictionary<Channel, DataObject> ChannelDictionary;
+struct ChannelHash {
+    size_t operator()(const Channel& channel) const {
+        return utils::HashCombine(std::hash<Node*>()(channel.ParentNode()),
+                                  std::hash<int>()(channel.Index()));
+    }
+};
+
+using ChannelDictionary = std::unordered_map<Channel, DataObject, ChannelHash>;
 
 #endif  // SRC_OPERATIONS_BASE_NODE_H_
