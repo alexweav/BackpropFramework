@@ -10,21 +10,14 @@ DataObject Evaluator::ForwardEvaluate(const NodePtr& node) {
 
 DataObject Evaluator::ForwardEvaluate(const NodePtr& node, const Variables& vars) {
     ChannelDictionary evaluated;
-    for (std::pair<InputPtr, DataObject> element : vars) {
-        evaluated[element.first->Channels(0)] = element.second;
-    }
+    LoadVariableOverrides(vars, evaluated);
     std::vector<NodePtr>* order = new std::vector<NodePtr>();
     std::vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
     DataObject result;
-    if (evaluated.find(node->Channels(0)) == evaluated.end()) {
-        result = node->Forward(inputs);
-        evaluated[node->Channels(0)] = result;
-    } else {
-        result = evaluated[node->Channels(0)];
-    }
+    ChannelDictionary results = LazyEvaluateNode(node, inputs, evaluated);
     order->push_back(node);
     free(order);
-    return result;
+    return results[node->Channels(0)];
 }
 
 ChannelDictionary Evaluator::MultipleEvaluate(std::initializer_list<NodePtr> nodes) {
@@ -45,18 +38,12 @@ ChannelDictionary Evaluator::MultipleEvaluate(const std::vector<NodePtr>& nodes)
 ChannelDictionary Evaluator::MultipleEvaluate(const std::vector<NodePtr>& nodes, const Variables& vars) {
     ChannelDictionary results;
     ChannelDictionary evaluated;
-    for (std::pair<InputPtr, DataObject> element : vars) {
-        evaluated[element.first->Channels(0)] = element.second;
-    }
+    LoadVariableOverrides(vars, evaluated);
     std::vector<NodePtr>* order = new std::vector<NodePtr>();
     for (NodePtr node : nodes) {
         std::vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
-        if (evaluated.find(node->Channels(0)) == evaluated.end()) {
-            results[node->Channels(0)] = node->Forward(inputs);
-            evaluated[node->Channels(0)] = results[node->Channels(0)];
-        } else {
-            results[node->Channels(0)] = evaluated[node->Channels(0)];
-        }
+        ChannelDictionary nodeResult = LazyEvaluateNode(node, inputs, evaluated);
+        AddChannelDictionaries(results, nodeResult);
         order->push_back(node);
     }
     free(order);
@@ -87,9 +74,7 @@ std::vector<DataObject> Evaluator::EvaluatePredecessors(const NodePtr& node, Cha
 
 ChannelDictionary Evaluator::BackwardEvaluate(const DifferentiablePtr& node, const Variables& vars) {
     ChannelDictionary forwardResults;
-    for (std::pair<InputPtr, DataObject> element : vars) {
-        forwardResults[element.first->Channels(0)] = element.second;
-    }
+    LoadVariableOverrides(vars, forwardResults);
     std::vector<NodePtr>* order = new std::vector<NodePtr>();
     this->ForwardEvaluate(node, forwardResults, order);
     reverse(order->begin(), order->end());
@@ -110,4 +95,30 @@ ChannelDictionary Evaluator::BackwardEvaluate(const DifferentiablePtr& node, con
         }
     }
     return grads;
+}
+
+void Evaluator::LoadVariableOverrides(const Variables& variables, ChannelDictionary& overrides) {
+    for (std::pair<InputPtr, DataObject> element : variables) {
+        overrides[element.first->Channels(0)] = element.second; // Inputs have only one Channel by definition
+    }
+}
+
+ChannelDictionary Evaluator::LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated) {
+    ChannelDictionary results;
+    bool knownEvaluated = false;
+    for (Channel channel : node->Channels()) {
+        if (!knownEvaluated && evaluated.find(channel) == evaluated.end()) {
+            results[channel] = node->Forward(inputs);
+            evaluated[channel] = results[channel];
+        } else {
+            results[channel] = evaluated[channel];
+        }
+    }
+    return results;
+}
+
+void Evaluator::AddChannelDictionaries(ChannelDictionary& target, const ChannelDictionary& source) {
+    for (std::pair<Channel, DataObject> element : source) {
+        target[element.first] = element.second;
+    }
 }

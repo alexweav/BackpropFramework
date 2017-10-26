@@ -19,6 +19,10 @@ class Evaluator {
  protected:
     DataObject ForwardEvaluate(const NodePtr&, ChannelDictionary&, std::vector<NodePtr>*);
     std::vector<DataObject> EvaluatePredecessors(const NodePtr&, ChannelDictionary&, std::vector<NodePtr>*);
+ private:
+    void LoadVariableOverrides(const Variables& vars, ChannelDictionary& overrides);
+    ChannelDictionary LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated);
+    void AddChannelDictionaries(ChannelDictionary& target, const ChannelDictionary& source);
 };
 
 #endif  // SRC_EVALUATION_EVALUATOR_H_
