@@ -4,6 +4,19 @@
 #include <vector>
 #include "Operations/Base/Operation.h"
 #include "Operations/Base/Differentiable.h"
+#include "Operations/Base/IDifferentiableExecutor.h"
+
+class AdditionExecutor: public IDifferentiableExecutor {
+ public:
+    DataObject operator() (const std::vector<DataObject>& inputs) const;
+    std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
+
+ private:
+    std::vector<DataObject> HandleBackward(const DataObject&, const DataObject&, const DataObject&) const;
+    std::vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&, const DataObject&) const;
+    std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&, const DataObject&) const;
+
+};
 
 class Addition: public Operation, public Differentiable {
  public:
@@ -12,9 +25,7 @@ class Addition: public Operation, public Differentiable {
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
  private:
-    std::vector<DataObject> HandleBackward(const DataObject&, const DataObject&, const DataObject&) const;
-    std::vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&, const DataObject&) const;
-    std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&, const DataObject&) const;
+    AdditionExecutor _executor;
 };
 
 std::shared_ptr<Addition> Add(const NodePtr&, const NodePtr&);
