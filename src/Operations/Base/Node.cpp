@@ -5,6 +5,9 @@ Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable):
         _arity(inputs.size()),
         _hasDifferentiableTree(isDifferentiable) {
     for (NodePtr node : inputs) {
+        if (node->NumChannels() > 1) {
+            throw std::invalid_argument("Predecessor node has multiple known channels.");
+        }
         _predecessors.push_back(node);
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
