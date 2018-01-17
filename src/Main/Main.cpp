@@ -2,7 +2,7 @@
 #include "Operations/Arithmetic.h"
 #include "Operations/Base/Constant.h"
 #include "Operations/Base/Input.h"
-#include "Operations/Base/IExecutor.h"
+#include "Operations/Base/IDifferentiableExecutor.h"
 #include "Operations/Base/Variable.h"
 #include "Evaluation/Evaluator.h"
 #include "Utils/Dictionary.h"
