@@ -11,7 +11,30 @@
 #include "Data/Initializers/Constant.h"
 #include "Optimizers/GradientDescentOptimizer.h"
 
+class TestExecutor: public IExecutor {
+ public:
+    DataObject operator() (const std::vector<DataObject>& inputs) const {
+        return Scalar(100);
+    }
+};
+
+class TestNode: public Node {
+ public:
+    TestNode(void): Node({}, true) {
+        std::shared_ptr<TestExecutor> executor1(new TestExecutor());
+        std::shared_ptr<TestExecutor> executor2(new TestExecutor());
+        RegisterExecutor(executor1);
+        RegisterExecutor(executor2);
+    }
+
+    DataObject Forward(const std::vector<DataObject>& inputs) const { }
+};
+
 int main(int argc, char** argv) {
+
+    std::shared_ptr<TestNode> node(new TestNode());
+    std::cout << node->NumChannels() << std::endl;
+
     auto x = std::shared_ptr<Variable>(new Variable(3.0));
     auto x_squared = x * x;
     Variables vars;

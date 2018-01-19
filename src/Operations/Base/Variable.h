@@ -17,7 +17,7 @@ class VariableExecutor: public IDifferentiableExecutor {
     void Update(const IOptimizer&, const DataObject&);
 
  private:
-     DataObject _value;
+    DataObject _value;
 };
 
 class Variable: public Differentiable, public Parameterized {

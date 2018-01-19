@@ -1,4 +1,4 @@
-#include "src/Operations/Base/Node.h"
+#include "Node.h"
 #include "src/Operations/Arithmetic/Addition.h"
 
 Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable): 
@@ -49,6 +49,17 @@ Channel Node::Channels(int index) const {
 
 int Node::NumChannels(void) {
     return _numChannels;
+}
+
+void Node::RegisterExecutor(const std::shared_ptr<IExecutor> executor) {
+    _channels.push_back(Channel(this, _numChannels));
+    _executors[_channels.at(_numChannels)] = executor;
+    _numChannels++;
+}
+void Node::RegisterDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor) {
+    _channels.push_back(Channel(this, _numChannels));
+    _differentiableExecutors[_channels.at(_numChannels)] = executor;
+    _numChannels++;
 }
 
 Channel::Channel(Node* node, int index) {
