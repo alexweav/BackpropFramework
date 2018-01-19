@@ -2,25 +2,39 @@
 #include <vector>
 #include <memory>
 
-Constant::Constant(const float value): Constant(Scalar(value)) { }
-
-Constant::Constant(const Eigen::MatrixXf& value): Constant(Mat(value)) { }
-
-Constant::Constant(const DataObject& value): Node({}, true) {
+ConstantExecutor::ConstantExecutor(const DataObject& value) {
     _value = value;
 }
 
-DataObject Constant::Forward(const std::vector<DataObject>& inputs) const {
+DataObject ConstantExecutor::operator() (const std::vector<DataObject>& inputs) const {
     return _value;
 }
 
-std::vector<DataObject> Constant::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
+std::vector<DataObject> ConstantExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
     std::vector<DataObject> gradsOut;
     return gradsOut;
 }
 
-DataObject Constant::getValue() {
+DataObject ConstantExecutor::GetValue(void) const {
     return _value;
+}
+
+Constant::Constant(const float value): Constant(Scalar(value)) { }
+
+Constant::Constant(const Eigen::MatrixXf& value): Constant(Mat(value)) { }
+
+Constant::Constant(const DataObject& value): Node({}, true), _executor(value) { }
+
+DataObject Constant::Forward(const std::vector<DataObject>& inputs) const {
+    return _executor(inputs);
+}
+
+std::vector<DataObject> Constant::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
+    return _executor.Differentiate(prevInputs, dout); 
+}
+
+DataObject Constant::GetValue(void) const {
+    return _executor.GetValue();
 }
 
 std::shared_ptr<Constant> Value(float value) {

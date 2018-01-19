@@ -2,19 +2,43 @@
 #include <vector>
 #include <memory>
 
-Input::Input(): Node({}, true) { }
+InputExecutor::InputExecutor(void) { }
 
-DataObject Input::GetDefaultOutput() {
+InputExecutor::InputExecutor(const DataObject& defaultOutput) {
+    _defaultOutput = defaultOutput;
+}
+
+DataObject InputExecutor::operator() (const std::vector<DataObject>& inputs) const {
     return _defaultOutput;
+}
+
+std::vector<DataObject> InputExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
+    std::vector<DataObject> gradsOut;
+    return gradsOut;
+}
+
+void InputExecutor::RegisterNewDefaultValue(const DataObject& newValue) {
+    _defaultOutput = newValue;
+}
+
+DataObject InputExecutor::GetDefaultOutput(void) {
+    return _defaultOutput;
+}
+
+Input::Input(void): Node({}, true), _executor() { }
+
+Input::Input(const DataObject& defaultOutput): Node({}, true), _executor(defaultOutput) { }
+
+DataObject Input::GetDefaultOutput(void) {
+    return _executor.GetDefaultOutput();
 }
 
 DataObject Input::Forward(const std::vector<DataObject>& inputs) const {
-    return _defaultOutput;
+    return _executor(inputs);
 }
 
 std::vector<DataObject> Input::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    std::vector<DataObject> gradsOut;
-    return gradsOut;
+    return _executor.Differentiate(prevInputs, dout);
 }
 
 void Input::RegisterNewDefaultValue(float value) {
@@ -26,7 +50,7 @@ void Input::RegisterNewDefaultValue(const Eigen::MatrixXf& matrix) {
 }
 
 void Input::RegisterNewDefaultValue(const DataObject& newValue) {
-    _defaultOutput = newValue;
+    return _executor.RegisterNewDefaultValue(newValue);
 }
 
 std::shared_ptr<Input> Var(void) {
