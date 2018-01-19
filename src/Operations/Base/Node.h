@@ -49,6 +49,7 @@ class Node {
     std::vector<Channel> Channels(void) const;
     Channel Channels(int index) const;
     std::vector<NodePtr> Predecessors(void);
+    bool IsDifferentiable(void) const;
     bool HasDifferentiableTree(void) const;
     int NumChannels(void);
     void RegisterExecutor(const std::shared_ptr<IExecutor> executor);
@@ -57,6 +58,7 @@ class Node {
  protected:
     int _arity;
     int _numChannels;
+    bool _isDifferentiable = true;
     bool _hasDifferentiableTree = false;
     std::vector<NodePtr> _predecessors;
     std::vector<Channel> _channels;

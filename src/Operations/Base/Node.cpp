@@ -3,6 +3,7 @@
 
 Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable): 
         _arity(inputs.size()),
+        _isDifferentiable(isDifferentiable),
         _hasDifferentiableTree(isDifferentiable) {
     for (NodePtr node : inputs) {
         if (node->NumChannels() > 1) {
@@ -17,6 +18,7 @@ Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable):
 
 Node::Node(std::vector<ChannelPtr> inputs, bool isDifferentiable):
         _arity(inputs.size()),
+        _isDifferentiable(isDifferentiable),
         _hasDifferentiableTree(isDifferentiable) {
     for (ChannelPtr channel : inputs) {
         NodePtr node = std::shared_ptr<Node>(channel->ParentNode());
@@ -32,11 +34,11 @@ ChannelDictionary Node::Execute(const std::vector<DataObject>& inputs) {
     for (Channel channel : _channels) {
         if (_executors.find(channel) != _executors.end()) {
             auto executor = _executors[channel];
-            results[channel] = executor->operator()(inputs);
+            results[channel] = (*executor)(inputs);
         }
         if (_differentiableExecutors.find(channel) != _differentiableExecutors.end()) {
             auto executor = _executors[channel];
-            results[channel] = executor->operator()(inputs);
+            results[channel] = (*executor)(inputs);
         }
     }
     return results;
@@ -50,8 +52,12 @@ std::vector<NodePtr> Node::Predecessors(void) {
     return _predecessors;
 }
 
+bool Node::IsDifferentiable(void) const {
+    return _isDifferentiable;
+}
+
 bool Node::HasDifferentiableTree(void) const {
-    return this->_hasDifferentiableTree;
+    return _hasDifferentiableTree;
 }
 
 std::vector<Channel> Node::Channels(void) const {
@@ -70,8 +76,12 @@ void Node::RegisterExecutor(const std::shared_ptr<IExecutor> executor) {
     _channels.push_back(Channel(this, _numChannels));
     _executors[_channels.at(_numChannels)] = executor;
     _numChannels++;
+    _isDifferentiable = false;
 }
 void Node::RegisterDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor) {
+    if (_channels.size() == 0) {
+        _isDifferentiable = true;
+    }
     _channels.push_back(Channel(this, _numChannels));
     _differentiableExecutors[_channels.at(_numChannels)] = executor;
     _numChannels++;
