@@ -117,8 +117,3 @@ ChannelDictionary Evaluator::LazyEvaluateNode(const NodePtr& node, const std::ve
     return results;
 }
 
-void Evaluator::AddChannelDictionaries(ChannelDictionary& target, const ChannelDictionary& source) {
-    for (std::pair<Channel, DataObject> element : source) {
-        target[element.first] = element.second;
-    }
-}

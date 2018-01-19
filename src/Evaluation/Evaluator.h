@@ -1,11 +1,14 @@
 #ifndef SRC_EVALUATION_EVALUATOR_H_
 #define SRC_EVALUATION_EVALUATOR_H_
 
-#include <vector>
 #include "Operations/Base/Differentiable.h"
 #include "Operations/Base/Input.h"
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
+
+#include <vector>
+
+#include "Utils.h"
 
 class Evaluator {
  public:
@@ -22,7 +25,6 @@ class Evaluator {
  private:
     void LoadVariableOverrides(const Variables& vars, ChannelDictionary& overrides);
     ChannelDictionary LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated);
-    void AddChannelDictionaries(ChannelDictionary& target, const ChannelDictionary& source);
 };
 
 #endif  // SRC_EVALUATION_EVALUATOR_H_
