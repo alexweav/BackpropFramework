@@ -34,6 +34,10 @@ int main(int argc, char** argv) {
 
     std::shared_ptr<TestNode> node(new TestNode());
     std::cout << node->NumChannels() << std::endl;
+    std::vector<DataObject> testInputs;
+    ChannelDictionary res = node->Execute(testInputs);
+    std::cout << res[node->Channels(1)] << std::endl;
+    std::cout << res[node->Channels(2)] << std::endl;
 
     auto x = std::shared_ptr<Variable>(new Variable(3.0));
     auto x_squared = x * x;

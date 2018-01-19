@@ -27,6 +27,21 @@ Node::Node(std::vector<ChannelPtr> inputs, bool isDifferentiable):
     _channels.push_back(Channel(this, 0));
 }
 
+ChannelDictionary Node::Execute(const std::vector<DataObject>& inputs) {
+    ChannelDictionary results;
+    for (Channel channel : _channels) {
+        if (_executors.find(channel) != _executors.end()) {
+            auto executor = _executors[channel];
+            results[channel] = executor->operator()(inputs);
+        }
+        if (_differentiableExecutors.find(channel) != _differentiableExecutors.end()) {
+            auto executor = _executors[channel];
+            results[channel] = executor->operator()(inputs);
+        }
+    }
+    return results;
+}
+
 int Node::Arity(void) {
     return this->_arity;
 }

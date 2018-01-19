@@ -44,6 +44,7 @@ class Node {
     Node(std::initializer_list<NodePtr>, bool isDifferentiable);
     Node(std::vector<ChannelPtr>, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
+    ChannelDictionary Execute(const std::vector<DataObject>& inputs);
     int Arity(void);
     std::vector<Channel> Channels(void) const;
     Channel Channels(int index) const;
