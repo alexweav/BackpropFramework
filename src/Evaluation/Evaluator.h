@@ -23,7 +23,6 @@ class Evaluator {
     DataObject ForwardEvaluate(const NodePtr&, ChannelDictionary&, std::vector<NodePtr>*);
     std::vector<DataObject> EvaluatePredecessors(const NodePtr&, ChannelDictionary&, std::vector<NodePtr>*);
  private:
-    void LoadVariableOverrides(const Variables& vars, ChannelDictionary& overrides);
     ChannelDictionary LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated);
 };
 

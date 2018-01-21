@@ -16,8 +16,12 @@ class LazyEvaluator {
     ChannelDictionary EvaluateGraph(std::initializer_list<NodePtr> nodes, const Variables& vars);
 
  protected:
+    ChannelDictionary EvaluateGraph(std::vector<NodePtr> nodes, ChannelDictionary& evaluated);
     ChannelDictionary EvaluatePredecessors(const NodePtr& node, ChannelDictionary& evaluated);
     std::vector<DataObject> GetInputs(const NodePtr& node, const ChannelDictionary& evaluated);
+
+ private:
+    bool IsEvaluated(const NodePtr& node, const ChannelDictionary& evaluated) const;
 };
 
 #endif  // SRC_EVALUATION_LAZYEVALUATOR_H_

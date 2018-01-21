@@ -6,3 +6,10 @@ void AddChannelDictionaries(ChannelDictionary& target, const ChannelDictionary& 
     }
 }
 
+void LoadVariableOverrides(const Variables& variables, ChannelDictionary& overrides) {
+    for (std::pair<InputPtr, DataObject> element : variables) {
+        overrides[element.first->Channels(0)] = element.second; // Inputs only have one Channel
+    }
+}
+
+

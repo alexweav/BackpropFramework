@@ -97,12 +97,6 @@ ChannelDictionary Evaluator::BackwardEvaluate(const DifferentiablePtr& node, con
     return grads;
 }
 
-void Evaluator::LoadVariableOverrides(const Variables& variables, ChannelDictionary& overrides) {
-    for (std::pair<InputPtr, DataObject> element : variables) {
-        overrides[element.first->Channels(0)] = element.second; // Inputs have only one Channel by definition
-    }
-}
-
 ChannelDictionary Evaluator::LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated) {
     ChannelDictionary results;
     bool knownEvaluated = false;
