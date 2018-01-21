@@ -26,7 +26,7 @@ TEST(DataObjectTests, ScalarDataObjectGivesCorrectScalarConversion) {
 }
 
 TEST(DataObjectTests, MatrixDataObjectGivesCorrectMatrixConversion) {
-    Eigen::MatrixXf m(3, 2);
+    Eigen::MatrixXf m = Eigen::MatrixXf::Zero(3, 2);
     DataObject matrix = Mat(m);
     EXPECT_EQ(matrix.ToMatrix(), m);
     bool comparatorWorks = matrix == m;
