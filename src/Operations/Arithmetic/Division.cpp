@@ -13,7 +13,9 @@ std::vector<DataObject> DivisionExecutor::Differentiate(const std::vector<DataOb
     return grads;
 }
 
-Division::Division(const NodePtr& i1, const NodePtr& i2) : Node({i1, i2}, true) { }
+Division::Division(const NodePtr& i1, const NodePtr& i2) : Node({i1, i2}, true) { 
+    RegisterDifferentiableExecutor(std::make_shared<DivisionExecutor>(_executor));
+}
 
 DataObject Division::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);

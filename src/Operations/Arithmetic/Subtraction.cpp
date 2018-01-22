@@ -13,7 +13,9 @@ std::vector<DataObject> SubtractionExecutor::Differentiate(const std::vector<Dat
     return grads;
 }
 
-Subtraction::Subtraction(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { }
+Subtraction::Subtraction(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { 
+    RegisterDifferentiableExecutor(std::make_shared<SubtractionExecutor>(_executor));
+}
 
 DataObject Subtraction::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);

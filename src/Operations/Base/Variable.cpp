@@ -23,13 +23,17 @@ void VariableExecutor::Update(const IOptimizer& optimizer, const DataObject& gra
     _value = optimizer.AdjustNode(_value, grad);
 }
 
-Variable::Variable(void): _executor() { }
+Variable::Variable(void): Node({}, true), _executor() { 
+    RegisterDifferentiableExecutor(std::make_shared<VariableExecutor>(_executor));
+}
 
 Variable::Variable(float value): Variable(Scalar(value)) { }
 
 Variable::Variable(const Eigen::MatrixXf& value): Variable(Mat(value)) { }
 
-Variable::Variable(const DataObject& value): Node({}, true), _executor(value) { }
+Variable::Variable(const DataObject& value): Node({}, true), _executor(value) { 
+    RegisterDifferentiableExecutor(std::make_shared<VariableExecutor>(_executor));
+}
 
 DataObject Variable::GetValue() {
     return _executor.GetValue();

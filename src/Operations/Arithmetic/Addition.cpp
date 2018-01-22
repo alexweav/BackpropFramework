@@ -33,7 +33,9 @@ std::vector<DataObject> AdditionExecutor::DifferentiateMatrixAddition(const Data
     return grads;
 }
 
-Addition::Addition(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { }
+Addition::Addition(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { 
+    RegisterDifferentiableExecutor(std::make_shared<AdditionExecutor>(_executor));
+}
 
 DataObject Addition::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);

@@ -25,9 +25,13 @@ DataObject InputExecutor::GetDefaultOutput(void) {
     return _defaultOutput;
 }
 
-Input::Input(void): Node({}, true), _executor() { }
+Input::Input(void): Node({}, true), _executor() { 
+    RegisterDifferentiableExecutor(std::make_shared<InputExecutor>(_executor));
+}
 
-Input::Input(const DataObject& defaultOutput): Node({}, true), _executor(defaultOutput) { }
+Input::Input(const DataObject& defaultOutput): Node({}, true), _executor(defaultOutput) { 
+    RegisterDifferentiableExecutor(std::make_shared<InputExecutor>(_executor));
+}
 
 DataObject Input::GetDefaultOutput(void) {
     return _executor.GetDefaultOutput();

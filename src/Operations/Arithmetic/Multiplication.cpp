@@ -50,7 +50,9 @@ std::vector<DataObject> MultiplicationExecutor::DifferentiateMatrixMultiplicatio
     return grads;
 }
 
-Multiplication::Multiplication(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { }
+Multiplication::Multiplication(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { 
+    RegisterDifferentiableExecutor(std::make_shared<MultiplicationExecutor>(_executor));
+}
 
 DataObject Multiplication::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);
