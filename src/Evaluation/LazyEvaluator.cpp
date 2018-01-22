@@ -33,12 +33,12 @@ ChannelDictionary LazyEvaluator::EvaluateGraph(std::vector<NodePtr> nodes, Chann
 }
 
 ChannelDictionary LazyEvaluator::EvaluatePredecessors(const NodePtr& node, ChannelDictionary& evaluated) {
-    return EvaluateGraph(node->Predecessors(), evaluated);
+    //return EvaluateGraph(node->Predecessors(), evaluated);
 }
 
 std::vector<DataObject> LazyEvaluator::GetInputs(const NodePtr& node, const ChannelDictionary& evaluated) {
     //TODO:convert evaluated predecessor dictionary to a list of operable inputs
-    for (NodePtr node : node->Predecessors()) {
+    for (std::pair<NodePtr, Channel> predecessor : node->Predecessors()) {
         
     }
 }

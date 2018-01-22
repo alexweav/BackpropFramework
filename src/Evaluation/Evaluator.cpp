@@ -60,12 +60,12 @@ DataObject Evaluator::ForwardEvaluate(const NodePtr& node, ChannelDictionary& ev
 std::vector<DataObject> Evaluator::EvaluatePredecessors(const NodePtr& node, ChannelDictionary& evaluated, std::vector<NodePtr>* order) {
     std::vector<DataObject> inputs(node->Arity());
     for (int i = 0; i < node->Arity(); i++) {
-        if (evaluated.find(node->Predecessors().at(i)->Channels(0)) == evaluated.end()) {
-            DataObject res = ForwardEvaluate(node->Predecessors().at(i), evaluated, order);
+        if (evaluated.find(node->Predecessors().at(i).second) == evaluated.end()) {
+            DataObject res = ForwardEvaluate(node->Predecessors().at(i).first, evaluated, order);
             inputs.at(i) = res;
-            evaluated[node->Predecessors().at(i)->Channels(0)] = res;
+            evaluated[node->Predecessors().at(i).second] = res;
         } else {
-            DataObject res = evaluated[node->Predecessors().at(i)->Channels(0)];
+            DataObject res = evaluated[node->Predecessors().at(i).second];
             inputs.at(i) = res;
         }
     }
@@ -83,15 +83,15 @@ ChannelDictionary Evaluator::BackwardEvaluate(const DifferentiablePtr& node, con
     for (NodePtr n : *order) {
         DifferentiablePtr diffNode = std::dynamic_pointer_cast<Differentiable>(n);
         std::vector<DataObject> prevInputs;
-        std::vector<NodePtr> predecessors = n->Predecessors();
-        for (NodePtr pred : predecessors) {
-            prevInputs.push_back(forwardResults[pred->Channels(0)]);
+        std::vector<std::pair<NodePtr, Channel>> predecessors = n->Predecessors();
+        for (std::pair<NodePtr, Channel> pred : predecessors) {
+            prevInputs.push_back(forwardResults[pred.second]);
         }
         std::vector<DataObject> gradOut = diffNode->Backward(prevInputs, grads[n->Channels(0)]);
         for (int i = 0; i < n->Arity(); i++) {
-            DataObject prevGrad = grads[predecessors.at(i)->Channels(0)];
+            DataObject prevGrad = grads[predecessors.at(i).second];
             DataObject newGrad = prevGrad.Add(gradOut.at(i));
-            grads[predecessors.at(i)->Channels(0)] = newGrad;
+            grads[predecessors.at(i).second] = newGrad;
         }
     }
     return grads;

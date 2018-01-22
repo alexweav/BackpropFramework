@@ -9,20 +9,20 @@ Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable):
         if (node->NumChannels() > 1) {
             throw std::invalid_argument("Predecessor node has multiple known channels.");
         }
-        _predecessors.push_back(node);
+        _predecessors.push_back(std::pair<NodePtr, Channel>(node, node->Channels(0)));
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
     _numChannels = 1;
     _channels.push_back(Channel(this, 0));
 }
 
-Node::Node(std::vector<ChannelPtr> inputs, bool isDifferentiable):
+Node::Node(std::vector<Channel> inputs, bool isDifferentiable):
         _arity(inputs.size()),
         _isDifferentiable(isDifferentiable),
         _hasDifferentiableTree(isDifferentiable) {
-    for (ChannelPtr channel : inputs) {
-        NodePtr node = std::shared_ptr<Node>(channel->ParentNode());
-        _predecessors.push_back(node);
+    for (Channel channel : inputs) {
+        NodePtr node = std::shared_ptr<Node>(channel.ParentNode());
+        _predecessors.push_back(std::pair<NodePtr, Channel>(node, channel)); 
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
     _numChannels = 1;
@@ -48,7 +48,7 @@ int Node::Arity(void) {
     return this->_arity;
 }
 
-std::vector<NodePtr> Node::Predecessors(void) {
+std::vector<std::pair<NodePtr, Channel>> Node::Predecessors(void) {
     return _predecessors;
 }
 

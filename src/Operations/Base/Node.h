@@ -42,13 +42,13 @@ class Node {
  public:
     Node() {}
     Node(std::initializer_list<NodePtr>, bool isDifferentiable);
-    Node(std::vector<ChannelPtr>, bool isDifferentiable);
+    Node(std::vector<Channel>, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
     ChannelDictionary Execute(const std::vector<DataObject>& inputs);
     int Arity(void);
     std::vector<Channel> Channels(void) const;
     Channel Channels(int index) const;
-    std::vector<NodePtr> Predecessors(void);
+    std::vector<std::pair<NodePtr, Channel>> Predecessors(void);
     bool IsDifferentiable(void) const;
     bool HasDifferentiableTree(void) const;
     int NumChannels(void);
@@ -60,7 +60,7 @@ class Node {
     int _numChannels;
     bool _isDifferentiable = true;
     bool _hasDifferentiableTree = false;
-    std::vector<NodePtr> _predecessors;
+    std::vector<std::pair<NodePtr, Channel>> _predecessors;
     std::vector<Channel> _channels;
     std::unordered_map<Channel, std::shared_ptr<IExecutor>, ChannelHash> _executors;
     std::unordered_map<Channel, std::shared_ptr<IDifferentiableExecutor>, ChannelHash> _differentiableExecutors;
