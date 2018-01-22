@@ -5,6 +5,7 @@
 #include "Operations/Base/IDifferentiableExecutor.h"
 #include "Operations/Base/Variable.h"
 #include "Evaluation/Evaluator.h"
+#include "Evaluation/LazyEvaluator.h"
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
 #include "Data/Initializers/Ones.h"
@@ -32,19 +33,21 @@ class TestNode: public Node {
 
 int main(int argc, char** argv) {
 
+    LazyEvaluator ev;
+
     std::shared_ptr<TestNode> node(new TestNode());
     std::cout << node->NumChannels() << std::endl;
     std::vector<DataObject> testInputs;
-    ChannelDictionary res = node->Execute(testInputs);
+    ChannelDictionary res = ev.EvaluateGraph(node);
     std::cout << res[node->Channels(1)] << std::endl;
     std::cout << res[node->Channels(2)] << std::endl;
 
-    auto x = std::shared_ptr<Variable>(new Variable(3.0));
+    /*auto x = std::shared_ptr<Variable>(new Variable(3.0));
     auto x_squared = x * x;
     Variables vars;
     Evaluator eval;
-    std::cout << eval.ForwardEvaluate(x_squared) << std::endl;
-    GradientDescentOptimizer optimizer(0.25);
+    std::cout << eval.ForwardEvaluate(x_squared) << std::endl;*/
+    /*GradientDescentOptimizer optimizer(0.25);
     int i;
     auto grads = eval.BackwardEvaluate(x_squared, vars);
     for (i = 0; i < 10; i++) {
@@ -73,7 +76,7 @@ int main(int argc, char** argv) {
     std::cout << ChannelHash()(y->Channels(0)) << std::endl;
     ChannelDictionary dict;
     dict[y->Channels(0)] = Scalar(1);
-    std::cout << dict[y->Channels(0)] << std::endl;
+    std::cout << dict[y->Channels(0)] << std::endl;*/
 
     return 0;
 }

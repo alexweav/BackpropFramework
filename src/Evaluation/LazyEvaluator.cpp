@@ -1,4 +1,5 @@
 #include "LazyEvaluator.h"
+#include <iostream>
 
 ChannelDictionary LazyEvaluator::EvaluateGraph(const NodePtr& node) {
     Variables vars;
@@ -26,28 +27,40 @@ ChannelDictionary LazyEvaluator::EvaluateGraph(std::vector<NodePtr> nodes, Chann
         if (!IsEvaluated(node, evaluated)) {
             ChannelDictionary predecessorResults = EvaluatePredecessors(node, evaluated);
             AddChannelDictionaries(evaluated, predecessorResults);
-            //TODO:get inputs and evaluate node
+            std::vector<DataObject> inputs = GetInputs(node, evaluated);
+            ChannelDictionary localResults = node->Execute(inputs);
+            AddChannelDictionaries(targetResults, localResults);
+            AddChannelDictionaries(evaluated, localResults);
         }
     }
     return targetResults;
 }
 
 ChannelDictionary LazyEvaluator::EvaluatePredecessors(const NodePtr& node, ChannelDictionary& evaluated) {
-    //return EvaluateGraph(node->Predecessors(), evaluated);
+    return EvaluateGraph(GetNodesFromPredecessors(node), evaluated);
 }
 
-std::vector<DataObject> LazyEvaluator::GetInputs(const NodePtr& node, const ChannelDictionary& evaluated) {
-    //TODO:convert evaluated predecessor dictionary to a list of operable inputs
+std::vector<DataObject> LazyEvaluator::GetInputs(const NodePtr& node, ChannelDictionary& evaluated) {
+    std::vector<DataObject> inputs;
     for (std::pair<NodePtr, Channel> predecessor : node->Predecessors()) {
-        
+        inputs.push_back(evaluated[predecessor.second]);
     }
+    return inputs;
 }
 
 bool LazyEvaluator::IsEvaluated(const NodePtr& node, const ChannelDictionary& evaluated) const {
     try {
-        return evaluated.find(node->Channels(0)) == evaluated.end();
+        return evaluated.count(node->Channels(0)) > 0; // TODO:inefficient, also empty zero-channels?
     } catch (const std::out_of_range& ex) {
-        return true;    //Node has no Channels, so it's evaluated vacuously
+        return true;    //node has no Channels, so it's evaluated vacuously
     }
+}
+
+std::vector<NodePtr> LazyEvaluator::GetNodesFromPredecessors(const NodePtr& node) const {
+    std::vector<NodePtr> nodes(node->Predecessors().size());
+    for (std::pair<NodePtr, Channel> predecessor : node->Predecessors()) {
+        nodes.push_back(predecessor.first);
+    }
+    return nodes;
 }
 
