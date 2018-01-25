@@ -3,12 +3,12 @@
 #include <iostream>
 #include <utility>
 
-DataObject Evaluator::ForwardEvaluate(const NodePtr& node) {
+ChannelDictionary Evaluator::EvaluateGraph(const NodePtr& node) {
     Variables vars;
-    return ForwardEvaluate(node, vars);
+    return EvaluateGraph(node, vars);
 }
 
-DataObject Evaluator::ForwardEvaluate(const NodePtr& node, const Variables& vars) {
+ChannelDictionary Evaluator::EvaluateGraph(const NodePtr& node, const Variables& vars) {
     ChannelDictionary evaluated;
     LoadVariableOverrides(vars, evaluated);
     std::vector<NodePtr>* order = new std::vector<NodePtr>();
@@ -17,25 +17,25 @@ DataObject Evaluator::ForwardEvaluate(const NodePtr& node, const Variables& vars
     ChannelDictionary results = LazyEvaluateNode(node, inputs, evaluated);
     order->push_back(node);
     free(order);
-    return results[node->Channels(0)];
+    return results;
 }
 
-ChannelDictionary Evaluator::MultipleEvaluate(std::initializer_list<NodePtr> nodes) {
+ChannelDictionary Evaluator::EvaluateGraph(std::initializer_list<NodePtr> nodes) {
     Variables vars;
-    return MultipleEvaluate(nodes, vars);
+    return EvaluateGraph(nodes, vars);
 }
 
-ChannelDictionary Evaluator::MultipleEvaluate(std::initializer_list<NodePtr> nodes, const Variables& vars) {
+ChannelDictionary Evaluator::EvaluateGraph(std::initializer_list<NodePtr> nodes, const Variables& vars) {
     std::vector<NodePtr> nodeVector(nodes);
-    return MultipleEvaluate(nodeVector, vars);
+    return EvaluateGraph(nodeVector, vars);
 }
 
-ChannelDictionary Evaluator::MultipleEvaluate(const std::vector<NodePtr>& nodes) {
+ChannelDictionary Evaluator::EvaluateGraph(const std::vector<NodePtr>& nodes) {
     Variables vars;
-    return MultipleEvaluate(nodes, vars);
+    return EvaluateGraph(nodes, vars);
 }
 
-ChannelDictionary Evaluator::MultipleEvaluate(const std::vector<NodePtr>& nodes, const Variables& vars) {
+ChannelDictionary Evaluator::EvaluateGraph(const std::vector<NodePtr>& nodes, const Variables& vars) {
     ChannelDictionary results;
     ChannelDictionary evaluated;
     LoadVariableOverrides(vars, evaluated);

@@ -8,16 +8,17 @@
 
 #include <vector>
 
+#include "IEvaluator.h"
 #include "Utils.h"
 
-class Evaluator {
+class Evaluator: public IEvaluator {
  public:
-    DataObject ForwardEvaluate(const NodePtr& node);
-    DataObject ForwardEvaluate(const NodePtr&, const Variables& vars);
-    ChannelDictionary MultipleEvaluate(std::initializer_list<NodePtr>);
-    ChannelDictionary MultipleEvaluate(std::initializer_list<NodePtr>, const Variables& vars);
-    ChannelDictionary MultipleEvaluate(const std::vector<NodePtr>& nodes);
-    ChannelDictionary MultipleEvaluate(const std::vector<NodePtr>& nodes, const Variables& vars);
+    ChannelDictionary EvaluateGraph(const NodePtr& node);
+    ChannelDictionary EvaluateGraph(const NodePtr&, const Variables& vars);
+    ChannelDictionary EvaluateGraph(std::initializer_list<NodePtr>);
+    ChannelDictionary EvaluateGraph(std::initializer_list<NodePtr>, const Variables& vars);
+    ChannelDictionary EvaluateGraph(const std::vector<NodePtr>& nodes);
+    ChannelDictionary EvaluateGraph(const std::vector<NodePtr>& nodes, const Variables& vars);
     ChannelDictionary BackwardEvaluate(const DifferentiablePtr&, const Variables&);
  protected:
     DataObject ForwardEvaluate(const NodePtr&, ChannelDictionary&, std::vector<NodePtr>*);

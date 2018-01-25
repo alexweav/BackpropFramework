@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
         grads = eval.BackwardEvaluate(x_squared, vars);
         std::cout << "grad: " << grads[x->Channels(0)] << std::endl;
         x->Update(optimizer, grads[x->Channels(0)]);
-        std::cout << eval.ForwardEvaluate(x_squared) << std::endl;
+        std::cout << eval.EvaluateGraph(x_squared)[x_squared->Channels(0)] << std::endl;
     }
     
     std::cout << std::endl;

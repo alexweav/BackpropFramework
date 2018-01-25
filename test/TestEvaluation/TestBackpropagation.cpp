@@ -28,7 +28,7 @@ TEST_F(BackpropagationTest, TestScalarArithmeticFunction) {
     auto fn_sqrt = Multiply(Add(x, cons4), Subtract(y, Divide(z, cons3)));
     auto f = Multiply(fn_sqrt, fn_sqrt);
     float f_actual = ((3.0+4.0)*(2.0-(1/3.0)))*((3.0+4.0)*(2.0-(1/3.0)));
-    EXPECT_FLOAT_EQ(eval.ForwardEvaluate(f, vars).ToScalar(), f_actual);
+    EXPECT_FLOAT_EQ(eval.EvaluateGraph(f, vars)[f->Channels(0)].ToScalar(), f_actual);
     auto grads = eval.BackwardEvaluate(f, vars);
     float dx_actual = 2.0*(3.0+4.0)*(2.0-(1/3.0))*(2.0-(1/3.0));
     EXPECT_FLOAT_EQ(grads[x->Channels(0)].ToScalar(), dx_actual);

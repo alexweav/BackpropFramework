@@ -21,6 +21,17 @@ ChannelDictionary LazyEvaluator::EvaluateGraph(std::initializer_list<NodePtr> no
     return EvaluateGraph(std::vector<NodePtr>(nodes), evaluated);
 }
 
+ChannelDictionary LazyEvaluator::EvaluateGraph(const std::vector<NodePtr>& nodes) {
+    Variables vars;
+    return EvaluateGraph(nodes, vars);
+}
+
+ChannelDictionary LazyEvaluator::EvaluateGraph(const std::vector<NodePtr>& nodes, const Variables& vars) {
+    ChannelDictionary evaluated;
+    LoadVariableOverrides(vars, evaluated);
+    return EvaluateGraph(nodes, evaluated);
+}
+
 ChannelDictionary LazyEvaluator::EvaluateGraph(std::vector<NodePtr> nodes, ChannelDictionary& evaluated) {
     ChannelDictionary targetResults;
     for (NodePtr node : nodes) {

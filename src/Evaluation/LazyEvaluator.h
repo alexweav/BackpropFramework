@@ -6,14 +6,17 @@
 
 #include <vector>
 
+#include "IEvaluator.h"
 #include "Utils.h"
 
-class LazyEvaluator {
+class LazyEvaluator: public IEvaluator {
  public:
     ChannelDictionary EvaluateGraph(const NodePtr& node);
     ChannelDictionary EvaluateGraph(const NodePtr& node, const Variables& vars);
     ChannelDictionary EvaluateGraph(std::initializer_list<NodePtr> nodes);
     ChannelDictionary EvaluateGraph(std::initializer_list<NodePtr> nodes, const Variables& vars);
+    ChannelDictionary EvaluateGraph(const std::vector<NodePtr>& nodes);
+    ChannelDictionary EvaluateGraph(const std::vector<NodePtr>& nodes, const Variables& vars);
 
  protected:
     ChannelDictionary EvaluateGraph(std::vector<NodePtr> nodes, ChannelDictionary& evaluated);
