@@ -33,20 +33,25 @@ class TestNode: public Node {
 
 int main(int argc, char** argv) {
 
-    /*LazyEvaluator ev;
 
-    std::shared_ptr<TestNode> node(new TestNode());
-    std::cout << node->NumChannels() << std::endl;
-    std::vector<DataObject> testInputs;
-    ChannelDictionary res = ev.EvaluateGraph(node);
-    std::cout << res[node->Channels(1)] << std::endl;
-    std::cout << res[node->Channels(2)] << std::endl;*/
+    LazyEvaluator ev;
 
     auto x = std::shared_ptr<Variable>(new Variable(3.0));
+    ChannelDictionary res = ev.EvaluateGraph(x);
+    std::cout << res[x->Channels(0)] << std::endl;
+    auto c3 = Value(3.0);
+    auto c4 = Value(4.0);
+    res = ev.EvaluateGraph({c3, c4});
+    std::cout << res[c3->Channels(0)] << std::endl;
+    std::cout << res[c4->Channels(0)] << std::endl;
+    auto seven = c3 + c4;
+    res = ev.EvaluateGraph(seven);
+    std::cout << res[seven->Channels(0)] << std::endl;
+
     auto x_squared = x * x;
     Variables vars;
     Evaluator eval;
-    std::cout << eval.ForwardEvaluate(x_squared) << std::endl;
+    std::cout << ev.EvaluateGraph(x_squared)[x_squared->Channels(0)] << std::endl;
     GradientDescentOptimizer optimizer(0.25);
     int i;
     auto grads = eval.BackwardEvaluate(x_squared, vars);
@@ -61,22 +66,14 @@ int main(int argc, char** argv) {
 
     auto y = Var();
     auto z = Var();
-    auto c3 = Value(3.0);
-    auto c4 = Value(4.0);
     auto inter1 = y * c3;
     auto out1 = inter1 + z;
     auto out2 = inter1 - z;
     vars[y] = Scalar(2.0);
     vars[z] = Scalar(1.0);
-    auto results = eval.MultipleEvaluate({out1, out2}, vars);
+    auto results = ev.EvaluateGraph({out1, out2}, vars);
     std::cout << "out1: " << results[out1->Channels(0)] << std::endl;
     std::cout << "out2: " << results[out2->Channels(0)] << std::endl;
-
-    std::cout << y->Channels().size() << std::endl;
-    std::cout << ChannelHash()(y->Channels(0)) << std::endl;
-    ChannelDictionary dict;
-    dict[y->Channels(0)] = Scalar(1);
-    std::cout << dict[y->Channels(0)] << std::endl;
 
     return 0;
 }

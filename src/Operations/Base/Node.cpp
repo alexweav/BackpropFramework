@@ -1,5 +1,6 @@
 #include "Node.h"
 #include "src/Operations/Arithmetic/Addition.h"
+#include <iostream>
 
 Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable): 
         _arity(inputs.size()),
@@ -37,7 +38,7 @@ ChannelDictionary Node::Execute(const std::vector<DataObject>& inputs) {
             results[channel] = (*executor)(inputs);
         }
         if (_differentiableExecutors.find(channel) != _differentiableExecutors.end()) {
-            auto executor = _executors[channel];
+            auto executor = _differentiableExecutors[channel];
             results[channel] = (*executor)(inputs);
         }
     }

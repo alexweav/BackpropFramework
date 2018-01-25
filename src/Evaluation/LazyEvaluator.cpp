@@ -50,14 +50,14 @@ std::vector<DataObject> LazyEvaluator::GetInputs(const NodePtr& node, ChannelDic
 
 bool LazyEvaluator::IsEvaluated(const NodePtr& node, const ChannelDictionary& evaluated) const {
     try {
-        return evaluated.count(node->Channels(0)) > 0; // TODO:inefficient, also empty zero-channels?
+        return evaluated.count(node->Channels(0)) > 0; // TODO:inefficient
     } catch (const std::out_of_range& ex) {
         return true;    //node has no Channels, so it's evaluated vacuously
     }
 }
 
 std::vector<NodePtr> LazyEvaluator::GetNodesFromPredecessors(const NodePtr& node) const {
-    std::vector<NodePtr> nodes(node->Predecessors().size());
+    std::vector<NodePtr> nodes;
     for (std::pair<NodePtr, Channel> predecessor : node->Predecessors()) {
         nodes.push_back(predecessor.first);
     }
