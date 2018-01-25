@@ -5,12 +5,12 @@
 #include "Operations/Base/Constant.h"
 #include "Operations/Arithmetic.h"
 #include "Evaluation/Evaluator.h"
+#include "Evaluation/LazyEvaluator.h"
 #include "FakeForwardEvaluationCounter.h"
 
 class ForwardPropagationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
-            eval = new Evaluator();
             cons2 = Value(2.0);
             cons7 = Value(7.0);
             add9 = Add(cons2, cons7);
@@ -21,7 +21,8 @@ class ForwardPropagationTest : public ::testing::Test {
             input = Var();
         }
         Variables vars;
-        Evaluator* eval;
+        Evaluator eval;
+        LazyEvaluator evaluator;
         NodePtr cons2;
         NodePtr cons3;
         NodePtr cons5;
@@ -48,6 +49,7 @@ class MultipleEvaluationTest : public ::testing::Test {
         minusFunctionPlusTwo = xTimesTwoMinusThree - yTimesZPlusFour + c2;
     }
     Evaluator eval;
+    LazyEvaluator evaluator;
     Variables vars;
     InputPtr x;
     InputPtr y;
@@ -65,7 +67,6 @@ class MultipleEvaluationTest : public ::testing::Test {
 class RepeatedEvaluationTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
-            eval = new Evaluator();
             std::shared_ptr<FakeForwardEvaluationCounter> ptr(new FakeForwardEvaluationCounter());
             counterConstant = ptr;
             zero = Value(0.0);
@@ -76,7 +77,8 @@ class RepeatedEvaluationTest : public ::testing::Test {
             counterPlusOne = counterConstant + one;
         }
         Variables vars;
-        Evaluator* eval;
+        Evaluator eval;
+        LazyEvaluator evaluator;
         std::shared_ptr<FakeForwardEvaluationCounter> counterConstant;
         NodePtr zero;
         NodePtr one;
@@ -94,7 +96,6 @@ class BackpropagationTest : public ::testing::Test {
             z = Var();
             vars[x] = Scalar(2.0);
             vars[y] = Scalar(3.0);
-            eval = new Evaluator();
             cons3 = Value(3.0);
             cons4 = Value(4.0);
             cons5 = Value(5.0);
@@ -103,7 +104,7 @@ class BackpropagationTest : public ::testing::Test {
             x2 = Multiply(x, x);
         }
         Variables vars;
-        Evaluator* eval;
+        Evaluator eval;
         InputPtr x;
         InputPtr y;
         InputPtr z;
