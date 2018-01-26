@@ -12,18 +12,18 @@ void FakeForwardEvaluationCounterExecutor::ResetCounter(void) {
     _numEvaluations = 0;
 }
 
-FakeForwardEvaluationCounter::FakeForwardEvaluationCounter() : Node({}, false) { 
-    RegisterExecutor(std::make_shared<FakeForwardEvaluationCounterExecutor>(_executor));
+FakeForwardEvaluationCounter::FakeForwardEvaluationCounter() : Node({}, false), _executor(new FakeForwardEvaluationCounterExecutor()){ 
+    RegisterExecutor(_executor);
 }
 
 DataObject FakeForwardEvaluationCounter::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor(inputs);
+    return _executor->operator()(inputs);
 }
 
 int FakeForwardEvaluationCounter::GetNumEvaluations(void) {
-    return _executor.GetNumEvaluations();
+    return _executor->GetNumEvaluations();
 }
 
 void FakeForwardEvaluationCounter::ResetCounter(void) {
-    _executor.ResetCounter();
+    _executor->ResetCounter();
 }

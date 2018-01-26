@@ -23,7 +23,7 @@ class FakeForwardEvaluationCounter: public Node {
         int GetNumEvaluations(void);
         void ResetCounter(void);
     protected:
-        FakeForwardEvaluationCounterExecutor _executor;
+        std::shared_ptr<FakeForwardEvaluationCounterExecutor> _executor;
 };
 
 #endif
