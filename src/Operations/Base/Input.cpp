@@ -25,24 +25,24 @@ DataObject InputExecutor::GetDefaultOutput(void) {
     return _defaultOutput;
 }
 
-Input::Input(void): Node({}, true), _executor() { 
-    RegisterDifferentiableExecutor(std::make_shared<InputExecutor>(_executor));
+Input::Input(void): Node({}, true), _executor(new InputExecutor()) { 
+    RegisterDifferentiableExecutor(_executor);
 }
 
-Input::Input(const DataObject& defaultOutput): Node({}, true), _executor(defaultOutput) { 
-    RegisterDifferentiableExecutor(std::make_shared<InputExecutor>(_executor));
+Input::Input(const DataObject& defaultOutput): Node({}, true), _executor(new InputExecutor(defaultOutput)) { 
+    RegisterDifferentiableExecutor(_executor);
 }
 
 DataObject Input::GetDefaultOutput(void) {
-    return _executor.GetDefaultOutput();
+    return _executor->GetDefaultOutput();
 }
 
 DataObject Input::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor(inputs);
+    return _executor->operator()(inputs);
 }
 
 std::vector<DataObject> Input::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor.Differentiate(prevInputs, dout);
+    return _executor->Differentiate(prevInputs, dout);
 }
 
 void Input::RegisterNewDefaultValue(float value) {
@@ -54,7 +54,7 @@ void Input::RegisterNewDefaultValue(const Eigen::MatrixXf& matrix) {
 }
 
 void Input::RegisterNewDefaultValue(const DataObject& newValue) {
-    return _executor.RegisterNewDefaultValue(newValue);
+    return _executor->RegisterNewDefaultValue(newValue);
 }
 
 std::shared_ptr<Input> Var(void) {

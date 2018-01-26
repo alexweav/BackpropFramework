@@ -36,6 +36,14 @@ int main(int argc, char** argv) {
 
     LazyEvaluator ev;
 
+    auto input = Var();
+    Variables vars;
+    std::cout << ev.EvaluateGraph(input, vars)[input->Channels(0)].ToScalar() << std::endl;
+    input->RegisterNewDefaultValue(Scalar(3.0));
+    vars[input] = Scalar(5.0);
+    std::cout << ev.EvaluateGraph(input, vars)[input->Channels(0)].ToScalar() << std::endl << std::endl;
+
+
     auto x = std::shared_ptr<Variable>(new Variable(3.0));
     ChannelDictionary res = ev.EvaluateGraph(x);
     std::cout << res[x->Channels(0)] << std::endl;
@@ -49,7 +57,6 @@ int main(int argc, char** argv) {
     std::cout << res[seven->Channels(0)] << std::endl;
 
     auto x_squared = x * x;
-    Variables vars;
     Evaluator eval;
     std::cout << ev.EvaluateGraph(x_squared)[x_squared->Channels(0)] << std::endl;
     GradientDescentOptimizer optimizer(0.25);

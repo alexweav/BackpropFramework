@@ -2,8 +2,7 @@
 #include <iostream>
 
 ChannelDictionary LazyEvaluator::EvaluateGraph(const NodePtr& node) {
-    Variables vars;
-    return EvaluateGraph(node, vars);
+    return EvaluateGraph({node});
 }
 
 ChannelDictionary LazyEvaluator::EvaluateGraph(const NodePtr& node, const Variables& vars) {
@@ -11,19 +10,16 @@ ChannelDictionary LazyEvaluator::EvaluateGraph(const NodePtr& node, const Variab
 }
 
 ChannelDictionary LazyEvaluator::EvaluateGraph(std::initializer_list<NodePtr> nodes) {
-    Variables vars;
-    return EvaluateGraph(nodes, vars);
+    return EvaluateGraph(std::vector<NodePtr>(nodes));
 }
 
 ChannelDictionary LazyEvaluator::EvaluateGraph(std::initializer_list<NodePtr> nodes, const Variables& vars) {
-    ChannelDictionary evaluated;
-    LoadVariableOverrides(vars, evaluated);
-    return EvaluateGraph(std::vector<NodePtr>(nodes), evaluated);
+    return EvaluateGraph(std::vector<NodePtr>(nodes), vars);
 }
 
 ChannelDictionary LazyEvaluator::EvaluateGraph(const std::vector<NodePtr>& nodes) {
-    Variables vars;
-    return EvaluateGraph(nodes, vars);
+    ChannelDictionary evaluated;
+    return EvaluateGraph(nodes, evaluated);
 }
 
 ChannelDictionary LazyEvaluator::EvaluateGraph(const std::vector<NodePtr>& nodes, const Variables& vars) {
@@ -42,6 +38,10 @@ ChannelDictionary LazyEvaluator::EvaluateGraph(std::vector<NodePtr> nodes, Chann
             ChannelDictionary localResults = node->Execute(inputs);
             AddChannelDictionaries(targetResults, localResults);
             AddChannelDictionaries(evaluated, localResults);
+        } else {
+            for (Channel channel : node->Channels()) {
+                targetResults[channel] = evaluated[channel];
+            }
         }
     }
     return targetResults;

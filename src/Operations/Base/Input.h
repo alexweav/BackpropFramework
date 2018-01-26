@@ -30,7 +30,7 @@ class Input: public Differentiable {
     void RegisterNewDefaultValue(const DataObject&);
     DataObject GetDefaultOutput(void);
  private:
-    InputExecutor _executor;
+    std::shared_ptr<InputExecutor> _executor;
 };
 
 typedef utils::Dictionary<Input, DataObject> Variables;
