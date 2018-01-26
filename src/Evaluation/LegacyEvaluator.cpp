@@ -1,14 +1,14 @@
-#include "src/Evaluation/Evaluator.h"
+#include "src/Evaluation/LegacyEvaluator.h"
 #include <algorithm>
 #include <iostream>
 #include <utility>
 
-ChannelDictionary Evaluator::EvaluateGraph(const NodePtr& node) {
+ChannelDictionary LegacyEvaluator::EvaluateGraph(const NodePtr& node) {
     Variables vars;
     return EvaluateGraph(node, vars);
 }
 
-ChannelDictionary Evaluator::EvaluateGraph(const NodePtr& node, const Variables& vars) {
+ChannelDictionary LegacyEvaluator::EvaluateGraph(const NodePtr& node, const Variables& vars) {
     ChannelDictionary evaluated;
     LoadVariableOverrides(vars, evaluated);
     std::vector<NodePtr>* order = new std::vector<NodePtr>();
@@ -20,22 +20,22 @@ ChannelDictionary Evaluator::EvaluateGraph(const NodePtr& node, const Variables&
     return results;
 }
 
-ChannelDictionary Evaluator::EvaluateGraph(std::initializer_list<NodePtr> nodes) {
+ChannelDictionary LegacyEvaluator::EvaluateGraph(std::initializer_list<NodePtr> nodes) {
     Variables vars;
     return EvaluateGraph(nodes, vars);
 }
 
-ChannelDictionary Evaluator::EvaluateGraph(std::initializer_list<NodePtr> nodes, const Variables& vars) {
+ChannelDictionary LegacyEvaluator::EvaluateGraph(std::initializer_list<NodePtr> nodes, const Variables& vars) {
     std::vector<NodePtr> nodeVector(nodes);
     return EvaluateGraph(nodeVector, vars);
 }
 
-ChannelDictionary Evaluator::EvaluateGraph(const std::vector<NodePtr>& nodes) {
+ChannelDictionary LegacyEvaluator::EvaluateGraph(const std::vector<NodePtr>& nodes) {
     Variables vars;
     return EvaluateGraph(nodes, vars);
 }
 
-ChannelDictionary Evaluator::EvaluateGraph(const std::vector<NodePtr>& nodes, const Variables& vars) {
+ChannelDictionary LegacyEvaluator::EvaluateGraph(const std::vector<NodePtr>& nodes, const Variables& vars) {
     ChannelDictionary results;
     ChannelDictionary evaluated;
     LoadVariableOverrides(vars, evaluated);
@@ -50,14 +50,14 @@ ChannelDictionary Evaluator::EvaluateGraph(const std::vector<NodePtr>& nodes, co
     return results;
 }
 
-DataObject Evaluator::ForwardEvaluate(const NodePtr& node, ChannelDictionary& evaluated, std::vector<NodePtr>* order) {
+DataObject LegacyEvaluator::ForwardEvaluate(const NodePtr& node, ChannelDictionary& evaluated, std::vector<NodePtr>* order) {
     std::vector<DataObject> inputs = EvaluatePredecessors(node, evaluated, order);
     DataObject result = node->Forward(inputs);
     order->push_back(node);
     return result;
 }
 
-std::vector<DataObject> Evaluator::EvaluatePredecessors(const NodePtr& node, ChannelDictionary& evaluated, std::vector<NodePtr>* order) {
+std::vector<DataObject> LegacyEvaluator::EvaluatePredecessors(const NodePtr& node, ChannelDictionary& evaluated, std::vector<NodePtr>* order) {
     std::vector<DataObject> inputs(node->Arity());
     for (int i = 0; i < node->Arity(); i++) {
         if (evaluated.find(node->Predecessors().at(i).second) == evaluated.end()) {
@@ -72,7 +72,7 @@ std::vector<DataObject> Evaluator::EvaluatePredecessors(const NodePtr& node, Cha
     return inputs;
 }
 
-ChannelDictionary Evaluator::BackwardEvaluate(const DifferentiablePtr& node, const Variables& vars) {
+ChannelDictionary LegacyEvaluator::BackwardEvaluate(const DifferentiablePtr& node, const Variables& vars) {
     ChannelDictionary forwardResults;
     LoadVariableOverrides(vars, forwardResults);
     std::vector<NodePtr>* order = new std::vector<NodePtr>();
@@ -97,7 +97,7 @@ ChannelDictionary Evaluator::BackwardEvaluate(const DifferentiablePtr& node, con
     return grads;
 }
 
-ChannelDictionary Evaluator::LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated) {
+ChannelDictionary LegacyEvaluator::LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated) {
     ChannelDictionary results;
     bool knownEvaluated = false;
     for (Channel channel : node->Channels()) {

@@ -1,5 +1,5 @@
-#ifndef SRC_EVALUATION_EVALUATOR_H_
-#define SRC_EVALUATION_EVALUATOR_H_
+#ifndef SRC_EVALUATION_LEGACY_EVALUATOR_H_
+#define SRC_EVALUATION_LEGACY_EVALUATOR_H_
 
 #include "Operations/Base/Differentiable.h"
 #include "Operations/Base/Input.h"
@@ -11,7 +11,7 @@
 #include "IEvaluator.h"
 #include "Utils.h"
 
-class Evaluator: public IEvaluator {
+class LegacyEvaluator: public IEvaluator {
  public:
     ChannelDictionary EvaluateGraph(const NodePtr& node);
     ChannelDictionary EvaluateGraph(const NodePtr&, const Variables& vars);
@@ -27,4 +27,4 @@ class Evaluator: public IEvaluator {
     ChannelDictionary LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated);
 };
 
-#endif  // SRC_EVALUATION_EVALUATOR_H_
+#endif  // SRC_EVALUATION_LEGACY_EVALUATOR_H_

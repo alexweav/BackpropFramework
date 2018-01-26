@@ -4,7 +4,7 @@
 #include "gtest/gtest.h"
 #include "Operations/Base/Constant.h"
 #include "Operations/Arithmetic.h"
-#include "Evaluation/Evaluator.h"
+#include "Evaluation/LegacyEvaluator.h"
 #include "Evaluation/LazyEvaluator.h"
 #include "FakeForwardEvaluationCounter.h"
 
@@ -21,7 +21,7 @@ class ForwardPropagationTest : public ::testing::Test {
             input = Var();
         }
         Variables vars;
-        Evaluator eval;
+        LegacyEvaluator eval;
         LazyEvaluator evaluator;
         NodePtr cons2;
         NodePtr cons3;
@@ -48,7 +48,7 @@ class MultipleEvaluationTest : public ::testing::Test {
         plusFunction = xTimesTwoMinusThree + yTimesZPlusFour;
         minusFunctionPlusTwo = xTimesTwoMinusThree - yTimesZPlusFour + c2;
     }
-    Evaluator eval;
+    LegacyEvaluator eval;
     LazyEvaluator evaluator;
     Variables vars;
     InputPtr x;
@@ -77,7 +77,7 @@ class RepeatedEvaluationTest : public ::testing::Test {
             counterPlusOne = counterConstant + one;
         }
         Variables vars;
-        Evaluator eval;
+        LegacyEvaluator eval;
         LazyEvaluator evaluator;
         std::shared_ptr<FakeForwardEvaluationCounter> counterConstant;
         NodePtr zero;
@@ -104,7 +104,7 @@ class BackpropagationTest : public ::testing::Test {
             x2 = Multiply(x, x);
         }
         Variables vars;
-        Evaluator eval;
+        LegacyEvaluator eval;
         InputPtr x;
         InputPtr y;
         InputPtr z;

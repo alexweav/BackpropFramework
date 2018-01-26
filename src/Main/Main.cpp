@@ -4,7 +4,7 @@
 #include "Operations/Base/Input.h"
 #include "Operations/Base/IDifferentiableExecutor.h"
 #include "Operations/Base/Variable.h"
-#include "Evaluation/Evaluator.h"
+#include "Evaluation/LegacyEvaluator.h"
 #include "Evaluation/LazyEvaluator.h"
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
     std::cout << res[seven->Channels(0)] << std::endl;
 
     auto x_squared = x * x;
-    Evaluator eval;
+    LegacyEvaluator eval;
     std::cout << ev.EvaluateGraph(x_squared)[x_squared->Channels(0)] << std::endl;
     GradientDescentOptimizer optimizer(0.25);
     int i;
