@@ -14,7 +14,6 @@ Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable):
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
     _numChannels = 0;
-    //_channels.push_back(Channel(this, 0));
 }
 
 Node::Node(std::vector<Channel> inputs, bool isDifferentiable):
@@ -27,7 +26,6 @@ Node::Node(std::vector<Channel> inputs, bool isDifferentiable):
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
     _numChannels = 0;
-    //_channels.push_back(Channel(this, 0));
 }
 
 ChannelDictionary Node::Execute(const std::vector<DataObject>& inputs) {

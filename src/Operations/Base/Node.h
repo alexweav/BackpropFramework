@@ -52,10 +52,11 @@ class Node {
     bool IsDifferentiable(void) const;
     bool HasDifferentiableTree(void) const;
     int NumChannels(void);
+
+ protected:
     void RegisterExecutor(const std::shared_ptr<IExecutor> executor);
     void RegisterDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor);
 
- protected:
     int _arity;
     int _numChannels;
     bool _isDifferentiable = true;
