@@ -92,18 +92,24 @@ class RepeatedEvaluationTest: public ::testing::Test {
 class MultichannelEvaluationTest: public ::testing::Test {
  protected:
     virtual void SetUp() {
+        c1 = Value(1.0);
         c2 = Value(2.0);
         c3 = Value(3.0);
         c4 = Value(4.0);
         addSubtract = NodePtr(new FakeMultichannelNode(c2, c3, c4));
-        //TODO: need better API for depending on multichannel nodes
-        //TODO: test that API here - have nodes depend on addSubtract and check value
+        addOne1 = Add(std::make_shared<Channel>(addSubtract->Channels(0)), c1);
+        addOne2 = Add(std::make_shared<Channel>(addSubtract->Channels(1)), c1);
+        addBoth = Add(std::make_shared<Channel>(addSubtract->Channels(0)), std::make_shared<Channel>(addSubtract->Channels(1)));
         //TODO: add mutable eval counter to addSubtract to test multi-evaluation
     }
+    NodePtr c1;
     NodePtr c2;
     NodePtr c3;
     NodePtr c4;
     NodePtr addSubtract;
+    NodePtr addOne1;
+    NodePtr addOne2;
+    NodePtr addBoth;
     LazyEvaluator evaluator;
 };
 
