@@ -20,7 +20,7 @@ class AdditionExecutor: public IDifferentiableExecutor {
 
 class Addition: public Operation, public Differentiable {
  public:
-    Addition(const NodePtr& input1, const NodePtr& input2);
+    Addition(const IChannelProviderPtr& input1, const IChannelProviderPtr& input2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
@@ -28,7 +28,7 @@ class Addition: public Operation, public Differentiable {
     AdditionExecutor _executor;
 };
 
-std::shared_ptr<Addition> Add(const NodePtr&, const NodePtr&);
-std::shared_ptr<Addition> operator+(const NodePtr& i1, const NodePtr& i2);
+std::shared_ptr<Addition> Add(const IChannelProviderPtr&, const IChannelProviderPtr&);
+std::shared_ptr<Addition> operator+(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_ADDITION_H_

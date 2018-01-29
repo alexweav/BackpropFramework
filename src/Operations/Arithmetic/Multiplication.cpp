@@ -50,7 +50,7 @@ std::vector<DataObject> MultiplicationExecutor::DifferentiateMatrixMultiplicatio
     return grads;
 }
 
-Multiplication::Multiplication(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { 
+Multiplication::Multiplication(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) { 
     RegisterDifferentiableExecutor(std::make_shared<MultiplicationExecutor>(_executor));
 }
 
@@ -62,10 +62,10 @@ std::vector<DataObject> Multiplication::Backward(const std::vector<DataObject>& 
     return _executor.Differentiate(prevInputs, dout);
 }
 
-std::shared_ptr<Multiplication> Multiply(const NodePtr& i1, const NodePtr& i2) {
+std::shared_ptr<Multiplication> Multiply(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     return std::shared_ptr<Multiplication>(new Multiplication(i1, i2));
 }
 
-std::shared_ptr<Multiplication> operator*(const NodePtr& i1, const NodePtr& i2) {
+std::shared_ptr<Multiplication> operator*(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     return Multiply(i1, i2);
 }

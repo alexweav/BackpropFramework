@@ -13,7 +13,7 @@ std::vector<DataObject> DivisionExecutor::Differentiate(const std::vector<DataOb
     return grads;
 }
 
-Division::Division(const NodePtr& i1, const NodePtr& i2) : Node({i1, i2}, true) { 
+Division::Division(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) : Node({i1, i2}, true) { 
     RegisterDifferentiableExecutor(std::make_shared<DivisionExecutor>(_executor));
 }
 
@@ -25,11 +25,11 @@ std::vector<DataObject> Division::Backward(const std::vector<DataObject>& prevIn
     return _executor.Differentiate(prevInputs, dout);
 }
 
-std::shared_ptr<Division> Divide(const NodePtr& i1, const NodePtr& i2) {
+std::shared_ptr<Division> Divide(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     std::shared_ptr<Division> ptr(new Division(i1, i2));
     return ptr;
 }
 
-std::shared_ptr<Division> operator/(const NodePtr& i1, const NodePtr& i2) {
+std::shared_ptr<Division> operator/(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     return Divide(i1, i2);
 }

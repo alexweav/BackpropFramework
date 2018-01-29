@@ -33,7 +33,7 @@ std::vector<DataObject> AdditionExecutor::DifferentiateMatrixAddition(const Data
     return grads;
 }
 
-Addition::Addition(const NodePtr& i1, const NodePtr& i2): Node({i1, i2}, true) { 
+Addition::Addition(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) { 
     RegisterDifferentiableExecutor(std::make_shared<AdditionExecutor>(_executor));
 }
 
@@ -45,11 +45,11 @@ std::vector<DataObject> Addition::Backward(const std::vector<DataObject>& prevIn
     return _executor.Differentiate(prevInputs, dout);
 }
 
-std::shared_ptr<Addition> Add(const NodePtr& i1, const NodePtr& i2) {
+std::shared_ptr<Addition> Add(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     std::shared_ptr<Addition> ptr(new Addition(i1, i2));
     return ptr;
 }
 
-std::shared_ptr<Addition> operator+(const NodePtr& i1, const NodePtr& i2) {
+std::shared_ptr<Addition> operator+(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     return Add(i1, i2);
 }

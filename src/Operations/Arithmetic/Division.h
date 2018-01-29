@@ -14,7 +14,7 @@ class DivisionExecutor: public IDifferentiableExecutor {
 
 class Division: public Operation, public Differentiable {
  public:
-    Division(const NodePtr& i1, const NodePtr& i2);
+    Division(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
@@ -22,7 +22,7 @@ class Division: public Operation, public Differentiable {
     DivisionExecutor _executor;
 };
 
-std::shared_ptr<Division> Divide(const NodePtr&, const NodePtr&);
-std::shared_ptr<Division> operator/(const NodePtr&, const NodePtr&);
+std::shared_ptr<Division> Divide(const IChannelProviderPtr&, const IChannelProviderPtr&);
+std::shared_ptr<Division> operator/(const IChannelProviderPtr&, const IChannelProviderPtr&);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_DIVISION_H_

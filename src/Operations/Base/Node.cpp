@@ -2,7 +2,7 @@
 #include "src/Operations/Arithmetic/Addition.h"
 #include <iostream>
 
-Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable): 
+/*Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable): 
         _arity(inputs.size()),
         _isDifferentiable(isDifferentiable),
         _hasDifferentiableTree(isDifferentiable) {
@@ -14,7 +14,7 @@ Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable):
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
     _numChannels = 0;
-}
+}*/
 
 Node::Node(std::vector<Channel> inputs, bool isDifferentiable):
         _arity(inputs.size()),
@@ -26,6 +26,26 @@ Node::Node(std::vector<Channel> inputs, bool isDifferentiable):
         _hasDifferentiableTree &= node->HasDifferentiableTree();
     }
     _numChannels = 0;
+}
+
+Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable): 
+    Node(std::vector<std::shared_ptr<IChannelProvider>>(inputs), isDifferentiable) { }
+
+Node::Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable):
+        _arity(inputs.size()),
+        _isDifferentiable(isDifferentiable),
+        _hasDifferentiableTree(isDifferentiable) {
+    for (std::shared_ptr<IChannelProvider> input : inputs) {
+        try {
+            Channel channel = input->GetChannel();
+            NodePtr node = channel.ParentNode()->GetPtr();
+            _predecessors.push_back(std::pair<NodePtr, Channel>(node, channel));
+            _hasDifferentiableTree &= node->HasDifferentiableTree();
+        } catch (const std::invalid_argument& e) {
+            throw std::invalid_argument("Predecessor node has multiple known channels.");
+        }
+    }
+
 }
 
 ChannelDictionary Node::Execute(const std::vector<DataObject>& inputs) {
@@ -86,6 +106,17 @@ void Node::RegisterDifferentiableExecutor(const std::shared_ptr<IDifferentiableE
     _numChannels++;
 }
 
+Channel Node::GetChannel(void) const {
+    if (_numChannels > 1) {
+        throw std::invalid_argument("Node has multiple known channels.");
+    }
+    return Channels(0);
+}
+
+std::shared_ptr<Node> Node::GetPtr(void) {
+    return shared_from_this();
+}
+
 Channel::Channel(Node* node, int index) {
     _node = node;
     _index = index;
@@ -101,4 +132,8 @@ Node* Channel::ParentNode(void) const {
 
 int Channel::Index(void) const {
     return _index;
+}
+
+Channel Channel::GetChannel(void) const {
+    return *this;
 }
