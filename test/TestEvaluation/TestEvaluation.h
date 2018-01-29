@@ -96,7 +96,7 @@ class MultichannelEvaluationTest: public ::testing::Test {
         c2 = Value(2.0);
         c3 = Value(3.0);
         c4 = Value(4.0);
-        addSubtract = NodePtr(new FakeMultichannelNode(c2, c3, c4));
+        addSubtract = std::shared_ptr<FakeMultichannelNode>(new FakeMultichannelNode(c2, c3, c4));
         addOne1 = Add(std::make_shared<Channel>(addSubtract->Channels(0)), c1);
         addOne2 = Add(std::make_shared<Channel>(addSubtract->Channels(1)), c1);
         addBoth = Add(std::make_shared<Channel>(addSubtract->Channels(0)), std::make_shared<Channel>(addSubtract->Channels(1)));
@@ -106,7 +106,7 @@ class MultichannelEvaluationTest: public ::testing::Test {
     NodePtr c2;
     NodePtr c3;
     NodePtr c4;
-    NodePtr addSubtract;
+    std::shared_ptr<FakeMultichannelNode> addSubtract;
     NodePtr addOne1;
     NodePtr addOne2;
     NodePtr addBoth;

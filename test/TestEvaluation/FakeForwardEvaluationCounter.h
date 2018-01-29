@@ -7,13 +7,12 @@
 
 class FakeForwardEvaluationCounterExecutor: public IExecutor {
  public:
-    DataObject operator() (const std::vector<DataObject>& inputs) const;
+    virtual DataObject operator() (const std::vector<DataObject>& inputs) const;
     int GetNumEvaluations(void);
     void ResetCounter(void);
 
  protected:
     mutable int _numEvaluations = 0;
-
 };
 
 class FakeForwardEvaluationCounter: public Node {
@@ -22,6 +21,7 @@ class FakeForwardEvaluationCounter: public Node {
     DataObject Forward(const std::vector<DataObject>&) const;
     int GetNumEvaluations(void);
     void ResetCounter(void);
+
  protected:
     std::shared_ptr<FakeForwardEvaluationCounterExecutor> _executor;
 };

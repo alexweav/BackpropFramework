@@ -35,3 +35,15 @@ TEST_F(MultichannelEvaluationTest, MultichannelNodeCanBeSharedResource) {
     auto results = evaluator.EvaluateGraph(addBoth);
     EXPECT_FLOAT_EQ(results[addBoth->Channels(0)].ToScalar(), 3.0);
 }
+
+TEST_F(MultichannelEvaluationTest, MultichannelNodeAsSharedNotRepeatedlyEvaluated) {
+    auto results = evaluator.EvaluateGraph({addOne1, addOne2});
+    EXPECT_EQ(addSubtract->GetNumAdds(), 1);
+    EXPECT_EQ(addSubtract->GetNumSubtracts(), 1);
+}
+
+TEST_F(MultichannelEvaluationTest, MultichannelNodeAsDualSharedNotRepeatedlyEvaluated) {
+    auto results = evaluator.EvaluateGraph(addBoth);
+    EXPECT_EQ(addSubtract->GetNumAdds(), 1);
+    EXPECT_EQ(addSubtract->GetNumSubtracts(), 1);
+}
