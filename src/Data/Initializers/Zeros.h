@@ -4,15 +4,16 @@
 #include "Data/IInitializer.h"
 
 namespace Initializers {
-    
-    class ZeroInitializer : public IInitializer {
-     public:
-        DataObject Initialize(std::initializer_list<int64_t> shape);
-    };
 
-    DataObject Zeros(void);
-    DataObject Zeros(int64_t, int64_t);
-    DataObject Zeros(std::initializer_list<int64_t> shape);
-}
+class ZeroInitializer : public IInitializer {
+ public:
+    DataObject Initialize(std::initializer_list<int64_t> shape);
+};
 
-#endif
+DataObject Zeros(void);
+DataObject Zeros(int64_t, int64_t);
+DataObject Zeros(std::initializer_list<int64_t> shape);
+
+}   // namespace Initializers
+
+#endif  // SRC_DATA_INITIALIZERS_ZEROS_H_

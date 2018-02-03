@@ -2,6 +2,7 @@
 #include "Data/Initializers/Ones.h"
 
 namespace Initializers {
+
     DataObject OnesInitializer::Initialize(std::initializer_list<int64_t> shape) {
         if (shape.size() == 0) {
             return Scalar(1.0);
@@ -22,4 +23,5 @@ namespace Initializers {
         OnesInitializer initializer;
         return initializer.Initialize(shape);
     }
-}
+
+}   // namespace Initializers

@@ -2,6 +2,7 @@
 #include "Data/Initializers/Zeros.h"
 
 namespace Initializers {
+
     DataObject ZeroInitializer::Initialize(std::initializer_list<int64_t> shape) {
         if (shape.size() == 0) {
             return Scalar(0.0);
@@ -22,4 +23,5 @@ namespace Initializers {
         ZeroInitializer initializer;
         return initializer.Initialize(shape);
     }
-}
+
+}   // namespace Initializers
