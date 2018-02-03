@@ -4,20 +4,31 @@
 #include <vector>
 #include "Operations/Base/Operation.h"
 #include "Operations/Base/Differentiable.h"
+#include "Operations/Base/IDifferentiableExecutor.h"
 
-class Addition: public Operation, public Differentiable {
+class AdditionExecutor: public IDifferentiableExecutor {
  public:
-    Addition(const NodePtr& input1, const NodePtr& input2);
-    DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
+    DataObject operator() (const std::vector<DataObject>& inputs) const;
+    std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
 
  private:
     std::vector<DataObject> HandleBackward(const DataObject&, const DataObject&, const DataObject&) const;
     std::vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&, const DataObject&) const;
     std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&, const DataObject&) const;
+
 };
 
-std::shared_ptr<Addition> Add(const NodePtr&, const NodePtr&);
-std::shared_ptr<Addition> operator+(const NodePtr& i1, const NodePtr& i2);
+class Addition: public Operation, public Differentiable {
+ public:
+    Addition(const IChannelProviderPtr& input1, const IChannelProviderPtr& input2);
+    DataObject Forward(const std::vector<DataObject>& inputs) const;
+    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
+
+ private:
+    AdditionExecutor _executor;
+};
+
+std::shared_ptr<Addition> Add(const IChannelProviderPtr&, const IChannelProviderPtr&);
+std::shared_ptr<Addition> operator+(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2);
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_ADDITION_H_

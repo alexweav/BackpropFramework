@@ -3,7 +3,19 @@
 
 #include "Node.h"
 #include "Differentiable.h"
+#include "IDifferentiableExecutor.h"
 #include <vector>
+
+class ConstantExecutor: public IDifferentiableExecutor {
+ public:
+    explicit ConstantExecutor(const DataObject& value);
+    DataObject operator() (const std::vector<DataObject>& inputs) const;
+    std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
+    DataObject GetValue(void) const;
+
+ private:
+    DataObject _value;
+};
 
 class Constant: public Differentiable {
  public:
@@ -12,10 +24,10 @@ class Constant: public Differentiable {
     explicit Constant(const DataObject&);
     DataObject Forward(const std::vector<DataObject>&) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
-    DataObject getValue();
+    DataObject GetValue(void) const;
 
  private:
-    DataObject _value;
+    ConstantExecutor _executor;
 };
 
 std::shared_ptr<Constant> Value(float);
