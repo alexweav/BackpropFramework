@@ -1,4 +1,3 @@
-#include <vector>
 #include "Data/Initializers/Constant.h"
 
 namespace Initializers {

@@ -15,7 +15,7 @@ struct GradientDescentFunctor {
 
 class GradientDescentOptimizer: public IOptimizer {
  public:
-    GradientDescentOptimizer(float learningRate);
+    explicit GradientDescentOptimizer(float learningRate);
     DataObject AdjustNode(const DataObject& parameter, const DataObject& grad) const;
 
  private:

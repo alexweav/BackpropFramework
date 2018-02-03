@@ -1,4 +1,4 @@
-#include "GradientDescentOptimizer.h"
+#include "Optimizers/GradientDescentOptimizer.h"
 
 GradientDescentOptimizer::GradientDescentOptimizer(float learningRate) {
     _learningRate = learningRate;

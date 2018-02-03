@@ -1,6 +1,8 @@
 #ifndef SRC_DATA_INITIALIZERS_CONSTANT_H_
 #define SRC_DATA_INITIALIZERS_CONSTANT_H_
 
+#include <vector>
+
 #include "Data/IInitializer.h"
 
 namespace Initializers {
