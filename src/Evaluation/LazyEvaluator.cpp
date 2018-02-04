@@ -1,5 +1,4 @@
-#include "LazyEvaluator.h"
-#include <iostream>
+#include "Evaluation/LazyEvaluator.h"
 
 ChannelDictionary LazyEvaluator::EvaluateGraph(const NodePtr& node) {
     return EvaluateGraph({node});
@@ -61,9 +60,9 @@ std::vector<DataObject> LazyEvaluator::GetInputs(const NodePtr& node, ChannelDic
 
 bool LazyEvaluator::IsEvaluated(const NodePtr& node, const ChannelDictionary& evaluated) const {
     try {
-        return evaluated.count(node->Channels(0)) > 0; // TODO:inefficient
+        return evaluated.count(node->Channels(0)) > 0;  // TODO: inefficient
     } catch (const std::out_of_range& ex) {
-        return true;    //node has no Channels, so it's evaluated vacuously
+        return true;    // node has no Channels, so it's evaluated vacuously
     }
 }
 

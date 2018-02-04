@@ -1,10 +1,11 @@
 #ifndef SRC_EVALUATION_LAZYEVALUATOR_H_
 #define SRC_EVALUATION_LAZYEVALUATOR_H_
 
+#include <vector>
+#include <utility>
+
 #include "Operations/Base/Input.h"
 #include "Operations/Base/Node.h"
-
-#include <vector>
 
 #include "IEvaluator.h"
 #include "Utils.h"

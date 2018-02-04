@@ -1,6 +1,8 @@
 #ifndef SRC_EVALUATION_IEVALUATOR_H_
 #define SRC_EVALUATION_IEVALUATOR_H_
 
+#include <vector>
+
 #include "Operations/Base/Input.h"
 #include "Operations/Base/Node.h"
 
