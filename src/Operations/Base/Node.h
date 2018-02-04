@@ -1,10 +1,11 @@
 #ifndef SRC_OPERATIONS_BASE_NODE_H_
 #define SRC_OPERATIONS_BASE_NODE_H_
 
-#include <vector>
 #include <initializer_list>
 #include <iostream>
 #include <memory>
+#include <vector>
+#include <utility>
 
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
@@ -43,7 +44,6 @@ using ChannelDictionary = std::unordered_map<Channel, DataObject, ChannelHash>;
 class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
  public:
     Node() {}
-    //Node(std::initializer_list<NodePtr>, bool isDifferentiable);
     Node(std::vector<Channel>, bool isDifferentiable);
     Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable);
     Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable);

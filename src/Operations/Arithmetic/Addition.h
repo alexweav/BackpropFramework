@@ -15,7 +15,6 @@ class AdditionExecutor: public IDifferentiableExecutor {
     std::vector<DataObject> HandleBackward(const DataObject&, const DataObject&, const DataObject&) const;
     std::vector<DataObject> DifferentiateScalarAddition(const DataObject&, const DataObject&, const DataObject&) const;
     std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&, const DataObject&) const;
-
 };
 
 class Addition: public Operation, public Differentiable {

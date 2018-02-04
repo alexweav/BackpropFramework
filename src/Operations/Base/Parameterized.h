@@ -9,4 +9,4 @@ class Parameterized: public virtual Node {
     virtual void Update(const IOptimizer& optimizer, const DataObject& gradOut) = 0;
 };
 
-#endif
+#endif  // SRC_OPERATIONS_BASE_PARAMETERIZED_H_

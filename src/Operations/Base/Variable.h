@@ -10,7 +10,7 @@
 class VariableExecutor: public IDifferentiableExecutor {
  public:
     VariableExecutor(void);
-    VariableExecutor(const DataObject& value);
+    explicit VariableExecutor(const DataObject& value);
     DataObject GetValue(void) const;
     DataObject operator() (const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
@@ -23,9 +23,9 @@ class VariableExecutor: public IDifferentiableExecutor {
 class Variable: public Differentiable, public Parameterized {
  public:
     Variable(void);
-    Variable(float);
-    Variable(const Eigen::MatrixXf&);
-    Variable(const DataObject&);
+    explicit Variable(float);
+    explicit Variable(const Eigen::MatrixXf&);
+    explicit Variable(const DataObject&);
     DataObject GetValue(void);
     DataObject Forward(const std::vector<DataObject>&) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;

@@ -1,6 +1,8 @@
 #ifndef SRC_OPERATIONS_BASE_IDIFFERENTIABLEEXECUTOR_H_
 #define SRC_OPERATIONS_BASE_IDIFFERENTIABLEEXECUTOR_H_
 
+#include <vector>
+
 #include "Operations/Base/IExecutor.h"
 
 class IDifferentiableExecutor: public IExecutor {

@@ -1,15 +1,16 @@
 #ifndef SRC_OPERATIONS_BASE_INPUT_H_
 #define SRC_OPERATIONS_BASE_INPUT_H_
 
+#include <memory>
+#include <vector>
+
 #include "Differentiable.h"
 #include "IDifferentiableExecutor.h"
-#include <vector>
-#include <memory>
 
 class InputExecutor: public IDifferentiableExecutor {
  public:
     InputExecutor(void);
-    InputExecutor(const DataObject& defaultOutput);
+    explicit InputExecutor(const DataObject& defaultOutput);
     DataObject operator() (const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
     void RegisterNewDefaultValue(const DataObject&);
@@ -22,7 +23,7 @@ class InputExecutor: public IDifferentiableExecutor {
 class Input: public Differentiable {
  public:
     Input(void);
-    Input(const DataObject& defaultOutput);
+    explicit Input(const DataObject& defaultOutput);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
     void RegisterNewDefaultValue(float);
