@@ -44,7 +44,6 @@ using ChannelDictionary = std::unordered_map<Channel, DataObject, ChannelHash>;
 class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
  public:
     Node() {}
-    Node(std::vector<Channel>, bool isDifferentiable);
     Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable);
     Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
