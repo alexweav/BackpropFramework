@@ -4,8 +4,8 @@
 #include <vector>
 #include <utility>
 
-#include "Operations/Base/Input.h"
 #include "Operations/Base/Node.h"
+#include "Operations/Value.h"
 
 #include "IEvaluator.h"
 #include "Utils.h"

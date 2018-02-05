@@ -1,6 +1,4 @@
-#include "src/Operations/Base/Constant.h"
-#include <vector>
-#include <memory>
+#include "Operations/Value/Constant.h"
 
 ConstantExecutor::ConstantExecutor(const DataObject& value) {
     _value = value;

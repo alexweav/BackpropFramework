@@ -1,11 +1,12 @@
-#ifndef SRC_OPERATIONS_BASE_VARIABLE_H_
-#define SRC_OPERATIONS_BASE_VARIABLE_H_
+#ifndef SRC_OPERATIONS_VALUE_VARIABLE_H_
+#define SRC_OPERATIONS_VALUE_VARIABLE_H_
 
-#include "Node.h"
-#include "Differentiable.h"
-#include "IDifferentiableExecutor.h"
-#include "Parameterized.h"
 #include <vector>
+
+#include "Operations/Base/Differentiable.h"
+#include "Operations/Base/IDifferentiableExecutor.h"
+#include "Operations/Base/Node.h"
+#include "Operations/Base/Parameterized.h"
 
 class VariableExecutor: public IDifferentiableExecutor {
  public:
@@ -35,4 +36,4 @@ class Variable: public Differentiable, public Parameterized {
     VariableExecutor _executor;
 };
 
-#endif  // SRC_OPERATIONS_BASE_VARIABLE_H_
+#endif  // SRC_OPERATIONS_VALUE_VARIABLE_H_

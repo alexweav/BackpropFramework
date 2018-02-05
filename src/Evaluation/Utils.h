@@ -3,8 +3,8 @@
 
 #include <utility>
 
-#include "Operations/Base/Input.h"
 #include "Operations/Base/Node.h"
+#include "Operations/Value.h"
 
 void AddChannelDictionaries(ChannelDictionary& target, const ChannelDictionary& source);
 void LoadVariableOverrides(const Variables& variables, ChannelDictionary& overrides);

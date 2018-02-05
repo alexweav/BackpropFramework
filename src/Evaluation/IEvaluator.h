@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "Operations/Base/Input.h"
 #include "Operations/Base/Node.h"
+#include "Operations/Value.h"
 
 #include "Utils.h"
 

@@ -1,11 +1,11 @@
-#ifndef SRC_OPERATIONS_BASE_INPUT_H_
-#define SRC_OPERATIONS_BASE_INPUT_H_
+#ifndef SRC_OPERATIONS_VALUE_INPUT_H_
+#define SRC_OPERATIONS_VALUE_INPUT_H_
 
 #include <memory>
 #include <vector>
 
-#include "Differentiable.h"
-#include "IDifferentiableExecutor.h"
+#include "Operations/Base/Differentiable.h"
+#include "Operations/Base/IDifferentiableExecutor.h"
 
 class InputExecutor: public IDifferentiableExecutor {
  public:
@@ -39,4 +39,4 @@ typedef std::shared_ptr<Input> InputPtr;
 
 std::shared_ptr<Input> Var(void);
 
-#endif  // SRC_OPERATIONS_BASE_INPUT_H_
+#endif  // SRC_OPERATIONS_VALUE_INPUT_H_

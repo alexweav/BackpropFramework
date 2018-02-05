@@ -1,9 +1,4 @@
 #include "TestOperations.h"
-#include <iostream>
-#include "Operations/Base/Constant.h"
-#include "Operations/Arithmetic.h"
-#include "Data/Initializers/Ones.h"
-#include "Data/Initializers/Zeros.h"
 
 using namespace std;
 

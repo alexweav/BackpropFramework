@@ -2,8 +2,8 @@
 #define TEST_EVALUATION_H
 
 #include "gtest/gtest.h"
-#include "Operations/Base/Constant.h"
 #include "Operations/Arithmetic.h"
+#include "Operations/Value.h"
 #include "Evaluation/LegacyEvaluator.h"
 #include "Evaluation/LazyEvaluator.h"
 

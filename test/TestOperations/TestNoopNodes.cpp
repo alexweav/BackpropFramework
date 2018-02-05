@@ -1,6 +1,4 @@
 #include "TestOperations.h"
-#include "Operations/Base/Constant.h"
-#include "Operations/Base/Input.h"
 
 using namespace std;
 

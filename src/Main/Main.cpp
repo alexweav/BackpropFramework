@@ -1,9 +1,7 @@
 #include <iostream>
 #include "Operations/Arithmetic.h"
-#include "Operations/Base/Constant.h"
-#include "Operations/Base/Input.h"
+#include "Operations/Value.h"
 #include "Operations/Base/IDifferentiableExecutor.h"
-#include "Operations/Base/Variable.h"
 #include "Evaluation/LegacyEvaluator.h"
 #include "Evaluation/LazyEvaluator.h"
 #include "Utils/Dictionary.h"

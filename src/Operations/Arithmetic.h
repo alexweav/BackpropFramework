@@ -7,4 +7,3 @@
 #include "Arithmetic/Division.h"
 
 #endif  // SRC_OPERATIONS_ARITHMETIC_H_
-

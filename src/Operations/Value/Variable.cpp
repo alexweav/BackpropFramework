@@ -1,4 +1,4 @@
-#include "Operations/Base/Variable.h"
+#include "Operations/Value/Variable.h"
 
 VariableExecutor::VariableExecutor(void): VariableExecutor(Scalar(0)) { }
 

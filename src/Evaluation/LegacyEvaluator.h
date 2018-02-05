@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Operations/Base/Differentiable.h"
-#include "Operations/Base/Input.h"
+#include "Operations/Value.h"
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
 
