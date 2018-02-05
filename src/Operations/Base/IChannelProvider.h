@@ -1,6 +1,8 @@
 #ifndef SRC_OPERATIONS_BASE_ICHANNELPROVIDER_H_
 #define SRC_OPERATIONS_BASE_ICHANNELPROVIDER_H_
 
+#include <memory>
+
 class Channel;
 
 class IChannelProvider {

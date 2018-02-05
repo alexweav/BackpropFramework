@@ -88,24 +88,3 @@ Channel Node::GetChannel(void) const {
 std::shared_ptr<Node> Node::GetPtr(void) {
     return shared_from_this();
 }
-
-Channel::Channel(Node* node, int index) {
-    _node = node;
-    _index = index;
-}
-
-bool Channel::operator==(const Channel& other) const {
-    return _node == other.ParentNode() && _index == other.Index();
-}
-
-Node* Channel::ParentNode(void) const {
-    return _node;
-}
-
-int Channel::Index(void) const {
-    return _index;
-}
-
-Channel Channel::GetChannel(void) const {
-    return *this;
-}
