@@ -3,7 +3,7 @@
 
 #include <utility>
 
-#include "Operations/Base/Node.h"
+#include "Core/Node.h"
 #include "Operations/Value.h"
 
 void AddChannelDictionaries(ChannelDictionary& target, const ChannelDictionary& source);

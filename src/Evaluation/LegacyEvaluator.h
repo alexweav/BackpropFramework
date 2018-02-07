@@ -1,9 +1,10 @@
 #ifndef SRC_EVALUATION_LEGACYEVALUATOR_H_
 #define SRC_EVALUATION_LEGACYEVALUATOR_H_
 
+#include <algorithm>
 #include <vector>
 
-#include "Operations/Base/Differentiable.h"
+#include "Core/Differentiable.h"
 #include "Operations/Value.h"
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"

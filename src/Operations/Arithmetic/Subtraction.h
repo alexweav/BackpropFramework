@@ -2,9 +2,10 @@
 #define SRC_OPERATIONS_ARITHMETIC_SUBTRACTION_H_
 
 #include <vector>
-#include "Operations/Base/Operation.h"
-#include "Operations/Base/Differentiable.h"
-#include "Operations/Base/IDifferentiableExecutor.h"
+
+#include "Core/Operation.h"
+#include "Core/Differentiable.h"
+#include "Core/IDifferentiableExecutor.h"
 
 class SubtractionExecutor: public IDifferentiableExecutor {
  public:

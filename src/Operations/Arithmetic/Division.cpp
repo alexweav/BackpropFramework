@@ -1,5 +1,4 @@
-#include "src/Operations/Arithmetic/Division.h"
-#include <vector>
+#include "Operations/Arithmetic/Division.h"
 
 DataObject DivisionExecutor::operator() (const std::vector<DataObject>& inputs) const {
     DataObject result(inputs.at(0).ToScalar() / inputs.at(1).ToScalar());

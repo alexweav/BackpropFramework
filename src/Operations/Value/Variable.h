@@ -3,10 +3,10 @@
 
 #include <vector>
 
-#include "Operations/Base/Differentiable.h"
-#include "Operations/Base/IDifferentiableExecutor.h"
-#include "Operations/Base/Node.h"
-#include "Operations/Base/Parameterized.h"
+#include "Core/Differentiable.h"
+#include "Core/IDifferentiableExecutor.h"
+#include "Core/Node.h"
+#include "Core/Parameterized.h"
 
 class VariableExecutor: public IDifferentiableExecutor {
  public:

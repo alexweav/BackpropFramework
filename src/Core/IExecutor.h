@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "Data/Datatypes.h"
+
 class IExecutor {
  public:
     virtual DataObject operator() (const std::vector<DataObject>& inputs) const = 0;

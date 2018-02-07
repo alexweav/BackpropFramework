@@ -1,4 +1,4 @@
-#include "Operations/Base/Channel.h"
+#include "Core/Channel.h"
 
 Channel::Channel(Node* node, int index) {
     _node = node;

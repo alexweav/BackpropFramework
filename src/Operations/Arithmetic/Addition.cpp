@@ -1,5 +1,4 @@
-#include "src/Operations/Arithmetic/Addition.h"
-#include <vector>
+#include "Operations/Arithmetic/Addition.h"
 
 DataObject AdditionExecutor::operator()(const std::vector<DataObject>& inputs) const {
     return inputs.at(0).Add(inputs.at(1));

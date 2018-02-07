@@ -4,9 +4,9 @@
 #include <memory>
 #include <vector>
 
-#include "Operations/Base/Differentiable.h"
-#include "Operations/Base/IDifferentiableExecutor.h"
-#include "Operations/Base/Node.h"
+#include "Core/Differentiable.h"
+#include "Core/IDifferentiableExecutor.h"
+#include "Core/Node.h"
 
 class ConstantExecutor: public IDifferentiableExecutor {
  public:

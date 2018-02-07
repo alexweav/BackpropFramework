@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Operations/Base/Node.h"
+#include "Core/Node.h"
 #include "Operations/Value.h"
 
 #include "Utils.h"

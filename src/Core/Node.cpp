@@ -1,5 +1,5 @@
-#include "Operations/Base/Node.h"
-#include "src/Operations/Arithmetic/Addition.h"
+#include "Core/Node.h"
+#include "Operations/Arithmetic/Addition.h"
 
 Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable):
     Node(std::vector<std::shared_ptr<IChannelProvider>>(inputs), isDifferentiable) { }

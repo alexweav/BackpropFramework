@@ -1,6 +1,4 @@
-#include "src/Operations/Arithmetic/Multiplication.h"
-#include <vector>
-#include <iostream>
+#include "Operations/Arithmetic/Multiplication.h"
 
 DataObject MultiplicationExecutor::operator()(const std::vector<DataObject>& inputs) const {
     return HandleMultiply(inputs.at(0), inputs.at(1));

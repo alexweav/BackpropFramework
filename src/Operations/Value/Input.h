@@ -4,8 +4,8 @@
 #include <memory>
 #include <vector>
 
-#include "Operations/Base/Differentiable.h"
-#include "Operations/Base/IDifferentiableExecutor.h"
+#include "Core/Differentiable.h"
+#include "Core/IDifferentiableExecutor.h"
 
 class InputExecutor: public IDifferentiableExecutor {
  public:

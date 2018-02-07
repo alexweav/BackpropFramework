@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Operations/Base/IExecutor.h"
+#include "Core/IExecutor.h"
 
 class IDifferentiableExecutor: public IExecutor {
  public:

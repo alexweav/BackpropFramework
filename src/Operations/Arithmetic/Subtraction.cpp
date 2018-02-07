@@ -1,5 +1,4 @@
-#include "src/Operations/Arithmetic/Subtraction.h"
-#include <vector>
+#include "Operations/Arithmetic/Subtraction.h"
 
 DataObject SubtractionExecutor::operator() (const std::vector<DataObject>& inputs) const {
     DataObject result(inputs.at(0).ToScalar() - inputs.at(1).ToScalar());
