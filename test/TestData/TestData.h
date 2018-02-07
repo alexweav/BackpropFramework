@@ -1,5 +1,7 @@
-#ifndef TEST_DATA_H_
-#define TEST_DATA_H_
+#ifndef TEST_TESTDATA_TESTDATA_H_
+#define TEST_TESTDATA_TESTDATA_H_
+
+#include <vector>
 
 #include "gtest/gtest.h"
 #include "Data/Datatypes.h"
@@ -9,9 +11,7 @@
 
 class DataPropertyTest : public ::testing::Test {
  protected:
-    virtual void SetUp() {
-
-    }
+    virtual void SetUp() { }
 };
 
-#endif  // TEST_DATA_H_
+#endif  // TEST_TESTDATA_TESTDATA_H_

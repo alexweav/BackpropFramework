@@ -1,5 +1,7 @@
-#ifndef TEST_EVALUATION_FAKE_MULTICHANNEL_NODE_H_
-#define TEST_EVALUATION_FAKE_MULTICHANNEL_NODE_H_
+#ifndef TEST_TESTEVALUATION_FAKEMULTICHANNELNODE_H_
+#define TEST_TESTEVALUATION_FAKEMULTICHANNELNODE_H_
+
+#include <vector>
 
 #include "Core/IExecutor.h"
 #include "Core/Node.h"
@@ -30,4 +32,4 @@ class FakeMultichannelNode: public Node {
     std::shared_ptr<FakeSubtractExecutor> _subtractExecutor;
 };
 
-#endif  // TEST_EVALUATION_FAKE_MULTICHANNEL_NODE_H_
+#endif  // TEST_TESTEVALUATION_FAKEMULTICHANNELNODE_H_

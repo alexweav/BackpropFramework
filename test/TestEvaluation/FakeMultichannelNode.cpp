@@ -10,7 +10,7 @@ DataObject FakeSubtractExecutor::operator() (const std::vector<DataObject>& inpu
     return DataObject(inputs.at(0).ToScalar() - inputs.at(2).ToScalar());
 }
 
-FakeMultichannelNode::FakeMultichannelNode(const NodePtr& base, const NodePtr& add, const NodePtr& subtract): 
+FakeMultichannelNode::FakeMultichannelNode(const NodePtr& base, const NodePtr& add, const NodePtr& subtract):
         Node({base, add, subtract}, false),
         _addExecutor(new FakeAddExecutor()),
         _subtractExecutor(new FakeSubtractExecutor()) {

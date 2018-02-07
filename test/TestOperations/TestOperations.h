@@ -1,5 +1,5 @@
-#ifndef TEST_OPERATIONS_H
-#define TEST_OPERATIONS_H
+#ifndef TEST_TESTOPERATIONS_TESTOPERATIONS_H_
+#define TEST_TESTOPERATIONS_TESTOPERATIONS_H_
 
 #include "gtest/gtest.h"
 
@@ -8,4 +8,4 @@
 #include "Operations/Arithmetic.h"
 #include "Operations/Value.h"
 
-#endif
+#endif  // TEST_TESTOPERATIONS_TESTOPERATIONS_H_

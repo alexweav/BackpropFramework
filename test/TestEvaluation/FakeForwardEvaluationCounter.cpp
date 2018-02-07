@@ -12,7 +12,7 @@ void FakeForwardEvaluationCounterExecutor::ResetCounter(void) {
     _numEvaluations = 0;
 }
 
-FakeForwardEvaluationCounter::FakeForwardEvaluationCounter() : Node({}, false), _executor(new FakeForwardEvaluationCounterExecutor()){ 
+FakeForwardEvaluationCounter::FakeForwardEvaluationCounter() : Node({}, false), _executor(new FakeForwardEvaluationCounterExecutor()) {
     RegisterExecutor(_executor);
 }
 

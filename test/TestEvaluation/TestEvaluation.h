@@ -1,5 +1,5 @@
-#ifndef TEST_EVALUATION_H
-#define TEST_EVALUATION_H
+#ifndef TEST_TESTEVALUATION_TESTEVALUATION_H_
+#define TEST_TESTEVALUATION_TESTEVALUATION_H_
 
 #include "gtest/gtest.h"
 #include "Operations/Arithmetic.h"
@@ -8,7 +8,7 @@
 #include "Evaluation/LazyEvaluator.h"
 
 #include "FakeForwardEvaluationCounter.h"
-#include "FakeMultichannelNode.h" 
+#include "FakeMultichannelNode.h"
 
 class ForwardPropagationTest: public ::testing::Test {
  protected:
@@ -100,7 +100,6 @@ class MultichannelEvaluationTest: public ::testing::Test {
         addOne1 = Add(std::make_shared<Channel>(addSubtract->Channels(0)), c1);
         addOne2 = Add(std::make_shared<Channel>(addSubtract->Channels(1)), c1);
         addBoth = Add(std::make_shared<Channel>(addSubtract->Channels(0)), std::make_shared<Channel>(addSubtract->Channels(1)));
-        //TODO: add mutable eval counter to addSubtract to test multi-evaluation
     }
     NodePtr c1;
     NodePtr c2;
@@ -141,4 +140,4 @@ class BackpropagationTest: public ::testing::Test {
     DifferentiablePtr x2;
 };
 
-#endif
+#endif  // TEST_TESTEVALUATION_TESTEVALUATION_H_
