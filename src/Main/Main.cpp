@@ -1,9 +1,8 @@
 #include <iostream>
+
+#include "Core/IDifferentiableExecutor.h"
 #include "Operations/Arithmetic.h"
-#include "Operations/Base/Constant.h"
-#include "Operations/Base/Input.h"
-#include "Operations/Base/IDifferentiableExecutor.h"
-#include "Operations/Base/Variable.h"
+#include "Operations/Value.h"
 #include "Evaluation/LegacyEvaluator.h"
 #include "Evaluation/LazyEvaluator.h"
 #include "Utils/Dictionary.h"
@@ -32,8 +31,6 @@ class TestNode: public Node {
 };
 
 int main(int argc, char** argv) {
-
-
     LazyEvaluator ev;
 
     auto input = Var();
@@ -68,7 +65,7 @@ int main(int argc, char** argv) {
         x->Update(optimizer, grads[x->Channels(0)]);
         std::cout << eval.EvaluateGraph(x_squared)[x_squared->Channels(0)] << std::endl;
     }
-    
+
     std::cout << std::endl;
 
     auto y = Var();

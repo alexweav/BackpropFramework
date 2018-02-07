@@ -1,7 +1,9 @@
-#ifndef SRC_OPERATIONS_BASE_IDIFFERENTIABLEEXECUTOR_H_
-#define SRC_OPERATIONS_BASE_IDIFFERENTIABLEEXECUTOR_H_
+#ifndef SRC_CORE_IDIFFERENTIABLEEXECUTOR_H_
+#define SRC_CORE_IDIFFERENTIABLEEXECUTOR_H_
 
-#include "Operations/Base/IExecutor.h"
+#include <vector>
+
+#include "Core/IExecutor.h"
 
 class IDifferentiableExecutor: public IExecutor {
  public:
@@ -9,4 +11,4 @@ class IDifferentiableExecutor: public IExecutor {
     virtual std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const = 0;
 };
 
-#endif  // SRC_OPERATIONS_BASE_IDIFFERENTIABLEEXECUTOR_H_
+#endif  // SRC_CORE_IDIFFERENTIABLEEXECUTOR_H_

@@ -1,16 +1,17 @@
-#ifndef SRC_OPERATIONS_BASE_VARIABLE_H_
-#define SRC_OPERATIONS_BASE_VARIABLE_H_
+#ifndef SRC_OPERATIONS_VALUE_VARIABLE_H_
+#define SRC_OPERATIONS_VALUE_VARIABLE_H_
 
-#include "Node.h"
-#include "Differentiable.h"
-#include "IDifferentiableExecutor.h"
-#include "Parameterized.h"
 #include <vector>
+
+#include "Core/Differentiable.h"
+#include "Core/IDifferentiableExecutor.h"
+#include "Core/Node.h"
+#include "Core/Parameterized.h"
 
 class VariableExecutor: public IDifferentiableExecutor {
  public:
     VariableExecutor(void);
-    VariableExecutor(const DataObject& value);
+    explicit VariableExecutor(const DataObject& value);
     DataObject GetValue(void) const;
     DataObject operator() (const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
@@ -23,9 +24,9 @@ class VariableExecutor: public IDifferentiableExecutor {
 class Variable: public Differentiable, public Parameterized {
  public:
     Variable(void);
-    Variable(float);
-    Variable(const Eigen::MatrixXf&);
-    Variable(const DataObject&);
+    explicit Variable(float);
+    explicit Variable(const Eigen::MatrixXf&);
+    explicit Variable(const DataObject&);
     DataObject GetValue(void);
     DataObject Forward(const std::vector<DataObject>&) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
@@ -35,4 +36,4 @@ class Variable: public Differentiable, public Parameterized {
     VariableExecutor _executor;
 };
 
-#endif  // SRC_OPERATIONS_BASE_VARIABLE_H_
+#endif  // SRC_OPERATIONS_VALUE_VARIABLE_H_

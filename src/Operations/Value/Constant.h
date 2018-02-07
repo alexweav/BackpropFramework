@@ -1,10 +1,12 @@
-#ifndef SRC_OPERATIONS_BASE_CONSTANT_H_
-#define SRC_OPERATIONS_BASE_CONSTANT_H_
+#ifndef SRC_OPERATIONS_VALUE_CONSTANT_H_
+#define SRC_OPERATIONS_VALUE_CONSTANT_H_
 
-#include "Node.h"
-#include "Differentiable.h"
-#include "IDifferentiableExecutor.h"
+#include <memory>
 #include <vector>
+
+#include "Core/Differentiable.h"
+#include "Core/IDifferentiableExecutor.h"
+#include "Core/Node.h"
 
 class ConstantExecutor: public IDifferentiableExecutor {
  public:
@@ -34,4 +36,4 @@ std::shared_ptr<Constant> Value(float);
 std::shared_ptr<Constant> Value(const Eigen::MatrixXf&);
 std::shared_ptr<Constant> Value(const DataObject&);
 
-#endif  // SRC_OPERATIONS_BASE_CONSTANT_H_
+#endif  // SRC_OPERATIONS_VALUE_CONSTANT_H_

@@ -1,5 +1,4 @@
-#include "src/Operations/Arithmetic/Addition.h"
-#include <vector>
+#include "Operations/Arithmetic/Addition.h"
 
 DataObject AdditionExecutor::operator()(const std::vector<DataObject>& inputs) const {
     return inputs.at(0).Add(inputs.at(1));
@@ -33,7 +32,7 @@ std::vector<DataObject> AdditionExecutor::DifferentiateMatrixAddition(const Data
     return grads;
 }
 
-Addition::Addition(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) { 
+Addition::Addition(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) {
     RegisterDifferentiableExecutor(std::make_shared<AdditionExecutor>(_executor));
 }
 

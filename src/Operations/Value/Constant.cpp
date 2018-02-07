@@ -1,6 +1,4 @@
-#include "src/Operations/Base/Constant.h"
-#include <vector>
-#include <memory>
+#include "Operations/Value/Constant.h"
 
 ConstantExecutor::ConstantExecutor(const DataObject& value) {
     _value = value;
@@ -23,7 +21,7 @@ Constant::Constant(const float value): Constant(Scalar(value)) { }
 
 Constant::Constant(const Eigen::MatrixXf& value): Constant(Mat(value)) { }
 
-Constant::Constant(const DataObject& value): Node({}, true), _executor(value) { 
+Constant::Constant(const DataObject& value): Node({}, true), _executor(value) {
     RegisterDifferentiableExecutor(std::make_shared<ConstantExecutor>(_executor));
 }
 
@@ -32,7 +30,7 @@ DataObject Constant::Forward(const std::vector<DataObject>& inputs) const {
 }
 
 std::vector<DataObject> Constant::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor.Differentiate(prevInputs, dout); 
+    return _executor.Differentiate(prevInputs, dout);
 }
 
 DataObject Constant::GetValue(void) const {

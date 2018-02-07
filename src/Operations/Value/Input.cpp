@@ -1,6 +1,4 @@
-#include "src/Operations/Base/Input.h"
-#include <vector>
-#include <memory>
+#include "Operations/Value/Input.h"
 
 InputExecutor::InputExecutor(void) { }
 
@@ -25,11 +23,11 @@ DataObject InputExecutor::GetDefaultOutput(void) {
     return _defaultOutput;
 }
 
-Input::Input(void): Node({}, true), _executor(new InputExecutor()) { 
+Input::Input(void): Node({}, true), _executor(new InputExecutor()) {
     RegisterDifferentiableExecutor(_executor);
 }
 
-Input::Input(const DataObject& defaultOutput): Node({}, true), _executor(new InputExecutor(defaultOutput)) { 
+Input::Input(const DataObject& defaultOutput): Node({}, true), _executor(new InputExecutor(defaultOutput)) {
     RegisterDifferentiableExecutor(_executor);
 }
 

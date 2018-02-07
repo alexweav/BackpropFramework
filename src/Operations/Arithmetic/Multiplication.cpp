@@ -1,6 +1,4 @@
-#include "src/Operations/Arithmetic/Multiplication.h"
-#include <vector>
-#include <iostream>
+#include "Operations/Arithmetic/Multiplication.h"
 
 DataObject MultiplicationExecutor::operator()(const std::vector<DataObject>& inputs) const {
     return HandleMultiply(inputs.at(0), inputs.at(1));
@@ -50,7 +48,7 @@ std::vector<DataObject> MultiplicationExecutor::DifferentiateMatrixMultiplicatio
     return grads;
 }
 
-Multiplication::Multiplication(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) { 
+Multiplication::Multiplication(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) {
     RegisterDifferentiableExecutor(std::make_shared<MultiplicationExecutor>(_executor));
 }
 

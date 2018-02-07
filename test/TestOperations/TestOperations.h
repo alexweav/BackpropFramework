@@ -1,6 +1,11 @@
-#ifndef TEST_OPERATIONS_H
-#define TEST_OPERATIONS_H
+#ifndef TEST_TESTOPERATIONS_TESTOPERATIONS_H_
+#define TEST_TESTOPERATIONS_TESTOPERATIONS_H_
 
 #include "gtest/gtest.h"
 
-#endif
+#include "Data/Initializers/Ones.h"
+#include "Data/Initializers/Zeros.h"
+#include "Operations/Arithmetic.h"
+#include "Operations/Value.h"
+
+#endif  // TEST_TESTOPERATIONS_TESTOPERATIONS_H_

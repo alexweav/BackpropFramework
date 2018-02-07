@@ -1,12 +1,14 @@
-#ifndef SRC_EVALUATION_LEGACY_EVALUATOR_H_
-#define SRC_EVALUATION_LEGACY_EVALUATOR_H_
+#ifndef SRC_EVALUATION_LEGACYEVALUATOR_H_
+#define SRC_EVALUATION_LEGACYEVALUATOR_H_
 
-#include "Operations/Base/Differentiable.h"
-#include "Operations/Base/Input.h"
+#include <algorithm>
+#include <vector>
+#include <utility>
+
+#include "Core/Differentiable.h"
+#include "Operations/Value.h"
 #include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
-
-#include <vector>
 
 #include "IEvaluator.h"
 #include "Utils.h"
@@ -27,4 +29,4 @@ class LegacyEvaluator: public IEvaluator {
     ChannelDictionary LazyEvaluateNode(const NodePtr& node, const std::vector<DataObject>& inputs, ChannelDictionary& evaluated);
 };
 
-#endif  // SRC_EVALUATION_LEGACY_EVALUATOR_H_
+#endif  // SRC_EVALUATION_LEGACYEVALUATOR_H_

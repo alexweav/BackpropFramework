@@ -5,14 +5,15 @@
 
 namespace Initializers {
 
-    class OnesInitializer : public IInitializer {
-     public:
-        DataObject Initialize(std::initializer_list<int64_t> shape);
-    };
+class OnesInitializer : public IInitializer {
+ public:
+    DataObject Initialize(std::initializer_list<int64_t> shape);
+};
 
-    DataObject Ones(void);
-    DataObject Ones(int64_t, int64_t);
-    DataObject Ones(std::initializer_list<int64_t>);
-}
+DataObject Ones(void);
+DataObject Ones(int64_t, int64_t);
+DataObject Ones(std::initializer_list<int64_t>);
+
+}   // namespace Initializers
 
 #endif  // SRC_DATA_INITIALIZERS_ONES_H_

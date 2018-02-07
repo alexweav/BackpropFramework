@@ -1,5 +1,4 @@
-#include "src/Operations/Arithmetic/Division.h"
-#include <vector>
+#include "Operations/Arithmetic/Division.h"
 
 DataObject DivisionExecutor::operator() (const std::vector<DataObject>& inputs) const {
     DataObject result(inputs.at(0).ToScalar() / inputs.at(1).ToScalar());
@@ -13,7 +12,7 @@ std::vector<DataObject> DivisionExecutor::Differentiate(const std::vector<DataOb
     return grads;
 }
 
-Division::Division(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) : Node({i1, i2}, true) { 
+Division::Division(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) : Node({i1, i2}, true) {
     RegisterDifferentiableExecutor(std::make_shared<DivisionExecutor>(_executor));
 }
 

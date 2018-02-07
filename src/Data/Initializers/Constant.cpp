@@ -1,8 +1,7 @@
-#include <vector>
 #include "Data/Initializers/Constant.h"
 
 namespace Initializers {
-    
+
     ConstantInitializer::ConstantInitializer(float value):
         _value(value) { }
 
@@ -30,4 +29,5 @@ namespace Initializers {
         ConstantInitializer initializer(value);
         return initializer.Initialize(shape);
     }
-}
+
+}   // namespace Initializers

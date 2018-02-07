@@ -1,34 +1,7 @@
-#include "Node.h"
-#include "src/Operations/Arithmetic/Addition.h"
-#include <iostream>
+#include "Core/Node.h"
+#include "Operations/Arithmetic/Addition.h"
 
-/*Node::Node(std::initializer_list<NodePtr> inputs, bool isDifferentiable): 
-        _arity(inputs.size()),
-        _isDifferentiable(isDifferentiable),
-        _hasDifferentiableTree(isDifferentiable) {
-    for (NodePtr node : inputs) {
-        if (node->NumChannels() > 1) {
-            throw std::invalid_argument("Predecessor node has multiple known channels.");
-        }
-        _predecessors.push_back(std::pair<NodePtr, Channel>(node, node->Channels(0)));
-        _hasDifferentiableTree &= node->HasDifferentiableTree();
-    }
-    _numChannels = 0;
-}*/
-
-Node::Node(std::vector<Channel> inputs, bool isDifferentiable):
-        _arity(inputs.size()),
-        _isDifferentiable(isDifferentiable),
-        _hasDifferentiableTree(isDifferentiable) {
-    for (Channel channel : inputs) {
-        NodePtr node = std::shared_ptr<Node>(channel.ParentNode());
-        _predecessors.push_back(std::pair<NodePtr, Channel>(node, channel)); 
-        _hasDifferentiableTree &= node->HasDifferentiableTree();
-    }
-    _numChannels = 0;
-}
-
-Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable): 
+Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable):
     Node(std::vector<std::shared_ptr<IChannelProvider>>(inputs), isDifferentiable) { }
 
 Node::Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable):
@@ -45,7 +18,6 @@ Node::Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDiffere
             throw std::invalid_argument("Predecessor node has multiple known channels.");
         }
     }
-
 }
 
 ChannelDictionary Node::Execute(const std::vector<DataObject>& inputs) {
@@ -115,25 +87,4 @@ Channel Node::GetChannel(void) const {
 
 std::shared_ptr<Node> Node::GetPtr(void) {
     return shared_from_this();
-}
-
-Channel::Channel(Node* node, int index) {
-    _node = node;
-    _index = index;
-}
-
-bool Channel::operator==(const Channel& other) const {
-    return _node == other.ParentNode() && _index == other.Index();
-}
-
-Node* Channel::ParentNode(void) const {
-    return _node;
-}
-
-int Channel::Index(void) const {
-    return _index;
-}
-
-Channel Channel::GetChannel(void) const {
-    return *this;
 }

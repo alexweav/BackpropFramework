@@ -1,5 +1,4 @@
-#include "src/Operations/Arithmetic/Subtraction.h"
-#include <vector>
+#include "Operations/Arithmetic/Subtraction.h"
 
 DataObject SubtractionExecutor::operator() (const std::vector<DataObject>& inputs) const {
     DataObject result(inputs.at(0).ToScalar() - inputs.at(1).ToScalar());
@@ -13,7 +12,7 @@ std::vector<DataObject> SubtractionExecutor::Differentiate(const std::vector<Dat
     return grads;
 }
 
-Subtraction::Subtraction(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) { 
+Subtraction::Subtraction(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) {
     RegisterDifferentiableExecutor(std::make_shared<SubtractionExecutor>(_executor));
 }
 

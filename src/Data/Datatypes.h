@@ -1,5 +1,5 @@
-#ifndef SRC_UTILS_DATATYPES_H_
-#define SRC_UTILS_DATATYPES_H_
+#ifndef SRC_DATA_DATATYPES_H_
+#define SRC_DATA_DATATYPES_H_
 
 #include <vector>
 #include "Eigen/Dense"
@@ -47,4 +47,4 @@ DataObject Mat(const Eigen::MatrixXf&);
 
 std::ostream& operator<<(std::ostream& os, const DataObject& obj);
 
-#endif  // SRC_UTILS_DATATYPES_H_
+#endif  // SRC_DATA_DATATYPES_H_

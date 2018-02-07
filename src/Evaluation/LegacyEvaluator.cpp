@@ -1,7 +1,4 @@
-#include "src/Evaluation/LegacyEvaluator.h"
-#include <algorithm>
-#include <iostream>
-#include <utility>
+#include "Evaluation/LegacyEvaluator.h"
 
 ChannelDictionary LegacyEvaluator::EvaluateGraph(const NodePtr& node) {
     Variables vars;

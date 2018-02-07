@@ -1,50 +1,25 @@
-#ifndef SRC_OPERATIONS_BASE_NODE_H_
-#define SRC_OPERATIONS_BASE_NODE_H_
+#ifndef SRC_CORE_NODE_H_
+#define SRC_CORE_NODE_H_
 
-#include <vector>
 #include <initializer_list>
-#include <iostream>
 #include <memory>
+#include <vector>
+#include <utility>
 
-#include "Utils/Dictionary.h"
 #include "Data/Datatypes.h"
+#include "Utils/Dictionary.h"
 
+#include "Channel.h"
 #include "IChannelProvider.h"
 #include "IExecutor.h"
 #include "IDifferentiableExecutor.h"
 
 class Node;
-class Channel;
-struct ChannelHash;
-typedef std::shared_ptr<Node> NodePtr;
-typedef std::shared_ptr<Channel> ChannelPtr;
-
-class Channel: public IChannelProvider {
- public:
-    Channel(Node* node, int index);
-    Node* ParentNode(void) const;
-    int Index(void) const;
-    Channel GetChannel(void) const;
-    bool operator==(const Channel& other) const;
- protected:
-    Node* _node;
-    int _index;
-};
-
-struct ChannelHash {
-    std::size_t operator()(const Channel& channel) const {
-        return utils::HashCombine(std::hash<Node*>()(channel.ParentNode()),
-                                  std::hash<int>()(channel.Index()));
-    }
-};
-
-using ChannelDictionary = std::unordered_map<Channel, DataObject, ChannelHash>;
+using NodePtr = std::shared_ptr<Node>;
 
 class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
  public:
     Node() {}
-    //Node(std::initializer_list<NodePtr>, bool isDifferentiable);
-    Node(std::vector<Channel>, bool isDifferentiable);
     Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable);
     Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable);
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
@@ -75,4 +50,4 @@ class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
 
 using ResultDictionary = utils::Dictionary<Node, DataObject>;
 
-#endif  // SRC_OPERATIONS_BASE_NODE_H_
+#endif  // SRC_CORE_NODE_H_

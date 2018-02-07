@@ -1,5 +1,7 @@
-#ifndef SRC_OPERATIONS_BASE_ICHANNELPROVIDER_H_
-#define SRC_OPERATIONS_BASE_ICHANNELPROVIDER_H_
+#ifndef SRC_CORE_ICHANNELPROVIDER_H_
+#define SRC_CORE_ICHANNELPROVIDER_H_
+
+#include <memory>
 
 class Channel;
 
@@ -10,4 +12,4 @@ class IChannelProvider {
 
 using IChannelProviderPtr = std::shared_ptr<IChannelProvider>;
 
-#endif  // SRC_OPERATIONS_BASE_ICHANNELPROVIDER_H_
+#endif  // SRC_CORE_ICHANNELPROVIDER_H_
