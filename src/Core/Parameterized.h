@@ -1,5 +1,5 @@
-#ifndef SRC_OPERATIONS_BASE_PARAMETERIZED_H_
-#define SRC_OPERATIONS_BASE_PARAMETERIZED_H_
+#ifndef SRC_CORE_PARAMETERIZED_H_
+#define SRC_CORE_PARAMETERIZED_H_
 
 #include "Optimizers/IOptimizer.h"
 
@@ -9,4 +9,4 @@ class Parameterized: public virtual Node {
     virtual void Update(const IOptimizer& optimizer, const DataObject& gradOut) = 0;
 };
 
-#endif  // SRC_OPERATIONS_BASE_PARAMETERIZED_H_
+#endif  // SRC_CORE_PARAMETERIZED_H_

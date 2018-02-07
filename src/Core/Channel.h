@@ -1,5 +1,5 @@
-#ifndef SRC_OPERATIONS_BASE_CHANNEL_H_
-#define SRC_OPERATIONS_BASE_CHANNEL_H_
+#ifndef SRC_CORE_CHANNEL_H_
+#define SRC_CORE_CHANNEL_H_
 
 #include <memory>
 
@@ -34,4 +34,4 @@ struct ChannelHash {
 
 using ChannelDictionary = std::unordered_map<Channel, DataObject, ChannelHash>;
 
-#endif  // SRC_OPERATIONS_BASE_CHANNEL_H_
+#endif  // SRC_CORE_CHANNEL_H_

@@ -1,9 +1,10 @@
-#ifndef SRC_OPERATIONS_BASE_DIFFERENTIABLE_H_
-#define SRC_OPERATIONS_BASE_DIFFERENTIABLE_H_
+#ifndef SRC_CORE_DIFFERENTIABLE_H_
+#define SRC_CORE_DIFFERENTIABLE_H_
+
+#include <memory>
+#include <vector>
 
 #include "Node.h"
-#include <vector>
-#include <memory>
 
 class Differentiable: public virtual Node {
  public:
@@ -13,4 +14,4 @@ class Differentiable: public virtual Node {
 
 typedef std::shared_ptr<Differentiable> DifferentiablePtr;
 
-#endif  // SRC_OPERATIONS_BASE_DIFFERENTIABLE_H_
+#endif  // SRC_CORE_DIFFERENTIABLE_H_

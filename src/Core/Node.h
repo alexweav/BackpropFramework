@@ -1,5 +1,5 @@
-#ifndef SRC_OPERATIONS_BASE_NODE_H_
-#define SRC_OPERATIONS_BASE_NODE_H_
+#ifndef SRC_CORE_NODE_H_
+#define SRC_CORE_NODE_H_
 
 #include <initializer_list>
 #include <memory>
@@ -50,4 +50,4 @@ class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
 
 using ResultDictionary = utils::Dictionary<Node, DataObject>;
 
-#endif  // SRC_OPERATIONS_BASE_NODE_H_
+#endif  // SRC_CORE_NODE_H_

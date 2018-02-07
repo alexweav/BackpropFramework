@@ -1,5 +1,5 @@
-#ifndef SRC_OPERATIONS_BASE_OPERATION_H_
-#define SRC_OPERATIONS_BASE_OPERATION_H_
+#ifndef SRC_CORE_OPERATION_H_
+#define SRC_CORE_OPERATION_H_
 
 #include <vector>
 #include <unordered_map>
@@ -12,4 +12,4 @@ class Operation: public virtual Node {
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
 };
 
-#endif  // SRC_OPERATIONS_BASE_OPERATION_H_
+#endif  // SRC_CORE_OPERATION_H_

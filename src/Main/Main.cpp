@@ -31,8 +31,6 @@ class TestNode: public Node {
 };
 
 int main(int argc, char** argv) {
-
-
     LazyEvaluator ev;
 
     auto input = Var();
@@ -67,7 +65,7 @@ int main(int argc, char** argv) {
         x->Update(optimizer, grads[x->Channels(0)]);
         std::cout << eval.EvaluateGraph(x_squared)[x_squared->Channels(0)] << std::endl;
     }
-    
+
     std::cout << std::endl;
 
     auto y = Var();
