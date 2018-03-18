@@ -1,3 +1,4 @@
+add_subdirectory(TestCore)
 add_subdirectory(TestData)
 add_subdirectory(TestEvaluation)
 add_subdirectory(TestOperations)

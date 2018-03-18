@@ -14,6 +14,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
     setup_target_for_coverage(TestOperations_coverage TestOperations coverage)
     setup_target_for_coverage(TestEvaluation_coverage TestEvaluation coverage)
     setup_target_for_coverage(TestData_coverage TestData coverage)
+    setup_target_for_coverage(TestCore_coverage TestCore coverage)
 endif()
 
 ExternalProject_Add(
