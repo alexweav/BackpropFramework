@@ -56,6 +56,6 @@ include_directories("src/"
                     "${source_dir}/googlemock/include")
 
 add_subdirectory(test)
-add_executable (BackpropFrameworkExe ${BackpropFramework_SOURCES})
+add_subdirectory(spike)
 add_library(BackpropFramework ${BackpropFramework_SOURCES})
 

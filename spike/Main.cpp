@@ -35,6 +35,7 @@ int main(int argc, char** argv) {
 
     auto input = Input();
     auto c1 = Constant(1.0);
+    std::cout << "not borked" << std::endl;
     /*Variables vars;
     std::cout << ev.EvaluateGraph(input, vars)[input->Channels(0)].ToScalar() << std::endl;
     input->RegisterNewDefaultValue(Scalar(3.0));
