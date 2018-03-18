@@ -48,7 +48,7 @@ std::vector<DataObject> MultiplicationExecutor::DifferentiateMatrixMultiplicatio
     return grads;
 }
 
-Multiplication::Multiplication(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) {
+Multiplication::Multiplication(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}) {
     RegisterDifferentiableExecutor(std::make_shared<MultiplicationExecutor>(_executor));
 }
 

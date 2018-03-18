@@ -1,10 +1,10 @@
 #include "Core/Node.h"
 #include "Operations/Arithmetic/Addition.h"
 
-Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable):
-    Node(std::vector<std::shared_ptr<IChannelProvider>>(inputs), isDifferentiable) { }
+Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs):
+    Node(std::vector<std::shared_ptr<IChannelProvider>>(inputs)) { }
 
-Node::Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable):
+Node::Node(std::vector<std::shared_ptr<IChannelProvider>> inputs):
         _arity(inputs.size()) {
     for (std::shared_ptr<IChannelProvider> input : inputs) {
         try {

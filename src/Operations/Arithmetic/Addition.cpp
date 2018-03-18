@@ -32,7 +32,7 @@ std::vector<DataObject> AdditionExecutor::DifferentiateMatrixAddition(const Data
     return grads;
 }
 
-Addition::Addition(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) {
+Addition::Addition(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}) {
     RegisterDifferentiableExecutor(std::make_shared<AdditionExecutor>(_executor));
 }
 

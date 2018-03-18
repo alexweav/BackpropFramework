@@ -20,7 +20,7 @@ class TestExecutor: public IExecutor {
 
 class TestNode: public Node {
  public:
-    TestNode(void): Node({}, true) {
+    TestNode(void): Node({}) {
         std::shared_ptr<TestExecutor> executor1(new TestExecutor());
         std::shared_ptr<TestExecutor> executor2(new TestExecutor());
         RegisterExecutor(executor1);

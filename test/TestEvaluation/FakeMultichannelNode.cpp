@@ -11,7 +11,7 @@ DataObject FakeSubtractExecutor::operator() (const std::vector<DataObject>& inpu
 }
 
 FakeMultichannelNode::FakeMultichannelNode(const NodePtr& base, const NodePtr& add, const NodePtr& subtract):
-        Node({base, add, subtract}, false),
+        Node({base, add, subtract}),
         _addExecutor(new FakeAddExecutor()),
         _subtractExecutor(new FakeSubtractExecutor()) {
     RegisterExecutor(std::shared_ptr<IExecutor>(_addExecutor));
