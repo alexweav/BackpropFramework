@@ -20,15 +20,14 @@ using NodePtr = std::shared_ptr<Node>;
 class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
  public:
     Node() {}
-    Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable);
-    Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable);
+    Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs);
+    Node(std::vector<std::shared_ptr<IChannelProvider>> inputs);
     virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
     ChannelDictionary Execute(const std::vector<DataObject>& inputs);
     int Arity(void);
     std::vector<Channel> Channels(void) const;
     Channel Channels(int index) const;
     std::vector<std::pair<NodePtr, Channel>> Predecessors(void);
-    bool IsDifferentiable(void) const;
     bool HasDifferentiableTree(void) const;
     int NumChannels(void);
     Channel GetChannel(void) const;
@@ -40,8 +39,7 @@ class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
 
     int _arity;
     int _numChannels = 0;
-    bool _isDifferentiable = true;
-    bool _hasDifferentiableTree = false;
+    bool _hasDifferentiableTree = true;
     std::vector<std::pair<NodePtr, Channel>> _predecessors;
     std::vector<Channel> _channels;
     std::unordered_map<Channel, std::shared_ptr<IExecutor>, ChannelHash> _executors;

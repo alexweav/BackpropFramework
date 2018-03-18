@@ -12,7 +12,7 @@ std::vector<DataObject> DivisionExecutor::Differentiate(const std::vector<DataOb
     return grads;
 }
 
-Division::Division(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) : Node({i1, i2}, true) {
+Division::Division(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) : Node({i1, i2}) {
     RegisterDifferentiableExecutor(std::make_shared<DivisionExecutor>(_executor));
 }
 

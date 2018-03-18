@@ -12,7 +12,7 @@ std::vector<DataObject> SubtractionExecutor::Differentiate(const std::vector<Dat
     return grads;
 }
 
-Subtraction::Subtraction(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}, true) {
+Subtraction::Subtraction(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}) {
     RegisterDifferentiableExecutor(std::make_shared<SubtractionExecutor>(_executor));
 }
 

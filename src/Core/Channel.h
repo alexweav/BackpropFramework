@@ -13,14 +13,17 @@ class Node;
 class Channel: public IChannelProvider {
  public:
     Channel(Node* node, int index);
+    Channel(Node* node, int index, bool isDifferentiable);
     Node* ParentNode(void) const;
     int Index(void) const;
+    bool IsDifferentiableFunctor(void) const;
     Channel GetChannel(void) const;
     bool operator==(const Channel& other) const;
 
  protected:
     Node* _node;
     int _index;
+    bool _isDifferentiableFunctor;
 };
 
 using ChannelPtr = std::shared_ptr<Channel>;
@@ -28,7 +31,8 @@ using ChannelPtr = std::shared_ptr<Channel>;
 struct ChannelHash {
     std::size_t operator()(const Channel& channel) const {
         return utils::HashCombine(std::hash<Node*>()(channel.ParentNode()),
-                                  std::hash<int>()(channel.Index()));
+               utils::HashCombine(std::hash<int>()(channel.Index()),
+                                  std::hash<bool>()(channel.IsDifferentiableFunctor())));
     }
 };
 

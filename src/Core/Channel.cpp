@@ -1,8 +1,11 @@
 #include "Core/Channel.h"
 
-Channel::Channel(Node* node, int index) {
+Channel::Channel(Node* node, int index): Channel(node, index, false) { }
+
+Channel::Channel(Node* node, int index, bool isDifferentiable) {
     _node = node;
     _index = index;
+    _isDifferentiableFunctor = isDifferentiable;
 }
 
 bool Channel::operator==(const Channel& other) const {
@@ -15,6 +18,10 @@ Node* Channel::ParentNode(void) const {
 
 int Channel::Index(void) const {
     return _index;
+}
+
+bool Channel::IsDifferentiableFunctor(void) const {
+    return _isDifferentiableFunctor;
 }
 
 Channel Channel::GetChannel(void) const {

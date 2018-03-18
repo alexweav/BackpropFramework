@@ -1,19 +1,17 @@
 #include "Core/Node.h"
 #include "Operations/Arithmetic/Addition.h"
 
-Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable):
-    Node(std::vector<std::shared_ptr<IChannelProvider>>(inputs), isDifferentiable) { }
+Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs):
+    Node(std::vector<std::shared_ptr<IChannelProvider>>(inputs)) { }
 
-Node::Node(std::vector<std::shared_ptr<IChannelProvider>> inputs, bool isDifferentiable):
-        _arity(inputs.size()),
-        _isDifferentiable(isDifferentiable),
-        _hasDifferentiableTree(isDifferentiable) {
+Node::Node(std::vector<std::shared_ptr<IChannelProvider>> inputs):
+        _arity(inputs.size()) {
     for (std::shared_ptr<IChannelProvider> input : inputs) {
         try {
             Channel channel = input->GetChannel();
-            NodePtr node = channel.ParentNode()->GetPtr();
-            _predecessors.push_back(std::pair<NodePtr, Channel>(node, channel));
-            _hasDifferentiableTree &= node->HasDifferentiableTree();
+            NodePtr predecessorNode = channel.ParentNode()->GetPtr();
+            _predecessors.push_back(std::pair<NodePtr, Channel>(predecessorNode, channel));
+            _hasDifferentiableTree &= (channel.IsDifferentiableFunctor() && predecessorNode->HasDifferentiableTree());
         } catch (const std::invalid_argument& e) {
             throw std::invalid_argument("Predecessor node has multiple known channels.");
         }
@@ -43,10 +41,6 @@ std::vector<std::pair<NodePtr, Channel>> Node::Predecessors(void) {
     return _predecessors;
 }
 
-bool Node::IsDifferentiable(void) const {
-    return _isDifferentiable;
-}
-
 bool Node::HasDifferentiableTree(void) const {
     return _hasDifferentiableTree;
 }
@@ -64,16 +58,12 @@ int Node::NumChannels(void) {
 }
 
 void Node::RegisterExecutor(const std::shared_ptr<IExecutor> executor) {
-    _channels.push_back(Channel(this, _numChannels));
+    _channels.push_back(Channel(this, _numChannels, false));
     _executors[_channels.at(_numChannels)] = executor;
     _numChannels++;
-    _isDifferentiable = false;
 }
 void Node::RegisterDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor) {
-    if (_channels.size() == 0) {
-        _isDifferentiable = true;
-    }
-    _channels.push_back(Channel(this, _numChannels));
+    _channels.push_back(Channel(this, _numChannels, true));
     _differentiableExecutors[_channels.at(_numChannels)] = executor;
     _numChannels++;
 }

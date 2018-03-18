@@ -20,7 +20,7 @@ class TestExecutor: public IExecutor {
 
 class TestNode: public Node {
  public:
-    TestNode(void): Node({}, true) {
+    TestNode(void): Node({}) {
         std::shared_ptr<TestExecutor> executor1(new TestExecutor());
         std::shared_ptr<TestExecutor> executor2(new TestExecutor());
         RegisterExecutor(executor1);
@@ -31,10 +31,12 @@ class TestNode: public Node {
 };
 
 int main(int argc, char** argv) {
-    LazyEvaluator ev;
+    //LazyEvaluator ev;
 
-    auto input = Var();
-    Variables vars;
+    auto input = Input();
+    auto c1 = Constant(1.0);
+    std::cout << "not borked" << std::endl;
+    /*Variables vars;
     std::cout << ev.EvaluateGraph(input, vars)[input->Channels(0)].ToScalar() << std::endl;
     input->RegisterNewDefaultValue(Scalar(3.0));
     vars[input] = Scalar(5.0);
@@ -79,6 +81,6 @@ int main(int argc, char** argv) {
     std::cout << "out1: " << results[out1->Channels(0)] << std::endl;
     std::cout << "out2: " << results[out2->Channels(0)] << std::endl;
 
-    return 0;
+    return 0;*/
 }
 
