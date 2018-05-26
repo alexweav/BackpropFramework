@@ -43,10 +43,6 @@ DataObject Variable::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);
 }
 
-std::vector<DataObject> Variable::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor.Differentiate(prevInputs, dout);
-}
-
 void Variable::Update(const IOptimizer& optimizer, const DataObject& grad) {
     _executor.Update(optimizer, grad);
 }

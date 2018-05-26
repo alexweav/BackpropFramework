@@ -4,7 +4,6 @@
 #include <memory>
 #include <vector>
 
-#include "Core/Differentiable.h"
 #include "Core/IDifferentiableExecutor.h"
 #include "Core/Node.h"
 
@@ -19,13 +18,12 @@ class ConstantExecutor: public IDifferentiableExecutor {
     DataObject _value;
 };
 
-class Constant: public Differentiable {
+class Constant: public Node {
  public:
     explicit Constant(float);
     explicit Constant(const Eigen::MatrixXf&);
     explicit Constant(const DataObject&);
     DataObject Forward(const std::vector<DataObject>&) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
     DataObject GetValue(void) const;
 
  private:

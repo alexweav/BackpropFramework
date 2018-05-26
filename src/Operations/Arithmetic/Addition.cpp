@@ -40,10 +40,6 @@ DataObject Addition::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);
 }
 
-std::vector<DataObject> Addition::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor.Differentiate(prevInputs, dout);
-}
-
 std::shared_ptr<Addition> Add(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     std::shared_ptr<Addition> ptr(new Addition(i1, i2));
     return ptr;

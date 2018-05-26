@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "Core/Differentiable.h"
+#include "Core/Node.h"
 #include "Core/IDifferentiableExecutor.h"
 
 class InputExecutor: public IDifferentiableExecutor {
@@ -20,12 +20,11 @@ class InputExecutor: public IDifferentiableExecutor {
     DataObject _defaultOutput;
 };
 
-class Input: public Differentiable {
+class Input: public Node {
  public:
     Input(void);
     explicit Input(const DataObject& defaultOutput);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
     void RegisterNewDefaultValue(float);
     void RegisterNewDefaultValue(const Eigen::MatrixXf&);
     void RegisterNewDefaultValue(const DataObject&);

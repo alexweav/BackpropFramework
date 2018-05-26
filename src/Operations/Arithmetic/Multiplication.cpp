@@ -56,10 +56,6 @@ DataObject Multiplication::Forward(const std::vector<DataObject>& inputs) const 
     return _executor(inputs);
 }
 
-std::vector<DataObject> Multiplication::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor.Differentiate(prevInputs, dout);
-}
-
 std::shared_ptr<Multiplication> Multiply(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     return std::shared_ptr<Multiplication>(new Multiplication(i1, i2));
 }

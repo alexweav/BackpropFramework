@@ -3,7 +3,6 @@
 
 #include <vector>
 
-#include "Core/Differentiable.h"
 #include "Core/IDifferentiableExecutor.h"
 #include "Core/Node.h"
 #include "Core/Parameterized.h"
@@ -21,7 +20,7 @@ class VariableExecutor: public IDifferentiableExecutor {
     DataObject _value;
 };
 
-class Variable: public Differentiable, public Parameterized {
+class Variable: public Parameterized {
  public:
     Variable(void);
     explicit Variable(float);
@@ -29,7 +28,6 @@ class Variable: public Differentiable, public Parameterized {
     explicit Variable(const DataObject&);
     DataObject GetValue(void);
     DataObject Forward(const std::vector<DataObject>&) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>&, const DataObject&) const;
     void Update(const IOptimizer&, const DataObject&);
 
  private:
