@@ -52,10 +52,6 @@ Multiplication::Multiplication(const IChannelProviderPtr& i1, const IChannelProv
     RegisterDifferentiableExecutor(std::make_shared<MultiplicationExecutor>(_executor));
 }
 
-DataObject Multiplication::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor(inputs);
-}
-
 std::shared_ptr<Multiplication> Multiply(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     return std::shared_ptr<Multiplication>(new Multiplication(i1, i2));
 }

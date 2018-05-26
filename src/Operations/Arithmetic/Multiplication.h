@@ -23,7 +23,6 @@ class MultiplicationExecutor: public IDifferentiableExecutor {
 class Multiplication: public Operation {
  public:
     Multiplication(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2);
-    DataObject Forward(const std::vector<DataObject>& inputs) const;
 
  private:
     MultiplicationExecutor _executor;

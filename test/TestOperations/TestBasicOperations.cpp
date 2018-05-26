@@ -7,7 +7,7 @@ TEST(AdditionTests, ForwardAdds) {
     DataObject d2(2.0);
     DataObject d3(3.0);
     std::vector<DataObject> inputs({d2, d3});
-    EXPECT_FLOAT_EQ(add->Forward(inputs).ToScalar(), 5.0);
+    EXPECT_FLOAT_EQ(add->Execute(inputs)[add->GetChannel()].ToScalar(), 5.0);
 }
 
 TEST(AdditionTests, ForwardMatrixAdds) {
@@ -17,7 +17,7 @@ TEST(AdditionTests, ForwardMatrixAdds) {
     Eigen::MatrixXf m(2, 2);
     m << 1, 2, 3, 4;
     std::vector<DataObject> inputs({Mat(m), Mat(m)});
-    EXPECT_EQ(add->Forward(inputs).ToMatrix(), m + m);
+    EXPECT_EQ(add->Execute(inputs)[add->GetChannel()].ToMatrix(), m + m);
 }
 
 TEST(SubtractionTests, ForwardSubtracts) {
@@ -27,7 +27,7 @@ TEST(SubtractionTests, ForwardSubtracts) {
     DataObject d5(5.0);
     DataObject d3(3.0);
     std::vector<DataObject> inputs({d5, d3});
-    EXPECT_FLOAT_EQ(sub->Forward(inputs).ToScalar(), 2.0);
+    EXPECT_FLOAT_EQ(sub->Execute(inputs)[sub->GetChannel()].ToScalar(), 2.0);
 }
 
 TEST(MultiplicationTests, ForwardMultiplies) {
@@ -37,7 +37,7 @@ TEST(MultiplicationTests, ForwardMultiplies) {
     DataObject d3(3.0);
     DataObject d5(5.0);
     std::vector<DataObject> inputs({d3, d5});
-    EXPECT_FLOAT_EQ(mul->Forward(inputs).ToScalar(), 15.0);
+    EXPECT_FLOAT_EQ(mul->Execute(inputs)[mul->GetChannel()].ToScalar(), 15.0);
 }
 
 TEST(DivisionTests, ForwardDivides) {
@@ -47,6 +47,6 @@ TEST(DivisionTests, ForwardDivides) {
     DataObject d7(7.0);
     DataObject d2(2.0);
     std::vector<DataObject> inputs({d7, d2});
-    EXPECT_FLOAT_EQ(div->Forward(inputs).ToScalar(), 3.5);
+    EXPECT_FLOAT_EQ(div->Execute(inputs)[div->GetChannel()].ToScalar(), 3.5);
 }
 

@@ -22,7 +22,6 @@ class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
     Node() {}
     Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs);
     Node(std::vector<std::shared_ptr<IChannelProvider>> inputs);
-    virtual DataObject Forward(const std::vector<DataObject>& inputs) const = 0;
     ChannelDictionary Execute(const std::vector<DataObject>& inputs);
     int Arity(void);
     std::vector<Channel> Channels(void) const;

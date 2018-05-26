@@ -25,10 +25,6 @@ Constant::Constant(const DataObject& value): Node({}), _executor(value) {
     RegisterDifferentiableExecutor(std::make_shared<ConstantExecutor>(_executor));
 }
 
-DataObject Constant::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor(inputs);
-}
-
 DataObject Constant::GetValue(void) const {
     return _executor.GetValue();
 }

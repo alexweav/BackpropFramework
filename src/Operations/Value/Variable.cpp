@@ -39,10 +39,6 @@ DataObject Variable::GetValue() {
     return _executor.GetValue();
 }
 
-DataObject Variable::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor(inputs);
-}
-
 void Variable::Update(const IOptimizer& optimizer, const DataObject& grad) {
     _executor.Update(optimizer, grad);
 }

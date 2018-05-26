@@ -16,10 +16,6 @@ Division::Division(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2)
     RegisterDifferentiableExecutor(std::make_shared<DivisionExecutor>(_executor));
 }
 
-DataObject Division::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor(inputs);
-}
-
 std::shared_ptr<Division> Divide(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     std::shared_ptr<Division> ptr(new Division(i1, i2));
     return ptr;

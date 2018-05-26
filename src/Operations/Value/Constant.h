@@ -23,7 +23,6 @@ class Constant: public Node {
     explicit Constant(float);
     explicit Constant(const Eigen::MatrixXf&);
     explicit Constant(const DataObject&);
-    DataObject Forward(const std::vector<DataObject>&) const;
     DataObject GetValue(void) const;
 
  private:

@@ -27,7 +27,6 @@ class Variable: public Parameterized {
     explicit Variable(const Eigen::MatrixXf&);
     explicit Variable(const DataObject&);
     DataObject GetValue(void);
-    DataObject Forward(const std::vector<DataObject>&) const;
     void Update(const IOptimizer&, const DataObject&);
 
  private:
