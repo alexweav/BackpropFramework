@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "Core/Operation.h"
-#include "Core/Differentiable.h"
 #include "Core/IDifferentiableExecutor.h"
 
 class AdditionExecutor: public IDifferentiableExecutor {
@@ -18,11 +17,10 @@ class AdditionExecutor: public IDifferentiableExecutor {
     std::vector<DataObject> DifferentiateMatrixAddition(const DataObject&, const DataObject&, const DataObject&) const;
 };
 
-class Addition: public Operation, public Differentiable {
+class Addition: public Operation {
  public:
     Addition(const IChannelProviderPtr& input1, const IChannelProviderPtr& input2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
  private:
     AdditionExecutor _executor;

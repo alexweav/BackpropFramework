@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "Core/Operation.h"
-#include "Core/Differentiable.h"
 #include "Core/IDifferentiableExecutor.h"
 
 class SubtractionExecutor: public IDifferentiableExecutor {
@@ -13,11 +12,10 @@ class SubtractionExecutor: public IDifferentiableExecutor {
     std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
 };
 
-class Subtraction: public Operation, public Differentiable {
+class Subtraction: public Operation {
  public:
     Subtraction(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
  private:
     SubtractionExecutor _executor;

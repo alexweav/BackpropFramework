@@ -4,7 +4,6 @@
 #include "gtest/gtest.h"
 #include "Operations/Arithmetic.h"
 #include "Operations/Value.h"
-#include "Evaluation/LegacyEvaluator.h"
 #include "Evaluation/LazyEvaluator.h"
 
 #include "FakeForwardEvaluationCounter.h"
@@ -23,7 +22,6 @@ class ForwardPropagationTest: public ::testing::Test {
         input = Var();
     }
     Variables vars;
-    LegacyEvaluator eval;
     LazyEvaluator evaluator;
     NodePtr cons2;
     NodePtr cons3;
@@ -50,7 +48,6 @@ class MultipleEvaluationTest: public ::testing::Test {
         plusFunction = xTimesTwoMinusThree + yTimesZPlusFour;
         minusFunctionPlusTwo = xTimesTwoMinusThree - yTimesZPlusFour + c2;
     }
-    LegacyEvaluator eval;
     LazyEvaluator evaluator;
     Variables vars;
     InputPtr x;
@@ -78,7 +75,6 @@ class RepeatedEvaluationTest: public ::testing::Test {
         counterPlusOne = counterConstant + one;
     }
     Variables vars;
-    LegacyEvaluator eval;
     LazyEvaluator evaluator;
     std::shared_ptr<FakeForwardEvaluationCounter> counterConstant;
     NodePtr zero;
@@ -110,34 +106,6 @@ class MultichannelEvaluationTest: public ::testing::Test {
     NodePtr addOne2;
     NodePtr addBoth;
     LazyEvaluator evaluator;
-};
-
-class BackpropagationTest: public ::testing::Test {
- protected:
-    virtual void SetUp() {
-        x = Var();
-        y = Var();
-        z = Var();
-        vars[x] = Scalar(2.0);
-        vars[y] = Scalar(3.0);
-        cons3 = Value(3.0);
-        cons4 = Value(4.0);
-        cons5 = Value(5.0);
-        xp5 = Add(x, cons5);
-        ax3 = Multiply(xp5, y);
-        x2 = Multiply(x, x);
-    }
-    Variables vars;
-    LegacyEvaluator eval;
-    InputPtr x;
-    InputPtr y;
-    InputPtr z;
-    NodePtr cons3;
-    NodePtr cons4;
-    NodePtr cons5;
-    NodePtr xp5;
-    DifferentiablePtr ax3;
-    DifferentiablePtr x2;
 };
 
 #endif  // TEST_TESTEVALUATION_TESTEVALUATION_H_

@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "Core/Operation.h"
-#include "Core/Differentiable.h"
 #include "Core/IDifferentiableExecutor.h"
 
 class MultiplicationExecutor: public IDifferentiableExecutor {
@@ -21,11 +20,10 @@ class MultiplicationExecutor: public IDifferentiableExecutor {
     std::vector<DataObject> DifferentiateMatrixMultiplication(const DataObject&, const DataObject&, const DataObject&) const;
 };
 
-class Multiplication: public Operation, public Differentiable {
+class Multiplication: public Operation {
  public:
     Multiplication(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2);
     DataObject Forward(const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
  private:
     MultiplicationExecutor _executor;

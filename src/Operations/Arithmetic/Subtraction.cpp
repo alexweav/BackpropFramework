@@ -20,10 +20,6 @@ DataObject Subtraction::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);
 }
 
-std::vector<DataObject> Subtraction::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor.Differentiate(prevInputs, dout);
-}
-
 std::shared_ptr<Subtraction> Subtract(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     std::shared_ptr<Subtraction> ptr(new Subtraction(i1, i2));
     return ptr;

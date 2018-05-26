@@ -14,12 +14,6 @@ TEST(ConstantTests, ForwardMatrixReturnsValue) {
     EXPECT_EQ(cons->Forward(inputs).ToMatrix(), m);
 }
 
-TEST(ConstantTests, BackwardReturnsEmptyVector) {
-    auto cons = Value(2.0);
-    std::vector<DataObject> prevInputs;
-    EXPECT_EQ(cons->Backward(prevInputs, Scalar(0)).size(), 0);
-}
-
 TEST(InputTests, ForwardReturnsDefaultValue) {
     auto input = Var();
     std::vector<DataObject> inputs;
@@ -42,10 +36,4 @@ TEST(InputTests, NewDefaultMatrixAppearsInForward) {
     m << 1, 2, 3, 4;
     input->RegisterNewDefaultValue(m);
     EXPECT_EQ(input->Forward(inputs).ToMatrix(), m);
-}
-
-TEST(InputTests, BackwardReturnsEmptyVector) {
-    auto input = Var();
-    std::vector<DataObject> prevInputs;
-    EXPECT_EQ(input->Backward(prevInputs, Scalar(0)).size(), 0);
 }

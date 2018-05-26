@@ -20,10 +20,6 @@ DataObject Division::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);
 }
 
-std::vector<DataObject> Division::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor.Differentiate(prevInputs, dout);
-}
-
 std::shared_ptr<Division> Divide(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     std::shared_ptr<Division> ptr(new Division(i1, i2));
     return ptr;

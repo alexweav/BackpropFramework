@@ -29,10 +29,6 @@ DataObject Constant::Forward(const std::vector<DataObject>& inputs) const {
     return _executor(inputs);
 }
 
-std::vector<DataObject> Constant::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor.Differentiate(prevInputs, dout);
-}
-
 DataObject Constant::GetValue(void) const {
     return _executor.GetValue();
 }

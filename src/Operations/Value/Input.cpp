@@ -39,10 +39,6 @@ DataObject Input::Forward(const std::vector<DataObject>& inputs) const {
     return _executor->operator()(inputs);
 }
 
-std::vector<DataObject> Input::Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const {
-    return _executor->Differentiate(prevInputs, dout);
-}
-
 void Input::RegisterNewDefaultValue(float value) {
     RegisterNewDefaultValue(Scalar(value));
 }
