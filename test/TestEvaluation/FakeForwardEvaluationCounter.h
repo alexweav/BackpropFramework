@@ -20,7 +20,6 @@ class FakeForwardEvaluationCounterExecutor: public IExecutor {
 class FakeForwardEvaluationCounter: public Node {
  public:
     FakeForwardEvaluationCounter(void);
-    DataObject Forward(const std::vector<DataObject>&) const;
     int GetNumEvaluations(void);
     void ResetCounter(void);
 
