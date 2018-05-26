@@ -36,10 +36,6 @@ Addition::Addition(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2)
     RegisterDifferentiableExecutor(std::make_shared<AdditionExecutor>(_executor));
 }
 
-DataObject Addition::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor(inputs);
-}
-
 std::shared_ptr<Addition> Add(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     std::shared_ptr<Addition> ptr(new Addition(i1, i2));
     return ptr;

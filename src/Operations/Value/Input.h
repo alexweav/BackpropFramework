@@ -24,7 +24,6 @@ class Input: public Node {
  public:
     Input(void);
     explicit Input(const DataObject& defaultOutput);
-    DataObject Forward(const std::vector<DataObject>& inputs) const;
     void RegisterNewDefaultValue(float);
     void RegisterNewDefaultValue(const Eigen::MatrixXf&);
     void RegisterNewDefaultValue(const DataObject&);

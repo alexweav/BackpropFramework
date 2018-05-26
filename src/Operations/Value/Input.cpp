@@ -35,10 +35,6 @@ DataObject Input::GetDefaultOutput(void) {
     return _executor->GetDefaultOutput();
 }
 
-DataObject Input::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor->operator()(inputs);
-}
-
 void Input::RegisterNewDefaultValue(float value) {
     RegisterNewDefaultValue(Scalar(value));
 }

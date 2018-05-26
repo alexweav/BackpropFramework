@@ -15,7 +15,6 @@ class SubtractionExecutor: public IDifferentiableExecutor {
 class Subtraction: public Operation {
  public:
     Subtraction(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2);
-    DataObject Forward(const std::vector<DataObject>& inputs) const;
 
  private:
     SubtractionExecutor _executor;

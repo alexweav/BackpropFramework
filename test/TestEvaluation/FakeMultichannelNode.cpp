@@ -18,8 +18,6 @@ FakeMultichannelNode::FakeMultichannelNode(const NodePtr& base, const NodePtr& a
     RegisterExecutor(std::shared_ptr<IExecutor>(_subtractExecutor));
 }
 
-DataObject FakeMultichannelNode::Forward(const std::vector<DataObject>& inputs) const { }
-
 int FakeMultichannelNode::GetNumAdds(void) {
     return _addExecutor->GetNumEvaluations();
 }

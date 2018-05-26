@@ -16,10 +16,6 @@ Subtraction::Subtraction(const IChannelProviderPtr& i1, const IChannelProviderPt
     RegisterDifferentiableExecutor(std::make_shared<SubtractionExecutor>(_executor));
 }
 
-DataObject Subtraction::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor(inputs);
-}
-
 std::shared_ptr<Subtraction> Subtract(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {
     std::shared_ptr<Subtraction> ptr(new Subtraction(i1, i2));
     return ptr;

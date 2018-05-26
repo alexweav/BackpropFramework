@@ -20,7 +20,6 @@ class AdditionExecutor: public IDifferentiableExecutor {
 class Addition: public Operation {
  public:
     Addition(const IChannelProviderPtr& input1, const IChannelProviderPtr& input2);
-    DataObject Forward(const std::vector<DataObject>& inputs) const;
 
  private:
     AdditionExecutor _executor;

@@ -22,7 +22,6 @@ class FakeSubtractExecutor: public FakeForwardEvaluationCounterExecutor {
 class FakeMultichannelNode: public Node {
  public:
     FakeMultichannelNode(const NodePtr& base, const NodePtr& add, const NodePtr& subtract);
-    DataObject Forward(const std::vector<DataObject>&) const;
     int GetNumAdds(void);
     int GetNumSubtracts(void);
     void ResetCounter(void);

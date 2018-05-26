@@ -16,10 +16,6 @@ FakeForwardEvaluationCounter::FakeForwardEvaluationCounter() : Node({}), _execut
     RegisterExecutor(_executor);
 }
 
-DataObject FakeForwardEvaluationCounter::Forward(const std::vector<DataObject>& inputs) const {
-    return _executor->operator()(inputs);
-}
-
 int FakeForwardEvaluationCounter::GetNumEvaluations(void) {
     return _executor->GetNumEvaluations();
 }

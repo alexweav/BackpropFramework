@@ -15,7 +15,6 @@ class DivisionExecutor: public IDifferentiableExecutor {
 class Division: public Operation {
  public:
     Division(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2);
-    DataObject Forward(const std::vector<DataObject>& inputs) const;
     std::vector<DataObject> Backward(const std::vector<DataObject>& prevInputs, const DataObject& dout) const;
 
  private:
