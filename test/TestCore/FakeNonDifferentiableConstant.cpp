@@ -4,7 +4,7 @@ FakeNonDifferentiableConstantExecutor::FakeNonDifferentiableConstantExecutor(flo
     _value = Scalar(value);
 }
 
-DataObject FakeNonDifferentiableConstantExecutor::operator() (const std::vector<DataObject>& inputs) const {
+DataObject FakeNonDifferentiableConstantExecutor::operator() (const ExecutionContext& context) const {
     return _value;
 }
 
@@ -13,5 +13,3 @@ FakeNonDifferentiableConstant::FakeNonDifferentiableConstant(float value): Node(
     RegisterExecutor(executor);
 }
 
-DataObject FakeNonDifferentiableConstant::Forward(const std::vector<DataObject>& inputs) const {
-}

@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "Core/ExecutionContext.h"
 #include "Core/IDifferentiableExecutor.h"
 #include "Operations/Arithmetic.h"
 #include "Operations/Value.h"
@@ -12,7 +13,7 @@
 
 class TestExecutor: public IExecutor {
  public:
-    DataObject operator() (const std::vector<DataObject>& inputs) const {
+    DataObject operator() (const ExecutionContext& context) const {
         return Scalar(100);
     }
 };
@@ -26,7 +27,7 @@ class TestNode: public Node {
         RegisterExecutor(executor2);
     }
 
-    DataObject Forward(const std::vector<DataObject>& inputs) const { }
+    DataObject Forward(const ExecutionContext& context) const { }
 };
 
 int main(int argc, char** argv) {

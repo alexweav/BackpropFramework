@@ -1,14 +1,14 @@
 #include "Operations/Arithmetic/Subtraction.h"
 
-DataObject SubtractionExecutor::operator() (const std::vector<DataObject>& inputs) const {
-    DataObject result(inputs.at(0).ToScalar() - inputs.at(1).ToScalar());
+DataObject SubtractionExecutor::operator() (const ExecutionContext& context) const {
+    DataObject result(context.Inputs().at(0).ToScalar() - context.Inputs().at(1).ToScalar());
     return result;
 }
 
-std::vector<DataObject> SubtractionExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
+std::vector<DataObject> SubtractionExecutor::Differentiate(const ExecutionContext& context) const {
     std::vector<DataObject> grads(2);
-    grads.at(0) = Scalar(1.0).ElementwiseMultiply(dOut);
-    grads.at(1) = Scalar(-1.0).ElementwiseMultiply(dOut);
+    grads.at(0) = Scalar(1.0).ElementwiseMultiply(context.DownstreamGradient());
+    grads.at(1) = Scalar(-1.0).ElementwiseMultiply(context.DownstreamGradient());
     return grads;
 }
 

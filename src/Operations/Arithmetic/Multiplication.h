@@ -3,13 +3,14 @@
 
 #include <vector>
 
+#include "Core/ExecutionContext.h"
 #include "Core/Operation.h"
 #include "Core/IDifferentiableExecutor.h"
 
 class MultiplicationExecutor: public IDifferentiableExecutor {
  public:
-    DataObject operator() (const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
+    DataObject operator() (const ExecutionContext& context) const;
+    std::vector<DataObject> Differentiate(const ExecutionContext& context) const;
 
  private:
     DataObject HandleMultiply(const DataObject&, const DataObject&) const;

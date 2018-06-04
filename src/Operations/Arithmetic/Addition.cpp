@@ -1,11 +1,11 @@
 #include "Operations/Arithmetic/Addition.h"
 
-DataObject AdditionExecutor::operator()(const std::vector<DataObject>& inputs) const {
-    return inputs.at(0).Add(inputs.at(1));
+DataObject AdditionExecutor::operator()(const ExecutionContext& context) const {
+    return context.Inputs().at(0).Add(context.Inputs().at(1));
 }
 
-std::vector<DataObject> AdditionExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
-    return HandleBackward(prevInputs.at(0), prevInputs.at(1), dOut);
+std::vector<DataObject> AdditionExecutor::Differentiate(const ExecutionContext& context) const {
+    return HandleBackward(context.Inputs().at(0), context.Inputs().at(1), context.DownstreamGradient());
 }
 
 std::vector<DataObject> AdditionExecutor::HandleBackward(const DataObject& i1, const DataObject& i2, const DataObject& dout) const {
