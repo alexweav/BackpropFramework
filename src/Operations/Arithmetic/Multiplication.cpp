@@ -1,11 +1,11 @@
 #include "Operations/Arithmetic/Multiplication.h"
 
-DataObject MultiplicationExecutor::operator()(const std::vector<DataObject>& inputs) const {
-    return HandleMultiply(inputs.at(0), inputs.at(1));
+DataObject MultiplicationExecutor::operator()(const ExecutionContext& context) const {
+    return HandleMultiply(context.Inputs().at(0), context.Inputs().at(1));
 }
 
-std::vector<DataObject> MultiplicationExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
-    return HandleBackward(prevInputs.at(0), prevInputs.at(1), dOut);
+std::vector<DataObject> MultiplicationExecutor::Differentiate(const ExecutionContext& context) const {
+    return HandleBackward(context.Inputs().at(0), context.Inputs().at(1), context.DownstreamGradient());
 }
 
 DataObject MultiplicationExecutor::HandleMultiply(const DataObject& i1, const DataObject& i2) const {

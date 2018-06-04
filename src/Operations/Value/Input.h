@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 
+#include "Core/ExecutionContext.h"
 #include "Core/Node.h"
 #include "Core/IDifferentiableExecutor.h"
 
@@ -11,8 +12,8 @@ class InputExecutor: public IDifferentiableExecutor {
  public:
     InputExecutor(void);
     explicit InputExecutor(const DataObject& defaultOutput);
-    DataObject operator() (const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
+    DataObject operator() (const ExecutionContext& context) const;
+    std::vector<DataObject> Differentiate(const ExecutionContext& context) const;
     void RegisterNewDefaultValue(const DataObject&);
     DataObject GetDefaultOutput();
 

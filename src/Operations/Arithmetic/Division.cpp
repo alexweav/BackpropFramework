@@ -1,14 +1,14 @@
 #include "Operations/Arithmetic/Division.h"
 
-DataObject DivisionExecutor::operator() (const std::vector<DataObject>& inputs) const {
-    DataObject result(inputs.at(0).ToScalar() / inputs.at(1).ToScalar());
+DataObject DivisionExecutor::operator() (const ExecutionContext& context) const {
+    DataObject result(context.Inputs().at(0).ToScalar() / context.Inputs().at(1).ToScalar());
     return result;
 }
 
-std::vector<DataObject> DivisionExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
+std::vector<DataObject> DivisionExecutor::Differentiate(const ExecutionContext& context) const {
     std::vector<DataObject> grads(2);
-    grads.at(0) = Scalar(dOut.ToScalar() / prevInputs.at(1).ToScalar());
-    grads.at(1) = Scalar(prevInputs.at(0).ToScalar() * -(dOut.ToScalar() / (prevInputs.at(1).ToScalar() * prevInputs.at(1).ToScalar())));
+    grads.at(0) = Scalar(context.DownstreamGradient().ToScalar() / context.Inputs().at(1).ToScalar());
+    grads.at(1) = Scalar(context.Inputs().at(0).ToScalar() * -(context.DownstreamGradient().ToScalar() / (context.Inputs().at(1).ToScalar() * context.Inputs().at(1).ToScalar())));
     return grads;
 }
 

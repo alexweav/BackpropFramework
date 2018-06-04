@@ -4,13 +4,12 @@ ConstantExecutor::ConstantExecutor(const DataObject& value) {
     _value = value;
 }
 
-DataObject ConstantExecutor::operator() (const std::vector<DataObject>& inputs) const {
+DataObject ConstantExecutor::operator() (const ExecutionContext& context) const {
     return _value;
 }
 
-std::vector<DataObject> ConstantExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
-    std::vector<DataObject> gradsOut;
-    return gradsOut;
+std::vector<DataObject> ConstantExecutor::Differentiate(const ExecutionContext& context) const {
+    return std::vector<DataObject>();
 }
 
 DataObject ConstantExecutor::GetValue(void) const {

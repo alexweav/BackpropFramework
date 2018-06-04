@@ -3,11 +3,12 @@
 
 #include <vector>
 
+#include "Core/ExecutionContext.h"
 #include "Data/Datatypes.h"
 
 class IExecutor {
  public:
-    virtual DataObject operator() (const std::vector<DataObject>& inputs) const = 0;
+    virtual DataObject operator() (const ExecutionContext& context) const = 0;
 };
 
 #endif  // SRC_CORE_IEXECUTOR_H_

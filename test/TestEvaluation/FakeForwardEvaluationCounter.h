@@ -3,13 +3,14 @@
 
 #include <vector>
 
+#include "Core/ExecutionContext.h"
 #include "Core/IExecutor.h"
 #include "Core/Node.h"
 #include "Data/Datatypes.h"
 
 class FakeForwardEvaluationCounterExecutor: public IExecutor {
  public:
-    virtual DataObject operator() (const std::vector<DataObject>& inputs) const;
+    virtual DataObject operator() (const ExecutionContext& context) const;
     int GetNumEvaluations(void);
     void ResetCounter(void);
 

@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "Core/ExecutionContext.h"
 #include "Core/IExecutor.h"
 #include "Core/Node.h"
 #include "Data/Datatypes.h"
@@ -11,12 +12,12 @@
 
 class FakeAddExecutor: public FakeForwardEvaluationCounterExecutor {
  public:
-    DataObject operator() (const std::vector<DataObject>& inputs) const;
+    DataObject operator() (const ExecutionContext& context) const;
 };
 
 class FakeSubtractExecutor: public FakeForwardEvaluationCounterExecutor {
  public:
-    DataObject operator() (const std::vector<DataObject>& inputs) const;
+    DataObject operator() (const ExecutionContext& context) const;
 };
 
 class FakeMultichannelNode: public Node {

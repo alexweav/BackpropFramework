@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "Core/ExecutionContext.h"
 #include "Core/IDifferentiableExecutor.h"
 #include "Core/Node.h"
 #include "Core/Parameterized.h"
@@ -12,8 +13,8 @@ class VariableExecutor: public IDifferentiableExecutor {
     VariableExecutor(void);
     explicit VariableExecutor(const DataObject& value);
     DataObject GetValue(void) const;
-    DataObject operator() (const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
+    DataObject operator() (const ExecutionContext& context) const;
+    std::vector<DataObject> Differentiate(const ExecutionContext& context) const;
     void Update(const IOptimizer&, const DataObject&);
 
  private:

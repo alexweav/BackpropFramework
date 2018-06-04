@@ -10,13 +10,12 @@ DataObject VariableExecutor::GetValue(void) const {
     return _value;
 }
 
-DataObject VariableExecutor::operator() (const std::vector<DataObject>& inputs) const {
+DataObject VariableExecutor::operator() (const ExecutionContext& context) const {
     return _value;
 }
 
-std::vector<DataObject> VariableExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
-    std::vector<DataObject> gradsOut;
-    return gradsOut;
+std::vector<DataObject> VariableExecutor::Differentiate(const ExecutionContext& context) const {
+    return std::vector<DataObject>();
 }
 
 void VariableExecutor::Update(const IOptimizer& optimizer, const DataObject& grad) {

@@ -6,13 +6,12 @@ InputExecutor::InputExecutor(const DataObject& defaultOutput) {
     _defaultOutput = defaultOutput;
 }
 
-DataObject InputExecutor::operator() (const std::vector<DataObject>& inputs) const {
+DataObject InputExecutor::operator() (const ExecutionContext& context) const {
     return _defaultOutput;
 }
 
-std::vector<DataObject> InputExecutor::Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const {
-    std::vector<DataObject> gradsOut;
-    return gradsOut;
+std::vector<DataObject> InputExecutor::Differentiate(const ExecutionContext& context) const {
+    return std::vector<DataObject>();
 }
 
 void InputExecutor::RegisterNewDefaultValue(const DataObject& newValue) {

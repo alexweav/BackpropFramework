@@ -4,14 +4,15 @@
 #include <memory>
 #include <vector>
 
+#include "Core/ExecutionContext.h"
 #include "Core/IDifferentiableExecutor.h"
 #include "Core/Node.h"
 
 class ConstantExecutor: public IDifferentiableExecutor {
  public:
     explicit ConstantExecutor(const DataObject& value);
-    DataObject operator() (const std::vector<DataObject>& inputs) const;
-    std::vector<DataObject> Differentiate(const std::vector<DataObject>& prevInputs, const DataObject& dOut) const;
+    DataObject operator() (const ExecutionContext& context) const;
+    std::vector<DataObject> Differentiate(const ExecutionContext& context) const;
     DataObject GetValue(void) const;
 
  private:

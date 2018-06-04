@@ -1,13 +1,13 @@
 #include "FakeMultichannelNode.h"
 
-DataObject FakeAddExecutor::operator() (const std::vector<DataObject>& inputs) const {
+DataObject FakeAddExecutor::operator() (const ExecutionContext& context) const {
     ++_numEvaluations;
-    return inputs.at(0).Add(inputs.at(1));
+    return context.Inputs().at(0).Add(context.Inputs().at(1));
 }
 
-DataObject FakeSubtractExecutor::operator() (const std::vector<DataObject>& inputs) const {
+DataObject FakeSubtractExecutor::operator() (const ExecutionContext& context) const {
     ++_numEvaluations;
-    return DataObject(inputs.at(0).ToScalar() - inputs.at(2).ToScalar());
+    return DataObject(context.Inputs().at(0).ToScalar() - context.Inputs().at(2).ToScalar());
 }
 
 FakeMultichannelNode::FakeMultichannelNode(const NodePtr& base, const NodePtr& add, const NodePtr& subtract):

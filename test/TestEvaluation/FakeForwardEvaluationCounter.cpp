@@ -1,6 +1,6 @@
 #include "FakeForwardEvaluationCounter.h"
 
-DataObject FakeForwardEvaluationCounterExecutor::operator() (const std::vector<DataObject>& inputs) const {
+DataObject FakeForwardEvaluationCounterExecutor::operator() (const ExecutionContext& context) const {
     return DataObject(++_numEvaluations);
 }
 
