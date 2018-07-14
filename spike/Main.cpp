@@ -10,6 +10,7 @@
 #include "Data/Initializers/Ones.h"
 #include "Data/Initializers/Constant.h"
 #include "Optimizers/GradientDescentOptimizer.h"
+#include "TestOp.h"
 
 class TestExecutor: public IExecutor {
  public:
@@ -35,7 +36,11 @@ int main(int argc, char** argv) {
 
     auto input = Input();
     auto c1 = Constant(1.0);
+    auto c2 = Value(2.0);
+    auto c3 = Value(3.0);
+    auto testOp = TestOp(c2, c3, 4);
     std::cout << "not borked" << std::endl;
+    std::cout << "asdf " << testOp.GetNode()->NumChannels() << std::endl;
     /*Variables vars;
     std::cout << ev.EvaluateGraph(input, vars)[input->Channels(0)].ToScalar() << std::endl;
     input->RegisterNewDefaultValue(Scalar(3.0));
