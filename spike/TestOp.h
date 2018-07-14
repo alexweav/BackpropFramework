@@ -6,8 +6,12 @@
 
 class TestOpExecutor: public IExecutor {
  public:
+    TestOpExecutor(int add);
     DataObject operator() (const ExecutionContext& context) const;
     std::vector<DataObject> Differentiate(const ExecutionContext& context) const;
+
+ private:
+    int _add;
 };
 
 class TestOp: public NodeFacade {

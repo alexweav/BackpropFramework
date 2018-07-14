@@ -12,7 +12,7 @@ class NodeFacade {
     NodeFacade(std::initializer_list<IChannelProviderPtr>);
     NodePtr GetNode(void) const;
     void AttachExecutor(const std::shared_ptr<IExecutor> executor);
-    void AttachDifferentiableExecutor(const std::shared_ptr<IExecutor> executor);
+    void AttachDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor);
  private:
     NodePtr _node;
 };

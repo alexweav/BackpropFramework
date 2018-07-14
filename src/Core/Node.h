@@ -32,10 +32,10 @@ class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
     Channel GetChannel(void) const;
     std::shared_ptr<Node> GetPtr(void);
 
- protected:
     void RegisterExecutor(const std::shared_ptr<IExecutor> executor);
     void RegisterDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor);
 
+ protected:
     int _arity;
     int _numChannels = 0;
     bool _hasDifferentiableTree = true;
