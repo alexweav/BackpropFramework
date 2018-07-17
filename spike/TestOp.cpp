@@ -8,6 +8,10 @@ DataObject TestOpExecutor::operator()(const ExecutionContext& context) const {
     return context.Inputs().at(0).Add(context.Inputs().at(1)).Add(Scalar(_add));
 }
 
+TestOp::TestOp(const IChannelProvider& i1, const IChannelProvider& i2, int ref): NodeFacade({}) {
+    AttachExecutor(std::shared_ptr<TestOpExecutor>(new TestOpExecutor(ref)));
+}
+
 TestOp::TestOp(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2, int ref): NodeFacade({i1, i2}) {
     AttachExecutor(std::shared_ptr<TestOpExecutor>(new TestOpExecutor(ref)));
 }
