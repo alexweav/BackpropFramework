@@ -10,6 +10,6 @@ DataObject FakeNonDifferentiableConstantExecutor::operator() (const ExecutionCon
 
 FakeNonDifferentiableConstant::FakeNonDifferentiableConstant(float value): Node({}) {
     std::shared_ptr<FakeNonDifferentiableConstantExecutor> executor(new FakeNonDifferentiableConstantExecutor(value));
-    RegisterExecutor(executor);
+    AttachExecutor(executor);
 }
 

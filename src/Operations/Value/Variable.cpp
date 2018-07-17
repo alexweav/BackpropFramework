@@ -23,7 +23,7 @@ void VariableExecutor::Update(const IOptimizer& optimizer, const DataObject& gra
 }
 
 Variable::Variable(void): Node({}), _executor() {
-    RegisterDifferentiableExecutor(std::make_shared<VariableExecutor>(_executor));
+    AttachDifferentiableExecutor(std::make_shared<VariableExecutor>(_executor));
 }
 
 Variable::Variable(float value): Variable(Scalar(value)) { }
@@ -31,7 +31,7 @@ Variable::Variable(float value): Variable(Scalar(value)) { }
 Variable::Variable(const Eigen::MatrixXf& value): Variable(Mat(value)) { }
 
 Variable::Variable(const DataObject& value): Node({}), _executor(value) {
-    RegisterDifferentiableExecutor(std::make_shared<VariableExecutor>(_executor));
+    AttachDifferentiableExecutor(std::make_shared<VariableExecutor>(_executor));
 }
 
 DataObject Variable::GetValue() {

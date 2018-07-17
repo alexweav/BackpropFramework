@@ -9,9 +9,9 @@ NodePtr NodeFacade::GetNode(void) const {
 }
 
 void NodeFacade::AttachExecutor(const std::shared_ptr<IExecutor> executor) {
-    _node->RegisterExecutor(executor);
+    _node->AttachExecutor(executor);
 }
 
 void NodeFacade::AttachDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor) {
-    _node->RegisterDifferentiableExecutor(executor);
+    _node->AttachDifferentiableExecutor(executor);
 }

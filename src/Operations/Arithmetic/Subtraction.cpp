@@ -13,7 +13,7 @@ std::vector<DataObject> SubtractionExecutor::Differentiate(const ExecutionContex
 }
 
 Subtraction::Subtraction(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}) {
-    RegisterDifferentiableExecutor(std::make_shared<SubtractionExecutor>(_executor));
+    AttachDifferentiableExecutor(std::make_shared<SubtractionExecutor>(_executor));
 }
 
 std::shared_ptr<Subtraction> Subtract(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {

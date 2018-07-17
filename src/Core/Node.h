@@ -32,8 +32,8 @@ class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
     Channel GetChannel(void) const;
     std::shared_ptr<Node> GetPtr(void);
 
-    void RegisterExecutor(const std::shared_ptr<IExecutor> executor);
-    void RegisterDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor);
+    void AttachExecutor(const std::shared_ptr<IExecutor> executor);
+    void AttachDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor);
 
  protected:
     int _arity;

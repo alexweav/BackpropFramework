@@ -23,11 +23,11 @@ DataObject InputExecutor::GetDefaultOutput(void) {
 }
 
 Input::Input(void): Node({}), _executor(new InputExecutor()) {
-    RegisterDifferentiableExecutor(_executor);
+    AttachDifferentiableExecutor(_executor);
 }
 
 Input::Input(const DataObject& defaultOutput): Node({}), _executor(new InputExecutor(defaultOutput)) {
-    RegisterDifferentiableExecutor(_executor);
+    AttachDifferentiableExecutor(_executor);
 }
 
 DataObject Input::GetDefaultOutput(void) {

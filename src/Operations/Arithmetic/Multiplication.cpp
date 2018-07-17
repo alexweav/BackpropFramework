@@ -49,7 +49,7 @@ std::vector<DataObject> MultiplicationExecutor::DifferentiateMatrixMultiplicatio
 }
 
 Multiplication::Multiplication(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}) {
-    RegisterDifferentiableExecutor(std::make_shared<MultiplicationExecutor>(_executor));
+    AttachDifferentiableExecutor(std::make_shared<MultiplicationExecutor>(_executor));
 }
 
 std::shared_ptr<Multiplication> Multiply(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {

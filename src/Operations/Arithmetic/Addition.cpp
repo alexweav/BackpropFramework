@@ -33,7 +33,7 @@ std::vector<DataObject> AdditionExecutor::DifferentiateMatrixAddition(const Data
 }
 
 Addition::Addition(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2): Node({i1, i2}) {
-    RegisterDifferentiableExecutor(std::make_shared<AdditionExecutor>(_executor));
+    AttachDifferentiableExecutor(std::make_shared<AdditionExecutor>(_executor));
 }
 
 std::shared_ptr<Addition> Add(const IChannelProviderPtr& i1, const IChannelProviderPtr& i2) {

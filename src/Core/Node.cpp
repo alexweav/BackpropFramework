@@ -57,12 +57,12 @@ int Node::NumChannels(void) {
     return _numChannels;
 }
 
-void Node::RegisterExecutor(const std::shared_ptr<IExecutor> executor) {
+void Node::AttachExecutor(const std::shared_ptr<IExecutor> executor) {
     _channels.push_back(Channel(this, _numChannels, false));
     _executors[_channels.at(_numChannels)] = executor;
     _numChannels++;
 }
-void Node::RegisterDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor) {
+void Node::AttachDifferentiableExecutor(const std::shared_ptr<IDifferentiableExecutor> executor) {
     _channels.push_back(Channel(this, _numChannels, true));
     _differentiableExecutors[_channels.at(_numChannels)] = executor;
     _numChannels++;

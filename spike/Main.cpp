@@ -24,8 +24,8 @@ class TestNode: public Node {
     TestNode(void): Node({}) {
         std::shared_ptr<TestExecutor> executor1(new TestExecutor());
         std::shared_ptr<TestExecutor> executor2(new TestExecutor());
-        RegisterExecutor(executor1);
-        RegisterExecutor(executor2);
+        AttachExecutor(executor1);
+        AttachExecutor(executor2);
     }
 
     DataObject Forward(const ExecutionContext& context) const { }

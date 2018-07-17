@@ -14,8 +14,8 @@ FakeMultichannelNode::FakeMultichannelNode(const NodePtr& base, const NodePtr& a
         Node({base, add, subtract}),
         _addExecutor(new FakeAddExecutor()),
         _subtractExecutor(new FakeSubtractExecutor()) {
-    RegisterExecutor(std::shared_ptr<IExecutor>(_addExecutor));
-    RegisterExecutor(std::shared_ptr<IExecutor>(_subtractExecutor));
+    AttachExecutor(std::shared_ptr<IExecutor>(_addExecutor));
+    AttachExecutor(std::shared_ptr<IExecutor>(_subtractExecutor));
 }
 
 int FakeMultichannelNode::GetNumAdds(void) {
