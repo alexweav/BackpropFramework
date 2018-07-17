@@ -3,6 +3,7 @@
 
 #include <initializer_list>
 #include <memory>
+#include <vector>
 
 #include "Core/IChannelProvider.h"
 #include "Core/Node.h"
@@ -11,6 +12,11 @@ class NodeFacade {
  public:
     NodeFacade(std::initializer_list<IChannelProviderPtr>);
     NodePtr GetNode(void) const;
+    int Arity(void);
+    std::vector<Channel> Channels(void) const;
+    Channel Channels(int index) const;
+    int NumChannels(void);
+    Channel GetChannel(void) const;
 
  protected:
     void AttachExecutor(const std::shared_ptr<IExecutor> executor);
