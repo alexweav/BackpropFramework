@@ -1,5 +1,13 @@
 #include "Evaluation/LazyEvaluator.h"
 
+ChannelDictionary LazyEvaluator::EvaluateGraph(const NodeFacade& node) {
+    return EvaluateGraph({node.GetNode()});
+}
+
+ChannelDictionary LazyEvaluator::EvaluateGraph(const NodeFacade& node, const Variables& vars) {
+    return EvaluateGraph({node.GetNode()}, vars);
+}
+
 ChannelDictionary LazyEvaluator::EvaluateGraph(const NodePtr& node) {
     return EvaluateGraph({node});
 }

@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "Core/Node.h"
+#include "Core/NodeFacade.h"
 #include "Operations/Value.h"
 
 #include "IEvaluator.h"
@@ -12,6 +13,8 @@
 
 class LazyEvaluator: public IEvaluator {
  public:
+    ChannelDictionary EvaluateGraph(const NodeFacade& node);
+    ChannelDictionary EvaluateGraph(const NodeFacade& node, const Variables& vars);
     ChannelDictionary EvaluateGraph(const NodePtr& node);
     ChannelDictionary EvaluateGraph(const NodePtr& node, const Variables& vars);
     ChannelDictionary EvaluateGraph(std::initializer_list<NodePtr> nodes);

@@ -1,6 +1,7 @@
 #ifndef SRC_SPIKE_TESTNODE_H_
 #define SRC_SPIKE_TESTNODE_H_
 
+#include "Data/Datatypes.h"
 #include "Core/IDifferentiableExecutor.h"
 #include "Core/NodeFacade.h"
 

@@ -32,7 +32,7 @@ class TestNode: public Node {
 };
 
 int main(int argc, char** argv) {
-    //LazyEvaluator ev;
+    LazyEvaluator ev;
 
     auto input = Input();
     auto c1 = Constant(1.0);
@@ -41,9 +41,9 @@ int main(int argc, char** argv) {
     auto testOp = TestOp(c2, c3, 4);
     std::cout << "not borked" << std::endl;
     std::cout << "asdf " << testOp.GetNode()->NumChannels() << std::endl;
-    /*Variables vars;
-    std::cout << ev.EvaluateGraph(input, vars)[input->Channels(0)].ToScalar() << std::endl;
-    input->RegisterNewDefaultValue(Scalar(3.0));
+    Variables vars;
+    std::cout << ev.EvaluateGraph(testOp, vars)[testOp.GetChannel()].ToScalar() << std::endl;
+    /*input->RegisterNewDefaultValue(Scalar(3.0));
     vars[input] = Scalar(5.0);
     std::cout << ev.EvaluateGraph(input, vars)[input->Channels(0)].ToScalar() << std::endl << std::endl;
 
