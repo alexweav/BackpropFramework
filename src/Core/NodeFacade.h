@@ -8,7 +8,7 @@
 #include "Core/IChannelProvider.h"
 #include "Core/Node.h"
 
-class NodeFacade {
+class NodeFacade: IChannelProvider {
  public:
     NodeFacade(std::initializer_list<IChannelProviderPtr>);
     NodePtr GetNode(void) const;
