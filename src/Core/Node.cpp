@@ -1,5 +1,20 @@
 #include "Core/Node.h"
 
+template <class ...Args> Node::Node(const Args&... args) {
+    std::vector<IChannelProvider*> inputs = {&args...};
+    _arity = inputs.size();
+    for (IChannelProvider* input : inputs) {
+        try {
+            Channel channel = input->GetChannel();
+            NodePtr predecessorNode = channel.ParentNode()->GetPtr();
+            _predecessors.push_back(std::pair<NodePtr, Channel>(predecessorNode, channel));
+            _hasDifferentiableTree &= (channel.IsDifferentiableFunctor() && predecessorNode->HasDifferentiableTree());
+        } catch (const std::invalid_argument& e) {
+            throw std::invalid_argument("Predecessor node has multiple known channels.");
+        }
+    }
+}
+
 Node::Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs):
     Node(std::vector<std::shared_ptr<IChannelProvider>>(inputs)) { }
 

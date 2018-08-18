@@ -10,6 +10,7 @@
 
 class NodeFacade: public IChannelProvider {
  public:
+    template <class ...Args> explicit NodeFacade(const Args&... args);
     NodeFacade(std::initializer_list<IChannelProviderPtr>);
     NodePtr GetNode(void) const;
     int Arity(void);

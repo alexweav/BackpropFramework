@@ -20,8 +20,9 @@ using NodePtr = std::shared_ptr<Node>;
 class Node: public IChannelProvider, public std::enable_shared_from_this<Node> {
  public:
     Node() {}
-    Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs);
-    Node(std::vector<std::shared_ptr<IChannelProvider>> inputs);
+    template <class ...Args> Node(const Args&... args);
+    explicit Node(std::initializer_list<std::shared_ptr<IChannelProvider>> inputs);
+    explicit Node(std::vector<std::shared_ptr<IChannelProvider>> inputs);
     ChannelDictionary Execute(const std::vector<DataObject>& inputs);
     int Arity(void);
     std::vector<Channel> Channels(void) const;

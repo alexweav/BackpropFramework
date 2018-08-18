@@ -1,5 +1,9 @@
 #include "Core/NodeFacade.h"
 
+template <class ...Args> NodeFacade::NodeFacade(const Args&... args) {
+    _node = std::shared_ptr<Node>(new Node(args...));
+}
+
 NodeFacade::NodeFacade(std::initializer_list<std::shared_ptr<IChannelProvider>> predecessors) {
     _node = std::shared_ptr<Node>(new Node(predecessors));
 }
